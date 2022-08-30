@@ -20,7 +20,8 @@ let package = Package(
     targets: [
         .target(
             name: "OpenWeatherKit",
-            dependencies: []),
+            dependencies: []
+        ),
         .testTarget(
             name: "OpenWeatherKitTests",
             dependencies: ["OpenWeatherKit"]),
