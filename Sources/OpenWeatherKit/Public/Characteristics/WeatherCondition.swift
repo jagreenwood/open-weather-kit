@@ -74,6 +74,8 @@ public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Ha
 
     case tropicalStorm
 
+    case undefined
+
     case windy
 
     case wintryMix
@@ -141,6 +143,12 @@ public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Ha
     ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
     ///     // Prints "true"
     public var rawValue: String {
+        fatalError("not implemented")
+    }
+}
+
+extension WeatherCondition {
+    var sfSymbol: String {
         fatalError("not implemented")
     }
 }

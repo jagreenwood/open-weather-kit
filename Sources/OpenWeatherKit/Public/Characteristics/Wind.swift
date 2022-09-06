@@ -101,6 +101,10 @@ public struct Wind {
             fatalError("not implemented")
         }
 
+        init(value: Int) {
+            fatalError("not implemented")
+        }
+
         /// A type that can represent a collection of all values of this type.
         public typealias AllCases = [Wind.CompassDirection]
 

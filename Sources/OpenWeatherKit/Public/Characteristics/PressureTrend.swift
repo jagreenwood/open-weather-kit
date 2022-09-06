@@ -18,6 +18,8 @@ public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hasha
     /// The pressure is not changing.
     case steady
 
+    case undefined
+
     /// The localized string describing the pressure trend.
     public var description: String {
         fatalError("not implemented")

@@ -95,6 +95,16 @@ public struct UVIndex {
             fatalError("not implemented")
         }
 
+        init(value: Int) {
+            switch value {
+            case 0...2: self = .low
+            case 3...5: self = .moderate
+            case 6...7: self = .high
+            case 8...10: self = .veryHigh
+            default: self = .extreme
+            }
+        }
+
         /// A type that can represent a collection of all values of this type.
         public typealias AllCases = [UVIndex.ExposureCategory]
 
