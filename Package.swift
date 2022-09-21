@@ -5,6 +5,7 @@ import PackageDescription
 
 let package = Package(
     name: "open-weather-kit",
+    defaultLocalization: "en",
     platforms: [
         .iOS(.v13),
         .watchOS(.v6),
@@ -20,7 +21,8 @@ let package = Package(
     targets: [
         .target(
             name: "OpenWeatherKit",
-            dependencies: []
+            dependencies: [],
+            resources: [.process("Resources")]
         ),
         .testTarget(
             name: "OpenWeatherKitTests",
