@@ -29,68 +29,39 @@ public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hasha
 
     /// A localized string describing the form of precipitation.
     public var description: String {
-        fatalError("not implemented")
+        switch self {
+        case .none:
+            return NSLocalizedString("Precipitation.none", bundle: BundleLocator.bundle, comment: "None")
+        case .hail:
+            return NSLocalizedString("Precipitation.hail", bundle: BundleLocator.bundle, comment: "Hail")
+        case .mixed:
+            return NSLocalizedString("Precipitation.mixed", bundle: BundleLocator.bundle, comment: "Mixed")
+        case .rain:
+            return NSLocalizedString("Precipitation.rain", bundle: BundleLocator.bundle, comment: "Rain")
+        case .sleet:
+            return NSLocalizedString("Precipitation.sleet", bundle: BundleLocator.bundle, comment: "Sleet")
+        case .snow:
+            return NSLocalizedString("Precipitation.snow", bundle: BundleLocator.bundle, comment: "Snow")
+        }
     }
 
     /// A localized accessibility description describing the form of precipitation, suitable for
     /// Voice Over and other assistive technologies.
     public var accessibilityDescription: String {
-        fatalError("not implemented")
-    }
-
-    /// Creates a new instance with the specified raw value.
-    ///
-    /// If there is no value of the type that corresponds with the specified raw
-    /// value, this initializer returns `nil`. For example:
-    ///
-    ///     enum PaperSize: String {
-    ///         case A4, A5, Letter, Legal
-    ///     }
-    ///
-    ///     print(PaperSize(rawValue: "Legal"))
-    ///     // Prints "Optional("PaperSize.Legal")"
-    ///
-    ///     print(PaperSize(rawValue: "Tabloid"))
-    ///     // Prints "nil"
-    ///
-    /// - Parameter rawValue: The raw value to use for the new instance.
-    public init?(rawValue: String) {
-        fatalError("not implemented")
-    }
-
-    /// A type that can represent a collection of all values of this type.
-    public typealias AllCases = [Precipitation]
-
-    /// The raw type that can be used to represent all values of the conforming
-    /// type.
-    ///
-    /// Every distinct value of the conforming type has a corresponding unique
-    /// value of the `RawValue` type, but there may be values of the `RawValue`
-    /// type that don't have a corresponding value of the conforming type.
-    public typealias RawValue = String
-
-    /// A collection of all values of this type.
-    public static var allCases: [Precipitation] {
-        fatalError("not implemented")
-    }
-
-    /// The corresponding value of the raw type.
-    ///
-    /// A new instance initialized with `rawValue` will be equivalent to this
-    /// instance. For example:
-    ///
-    ///     enum PaperSize: String {
-    ///         case A4, A5, Letter, Legal
-    ///     }
-    ///
-    ///     let selectedSize = PaperSize.Letter
-    ///     print(selectedSize.rawValue)
-    ///     // Prints "Letter"
-    ///
-    ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-    ///     // Prints "true"
-    public var rawValue: String {
-        fatalError("not implemented")
+        switch self {
+        case .none:
+            return NSLocalizedString("Precipitation.accessibility.none", bundle: BundleLocator.bundle, comment: "None")
+        case .hail:
+            return NSLocalizedString("Precipitation.accessibility.hail", bundle: BundleLocator.bundle, comment: "Hail")
+        case .mixed:
+            return NSLocalizedString("Precipitation.accessibility.mixed", bundle: BundleLocator.bundle, comment: "Mixed")
+        case .rain:
+            return NSLocalizedString("Precipitation.accessibility.rain", bundle: BundleLocator.bundle, comment: "Rain")
+        case .sleet:
+            return NSLocalizedString("Precipitation.accessibility.sleet", bundle: BundleLocator.bundle, comment: "Sleet")
+        case .snow:
+            return NSLocalizedString("Precipitation.accessibility.snow", bundle: BundleLocator.bundle, comment: "Snow")
+        }
     }
 }
 

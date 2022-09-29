@@ -24,7 +24,7 @@ struct APICurrentWeather: Codable, Equatable {
     let temperatureDewPoint: Double
     let uvIndex: Int
     let visibility: Double
-    let windDirection: Int
+    let windDirection: Double
     let windGust: Double
     let windSpeed: Double
 

@@ -60,17 +60,89 @@ public struct Wind {
 
         case northNorthwest
 
+        case undefined
+
         ///
         /// The short abbreviation of the wind compass direction, e.g. .north is "N".
         ///
         public var abbreviation: String {
-            fatalError("not implemented")
+            switch self {
+            case .north:
+                return NSLocalizedString("Wind.abbreviation.north", bundle: BundleLocator.bundle, comment: "N")
+            case .northNortheast:
+                return NSLocalizedString("Wind.abbreviation.northNortheast", bundle: BundleLocator.bundle, comment: "NNE")
+            case .northeast:
+                return NSLocalizedString("Wind.abbreviation.northeast", bundle: BundleLocator.bundle, comment: "NE")
+            case .eastNortheast:
+                return NSLocalizedString("Wind.abbreviation.eastNortheast", bundle: BundleLocator.bundle, comment: "ENE")
+            case .east:
+                return NSLocalizedString("Wind.abbreviation.east", bundle: BundleLocator.bundle, comment: "E")
+            case .eastSoutheast:
+                return NSLocalizedString("Wind.abbreviation.eastSoutheast", bundle: BundleLocator.bundle, comment: "ESE")
+            case .southeast:
+                return NSLocalizedString("Wind.abbreviation.southeast", bundle: BundleLocator.bundle, comment: "SE")
+            case .southSoutheast:
+                return NSLocalizedString("Wind.abbreviation.southSoutheast", bundle: BundleLocator.bundle, comment: "SSE")
+            case .south:
+                return NSLocalizedString("Wind.abbreviation.south", bundle: BundleLocator.bundle, comment: "S")
+            case .southSouthwest:
+                return NSLocalizedString("Wind.abbreviation.southSouthwest", bundle: BundleLocator.bundle, comment: "SSW")
+            case .southwest:
+                return NSLocalizedString("Wind.abbreviation.southwest", bundle: BundleLocator.bundle, comment: "SW")
+            case .westSouthwest:
+                return NSLocalizedString("Wind.abbreviation.westSouthwest", bundle: BundleLocator.bundle, comment: "WSW")
+            case .west:
+                return NSLocalizedString("Wind.abbreviation.west", bundle: BundleLocator.bundle, comment: "W")
+            case .westNorthwest:
+                return NSLocalizedString("Wind.abbreviation.westNorthwest", bundle: BundleLocator.bundle, comment: "WNW")
+            case .northwest:
+                return NSLocalizedString("Wind.abbreviation.northwest", bundle: BundleLocator.bundle, comment: "NW")
+            case .northNorthwest:
+                return NSLocalizedString("Wind.abbreviation.northNorthwest", bundle: BundleLocator.bundle, comment: "NNW")
+            case .undefined:
+                return NSLocalizedString("Wind.abbreviation.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+            }
         }
 
         /// Localized string describing the wind compass direction. Represents the direction the
         /// wind is coming from.
         public var description: String {
-            fatalError("not implemented")
+            switch self {
+            case .north:
+                return NSLocalizedString("Wind.north", bundle: BundleLocator.bundle, comment: "North")
+            case .northNortheast:
+                return NSLocalizedString("Wind.northNortheast", bundle: BundleLocator.bundle, comment: "North-Northeast")
+            case .northeast:
+                return NSLocalizedString("Wind.northeast", bundle: BundleLocator.bundle, comment: "Northeast")
+            case .eastNortheast:
+                return NSLocalizedString("Wind.eastNortheast", bundle: BundleLocator.bundle, comment: "East-Northeast")
+            case .east:
+                return NSLocalizedString("Wind.east", bundle: BundleLocator.bundle, comment: "East")
+            case .eastSoutheast:
+                return NSLocalizedString("Wind.eastSoutheast", bundle: BundleLocator.bundle, comment: "East-Souteast")
+            case .southeast:
+                return NSLocalizedString("Wind.southeast", bundle: BundleLocator.bundle, comment: "Southeast")
+            case .southSoutheast:
+                return NSLocalizedString("Wind.southSoutheast", bundle: BundleLocator.bundle, comment: "South")
+            case .south:
+                return NSLocalizedString("Wind.south", bundle: BundleLocator.bundle, comment: "South-Southeast")
+            case .southSouthwest:
+                return NSLocalizedString("Wind.southSouthwest", bundle: BundleLocator.bundle, comment: "South-Southwest")
+            case .southwest:
+                return NSLocalizedString("Wind.southwest", bundle: BundleLocator.bundle, comment: "Southwest")
+            case .westSouthwest:
+                return NSLocalizedString("Wind.westSouthwest", bundle: BundleLocator.bundle, comment: "West-Southwest")
+            case .west:
+                return NSLocalizedString("Wind.west", bundle: BundleLocator.bundle, comment: "West")
+            case .westNorthwest:
+                return NSLocalizedString("Wind.westNorthwest", bundle: BundleLocator.bundle, comment: "West-Northwest")
+            case .northwest:
+                return NSLocalizedString("Wind.northwest", bundle: BundleLocator.bundle, comment: "Northwest")
+            case .northNorthwest:
+                return NSLocalizedString("Wind.northNorthwest", bundle: BundleLocator.bundle, comment: "North-Northwest")
+            case .undefined:
+                return NSLocalizedString("Wind.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+            }
         }
 
         ///
@@ -78,66 +150,65 @@ public struct Wind {
         /// Voice Over and other assistive technologies, e.g. .northNortheast is "North Northeast".
         ///
         public var accessibilityDescription: String {
-            fatalError("not implemented")
+            switch self {
+            case .north:
+                return NSLocalizedString("Wind.accessibility.north", bundle: BundleLocator.bundle, comment: "North")
+            case .northNortheast:
+                return NSLocalizedString("Wind.accessibility.northNortheast", bundle: BundleLocator.bundle, comment: "North-Northeast")
+            case .northeast:
+                return NSLocalizedString("Wind.accessibility.northeast", bundle: BundleLocator.bundle, comment: "Northeast")
+            case .eastNortheast:
+                return NSLocalizedString("Wind.accessibility.eastNortheast", bundle: BundleLocator.bundle, comment: "East-Northeast")
+            case .east:
+                return NSLocalizedString("Wind.accessibility.east", bundle: BundleLocator.bundle, comment: "East")
+            case .eastSoutheast:
+                return NSLocalizedString("Wind.accessibility.eastSoutheast", bundle: BundleLocator.bundle, comment: "East-Souteast")
+            case .southeast:
+                return NSLocalizedString("Wind.accessibility.southeast", bundle: BundleLocator.bundle, comment: "Southeast")
+            case .southSoutheast:
+                return NSLocalizedString("Wind.accessibility.southSoutheast", bundle: BundleLocator.bundle, comment: "South")
+            case .south:
+                return NSLocalizedString("Wind.accessibility.south", bundle: BundleLocator.bundle, comment: "South-Southeast")
+            case .southSouthwest:
+                return NSLocalizedString("Wind.accessibility.southSouthwest", bundle: BundleLocator.bundle, comment: "South-Southwest")
+            case .southwest:
+                return NSLocalizedString("Wind.accessibility.southwest", bundle: BundleLocator.bundle, comment: "Southwest")
+            case .westSouthwest:
+                return NSLocalizedString("Wind.accessibility.westSouthwest", bundle: BundleLocator.bundle, comment: "West-Southwest")
+            case .west:
+                return NSLocalizedString("Wind.accessibility.west", bundle: BundleLocator.bundle, comment: "West")
+            case .westNorthwest:
+                return NSLocalizedString("Wind.accessibility.westNorthwest", bundle: BundleLocator.bundle, comment: "West-Northwest")
+            case .northwest:
+                return NSLocalizedString("Wind.accessibility.northwest", bundle: BundleLocator.bundle, comment: "Northwest")
+            case .northNorthwest:
+                return NSLocalizedString("Wind.accessibility.northNorthwest", bundle: BundleLocator.bundle, comment: "North-Northwest")
+            case .undefined:
+                return NSLocalizedString("Wind.accessibility.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+            }
         }
 
-        /// Creates a new instance with the specified raw value.
-        ///
-        /// If there is no value of the type that corresponds with the specified raw
-        /// value, this initializer returns `nil`. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     print(PaperSize(rawValue: "Legal"))
-        ///     // Prints "Optional("PaperSize.Legal")"
-        ///
-        ///     print(PaperSize(rawValue: "Tabloid"))
-        ///     // Prints "nil"
-        ///
-        /// - Parameter rawValue: The raw value to use for the new instance.
-        public init?(rawValue: String) {
-            fatalError("not implemented")
-        }
-
-        init(value: Int) {
-            fatalError("not implemented")
-        }
-
-        /// A type that can represent a collection of all values of this type.
-        public typealias AllCases = [Wind.CompassDirection]
-
-        /// The raw type that can be used to represent all values of the conforming
-        /// type.
-        ///
-        /// Every distinct value of the conforming type has a corresponding unique
-        /// value of the `RawValue` type, but there may be values of the `RawValue`
-        /// type that don't have a corresponding value of the conforming type.
-        public typealias RawValue = String
-
-        /// A collection of all values of this type.
-        public static var allCases: [Wind.CompassDirection] {
-            fatalError("not implemented")
-        }
-
-        /// The corresponding value of the raw type.
-        ///
-        /// A new instance initialized with `rawValue` will be equivalent to this
-        /// instance. For example:
-        ///
-        ///     enum PaperSize: String {
-        ///         case A4, A5, Letter, Legal
-        ///     }
-        ///
-        ///     let selectedSize = PaperSize.Letter
-        ///     print(selectedSize.rawValue)
-        ///     // Prints "Letter"
-        ///
-        ///     print(selectedSize == PaperSize(rawValue: selectedSize.rawValue)!)
-        ///     // Prints "true"
-        public var rawValue: String {
-            fatalError("not implemented")
+        init(value: Double) {
+            switch value {
+            case 0..<11.25: self = .north
+            case 11.25..<33.75: self = .northNortheast
+            case 33.75..<56.25: self = .northeast
+            case 56.25..<78.75: self = .eastNortheast
+            case 78.75..<101.25: self = .east
+            case 101.25..<123.75: self = .eastSoutheast
+            case 123.75..<146.25: self = .southeast
+            case 146.25..<168.75: self = .southSoutheast
+            case 168.75..<191.25: self = .south
+            case 191.25..<213.75: self = .southSouthwest
+            case 213.75..<236.25: self = .southwest
+            case 236.25..<258.75: self = .westSouthwest
+            case 258.75..<281.25: self = .west
+            case 281.25..<303.75: self = .westNorthwest
+            case 303.75..<326.25: self = .northwest
+            case 326.25..<348.75: self = .northNorthwest
+            case 348.75..<360.0: self = .north
+            default: self = .undefined
+            }
         }
     }
 }
