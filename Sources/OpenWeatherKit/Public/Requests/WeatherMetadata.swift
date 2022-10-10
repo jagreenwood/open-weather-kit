@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 public struct WeatherMetadata {
 
@@ -17,21 +16,14 @@ public struct WeatherMetadata {
     public var expirationDate: Date
 
     /// The location of the request.
-    public var location: CLLocation
+    public var location: Location
 
     init(with apiMetadata: APIMetadata) {
         self.date = apiMetadata.readTime
         self.expirationDate = apiMetadata.expireTime
-        self.location = CLLocation(latitude: apiMetadata.latitude, longitude: apiMetadata.longitude)
+        self.location = Location(latitude: apiMetadata.latitude, longitude: apiMetadata.longitude)
     }
 }
 
-extension WeatherMetadata: Codable {
-    public init(from decoder: Decoder) throws {
-        fatalError("not implemented")
-    }
-
-    public func encode(to encoder: Encoder) throws {
-        fatalError("not implemented")
-    }
-}
+extension WeatherMetadata: Codable {}
+extension WeatherMetadata: Equatable {}

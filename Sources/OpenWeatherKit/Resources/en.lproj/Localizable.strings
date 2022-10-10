@@ -1,4 +1,22 @@
 
+"MoonPhase.new" = "New";
+"MoonPhase.waxingCrescent" = "Waxing Crescent";
+"MoonPhase.firstQuarter" = "First Quarter";
+"MoonPhase.waxingGibbous" = "Waxing Gibbous";
+"MoonPhase.full" = "Full";
+"MoonPhase.waningGibbous" = "Waning Gibbous";
+"MoonPhase.lastQuarter" = "Last Quarter";
+"MoonPhase.waningCrescent" = "Waning Crescent";
+
+"MoonPhase.accessibility.new" = "New";
+"MoonPhase.accessibility.waxingCrescent" = "Waxing Crescent";
+"MoonPhase.accessibility.firstQuarter" = "First Quarter";
+"MoonPhase.accessibility.waxingGibbous" = "Waxing Gibbous";
+"MoonPhase.accessibility.full" = "Full";
+"MoonPhase.accessibility.waningGibbous" = "Waning Gibbous";
+"MoonPhase.accessibility.lastQuarter" = "Last Quarter";
+"MoonPhase.accessibility.waningCrescent" = "Waning Crescent";
+
 "Precipitation.accessibility.none" = "None";
 "Precipitation.accessibility.hail" = "Hail";
 "Precipitation.accessibility.mixed" = "Mixed";
@@ -104,40 +122,52 @@
 "WeatherCondition.accessibility.windy" = "Windy";
 "WeatherCondition.accessibility.wintryMix" = "Wintry Mix";
 
+"WeatherSeverity.minor" = "Minor";
+"WeatherSeverity.moderate" = "Moderate";
+"WeatherSeverity.severe" = "Severe";
+"WeatherSeverity.extreme" = "Extreme";
+"WeatherSeverity.unknown" = "Unknown";
+
+"WeatherSeverity.accessibility.minor" = "Minor";
+"WeatherSeverity.accessibility.moderate" = "Moderate";
+"WeatherSeverity.accessibility.severe" = "Severe";
+"WeatherSeverity.accessibility.extreme" = "Extreme";
+"WeatherSeverity.accessibility.unknown" = "Unknown";
+
 "Wind.north" = "North";
-"Wind.northNortheast" = "North-Northeast";
+"Wind.northNortheast" = "North Northeast";
 "Wind.northeast" = "Northeast";
-"Wind.eastNortheast" = "East-Northeast";
+"Wind.eastNortheast" = "East Northeast";
 "Wind.east" = "East";
-"Wind.eastSoutheast" = "East-Souteast";
+"Wind.eastSoutheast" = "East Souteast";
 "Wind.southeast" = "Southeast";
 "Wind.south" = "South";
-"Wind.southSoutheast" = "South-Southeast";
-"Wind.southSouthwest" = "South-Southwest";
+"Wind.southSoutheast" = "South Southeast";
+"Wind.southSouthwest" = "South Southwest";
 "Wind.southwest" = "Southwest";
-"Wind.westSouthwest" = "West-Southwest";
+"Wind.westSouthwest" = "West Southwest";
 "Wind.west" = "West";
-"Wind.westNorthwest" = "West-Northwest";
+"Wind.westNorthwest" = "West Northwest";
 "Wind.northwest" = "Northwest";
-"Wind.northNorthwest" = "North-Northwest";
+"Wind.northNorthwest" = "North Northwest";
 "Wind.undefined" = "Undefined";
 
 "Wind..north" = "North";
-"Wind.accessibility.northNortheast" = "North-Northeast";
+"Wind.accessibility.northNortheast" = "North Northeast";
 "Wind.accessibility.northeast" = "Northeast";
-"Wind.accessibility.eastNortheast" = "East-Northeast";
+"Wind.accessibility.eastNortheast" = "East Northeast";
 "Wind.accessibility.east" = "East";
-"Wind.accessibility.eastSoutheast" = "East-Souteast";
+"Wind.accessibility.eastSoutheast" = "East Souteast";
 "Wind.accessibility.southeast" = "Southeast";
 "Wind.accessibility.south" = "South";
-"Wind.accessibility.southSoutheast" = "South-Southeast";
-"Wind.accessibility.southSouthwest" = "South-Southwest";
+"Wind.accessibility.southSoutheast" = "South Southeast";
+"Wind.accessibility.southSouthwest" = "South Southwest";
 "Wind.accessibility.southwest" = "Southwest";
-"Wind.accessibility.westSouthwest" = "West-Southwest";
+"Wind.accessibility.westSouthwest" = "West Southwest";
 "Wind.accessibility.west" = "West";
-"Wind.accessibility.westNorthwest" = "West-Northwest";
+"Wind.accessibility.westNorthwest" = "West Northwest";
 "Wind.accessibility.northwest" = "Northwest";
-"Wind.accessibility.northNorthwest" = "North-Northwest";
+"Wind.accessibility.northNorthwest" = "North Northwest";
 "Wind.accessibility.undefined" = "Undefined";
 
 "Wind.abbreviation.north" = "N";
