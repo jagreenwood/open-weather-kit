@@ -14,9 +14,11 @@ struct APIMetadata: Codable, Equatable {
     let latitude: Double
     let longitude: Double
     let readTime: Date
-    let reportedTime: Date
-    let units: String
+    let reportedTime: Date?
+    let units: String?
     let version: Int
+    let language: String?
+    let providerName: String?
 
     enum CodingKeys: String, CodingKey {
         case attributionURL = "attributionURL"
@@ -27,5 +29,7 @@ struct APIMetadata: Codable, Equatable {
         case reportedTime = "reportedTime"
         case units = "units"
         case version = "version"
+        case language = "language"
+        case providerName = "providerName"
     }
 }
