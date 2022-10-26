@@ -8,26 +8,38 @@
 import Foundation
 
 public struct CurrentWeather {
-
-    init(with apiCurrentWeather: APICurrentWeather) {
-        self.date = apiCurrentWeather.asOf
-        self.cloudCover = apiCurrentWeather.cloudCover
-        self.condition = WeatherCondition(rawValue: apiCurrentWeather.conditionCode) ?? .undefined
-        self.symbolName = condition.sfSymbol
-        self.dewPoint = Measurement(value: apiCurrentWeather.temperatureDewPoint, unit: .celsius)
-        self.humidity = apiCurrentWeather.humidity
-        self.pressure = Measurement(value: apiCurrentWeather.pressure, unit: .millibars)
-        self.pressureTrend = PressureTrend(rawValue: apiCurrentWeather.pressureTrend) ?? .undefined
-        self.isDaylight = apiCurrentWeather.daylight
-        self.temperature = Measurement(value: apiCurrentWeather.temperature, unit: .celsius)
-        self.apparentTemperature = Measurement(value: apiCurrentWeather.temperatureApparent, unit: .celsius)
-        self.uvIndex = UVIndex(value: apiCurrentWeather.uvIndex, category: UVIndex.ExposureCategory(value: apiCurrentWeather.uvIndex))
-        self.visibility = Measurement(value: apiCurrentWeather.visibility, unit: .meters)
-        self.wind = Wind(
-            compassDirection: Wind.CompassDirection(value: apiCurrentWeather.windDirection),
-            direction: Measurement(value: Double(apiCurrentWeather.windDirection), unit: .degrees),
-            speed: Measurement(value: apiCurrentWeather.windSpeed, unit: .kilometersPerHour))
-        self.metadata = WeatherMetadata(with: apiCurrentWeather.metadata)
+    public init(
+        date: Date,
+        cloudCover: Double,
+        condition: WeatherCondition,
+        symbolName: String,
+        dewPoint: Measurement<UnitTemperature>,
+        humidity: Double,
+        pressure: Measurement<UnitPressure>,
+        pressureTrend: PressureTrend,
+        isDaylight: Bool,
+        temperature: Measurement<UnitTemperature>,
+        apparentTemperature: Measurement<UnitTemperature>,
+        uvIndex: UVIndex,
+        visibility: Measurement<UnitLength>,
+        wind: Wind,
+        metadata: WeatherMetadata
+    ) {
+        self.date = date
+        self.cloudCover = cloudCover
+        self.condition = condition
+        self.symbolName = symbolName
+        self.dewPoint = dewPoint
+        self.humidity = humidity
+        self.pressure = pressure
+        self.pressureTrend = pressureTrend
+        self.isDaylight = isDaylight
+        self.temperature = temperature
+        self.apparentTemperature = apparentTemperature
+        self.uvIndex = uvIndex
+        self.visibility = visibility
+        self.wind = wind
+        self.metadata = metadata
     }
 
     /// The date of the current weather.

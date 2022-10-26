@@ -9,11 +9,11 @@ import Foundation
 
 // MARK: - APIWeather
 struct APIWeather: Codable, Equatable {
-    let currentWeather: APICurrentWeather
-    let forecastDaily: APIForecastDaily
-    let forecastHourly: APIForecastHourly
-    let forecastNextHour: APIForecastNextHour
-    let weatherAlerts: APIWeatherAlerts
+    let currentWeather: APICurrentWeather?
+    let forecastDaily: APIForecastDaily?
+    let forecastHourly: APIForecastHourly?
+    let forecastNextHour: APIForecastNextHour?
+    let weatherAlerts: [APIWeatherAlerts]?
 
     enum CodingKeys: String, CodingKey {
         case currentWeather = "currentWeather"

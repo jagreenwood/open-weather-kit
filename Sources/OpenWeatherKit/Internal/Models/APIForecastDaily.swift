@@ -32,7 +32,7 @@ struct APIDay: Codable, Equatable {
     let precipitationAmount: Double
     let precipitationChance: Double
     let precipitationType: String
-    let snowfallAmount: Int
+    let snowfallAmount: Double
     let solarMidnight: Date
     let solarNoon: Date
     let sunrise: Date
@@ -89,8 +89,8 @@ struct APIForecast: Codable, Equatable {
     let precipitationAmount: Double
     let precipitationChance: Double
     let precipitationType: String
-    let snowfallAmount: Int
-    let windDirection: Int
+    let snowfallAmount: Double
+    let windDirection: Double
     let windSpeed: Double
 
     enum CodingKeys: String, CodingKey {

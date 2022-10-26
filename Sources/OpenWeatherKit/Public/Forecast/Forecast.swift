@@ -8,6 +8,11 @@
 import Foundation
 
 public struct Forecast<Element> : RandomAccessCollection, Codable, Equatable where Element : Decodable, Element : Encodable, Element : Equatable {
+    public init(forecast: [Element], metadata: WeatherMetadata) {
+        self.forecast = forecast
+        self.metadata = metadata
+    }
+    
 
     /// The forecast index.
     public typealias Index = Int

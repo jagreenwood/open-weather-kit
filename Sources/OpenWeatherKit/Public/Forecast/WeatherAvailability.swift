@@ -30,3 +30,5 @@ public struct WeatherAvailability {
         case unknown
     }
 }
+
+extension WeatherAvailability: Codable {}

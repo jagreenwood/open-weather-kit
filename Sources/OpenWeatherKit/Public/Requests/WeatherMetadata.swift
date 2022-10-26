@@ -17,12 +17,6 @@ public struct WeatherMetadata {
 
     /// The location of the request.
     public var location: Location
-
-    init(with apiMetadata: APIMetadata) {
-        self.date = apiMetadata.readTime
-        self.expirationDate = apiMetadata.expireTime
-        self.location = Location(latitude: apiMetadata.latitude, longitude: apiMetadata.longitude)
-    }
 }
 
 extension WeatherMetadata: Codable {}

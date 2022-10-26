@@ -27,9 +27,9 @@ struct APIHour: Codable, Equatable {
     let conditionCode: String
     let daylight: Bool
     let humidity: Double
-    let precipitationAmount: Int
-    let precipitationIntensity: Int
-    let precipitationChance: Int
+    let precipitationAmount: Double
+    let precipitationIntensity: Double
+    let precipitationChance: Double
     let precipitationType: String
     let pressure: Double
     let pressureTrend: String
@@ -39,7 +39,7 @@ struct APIHour: Codable, Equatable {
     let temperatureDewPoint: Double
     let uvIndex: Int
     let visibility: Double
-    let windDirection: Int
+    let windDirection: Double
     let windGust: Double
     let windSpeed: Double
 

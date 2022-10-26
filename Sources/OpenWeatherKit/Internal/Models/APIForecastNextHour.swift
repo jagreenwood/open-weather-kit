@@ -29,8 +29,8 @@ struct APIForecastNextHour: Codable, Equatable {
 // MARK: - APIMinute
 struct APIMinute: Codable, Equatable {
     let startTime: Date
-    let precipitationChance: Int
-    let precipitationIntensity: Int
+    let precipitationChance: Double
+    let precipitationIntensity: Double
     let condition: String?
 
     enum CodingKeys: String, CodingKey {
