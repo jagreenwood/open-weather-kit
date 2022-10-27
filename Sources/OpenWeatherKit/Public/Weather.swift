@@ -27,3 +27,5 @@ public struct Weather {
     /// The flags containing information about data availability and attribution.
     public var availability: WeatherAvailability
 }
+
+extension Weather: Codable {}

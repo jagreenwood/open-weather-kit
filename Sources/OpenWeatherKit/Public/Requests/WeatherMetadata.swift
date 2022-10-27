@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 public struct WeatherMetadata {
 
@@ -17,7 +16,8 @@ public struct WeatherMetadata {
     public var expirationDate: Date
 
     /// The location of the request.
-    public var location: CLLocation {
-        fatalError("not implemented")
-    }
+    public var location: Location
 }
+
+extension WeatherMetadata: Codable {}
+extension WeatherMetadata: Equatable {}

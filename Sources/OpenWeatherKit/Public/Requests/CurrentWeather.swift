@@ -8,6 +8,39 @@
 import Foundation
 
 public struct CurrentWeather {
+    public init(
+        date: Date,
+        cloudCover: Double,
+        condition: WeatherCondition,
+        symbolName: String,
+        dewPoint: Measurement<UnitTemperature>,
+        humidity: Double,
+        pressure: Measurement<UnitPressure>,
+        pressureTrend: PressureTrend,
+        isDaylight: Bool,
+        temperature: Measurement<UnitTemperature>,
+        apparentTemperature: Measurement<UnitTemperature>,
+        uvIndex: UVIndex,
+        visibility: Measurement<UnitLength>,
+        wind: Wind,
+        metadata: WeatherMetadata
+    ) {
+        self.date = date
+        self.cloudCover = cloudCover
+        self.condition = condition
+        self.symbolName = symbolName
+        self.dewPoint = dewPoint
+        self.humidity = humidity
+        self.pressure = pressure
+        self.pressureTrend = pressureTrend
+        self.isDaylight = isDaylight
+        self.temperature = temperature
+        self.apparentTemperature = apparentTemperature
+        self.uvIndex = uvIndex
+        self.visibility = visibility
+        self.wind = wind
+        self.metadata = metadata
+    }
 
     /// The date of the current weather.
     public var date: Date
@@ -68,3 +101,5 @@ public struct CurrentWeather {
     /// The current weather metadata.
     public var metadata: WeatherMetadata
 }
+
+extension CurrentWeather: Codable {}

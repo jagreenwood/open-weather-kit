@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import CoreLocation
 
 final public class WeatherService : @unchecked Sendable {
 
@@ -29,7 +28,7 @@ final public class WeatherService : @unchecked Sendable {
     /// - Throws: Weather data error `WeatherError`
     /// - Returns: The aggregate weather.
     ///
-    final public func weather(for location: CLLocation) async throws -> Weather {
+    final public func weather(for location: Location) async throws -> Weather {
         fatalError("not implemented")
     }
 
@@ -43,7 +42,10 @@ final public class WeatherService : @unchecked Sendable {
     /// Example usage:
     /// `let current = try await service.weather(for: newYork, including: .current)`
     ///
-    final public func weather<T>(for location: CLLocation, including dataSet: WeatherQuery<T>) async throws -> T {
+    final public func weather<T>(
+        for location: Location,
+        including dataSet: WeatherQuery<T>
+    ) async throws -> T {
         fatalError("not implemented")
     }
 
@@ -57,23 +59,53 @@ final public class WeatherService : @unchecked Sendable {
     /// Example usage:
     /// `let (current, minute) = try await service.weather(for: newYork, including: .current, .minute)`
     ///
-    final public func weather<T1, T2>(for location: CLLocation, including dataSet1: WeatherQuery<T1>, _ dataSet2: WeatherQuery<T2>) async throws -> (T1, T2) {
+    final public func weather<T1, T2>(
+        for location: Location,
+        including dataSet1: WeatherQuery<T1>,
+        _ dataSet2: WeatherQuery<T2>
+    ) async throws -> (T1, T2) {
         fatalError("not implemented")
     }
 
-    final public func weather<T1, T2, T3>(for location: CLLocation, including dataSet1: WeatherQuery<T1>, _ dataSet2: WeatherQuery<T2>, _ dataSet3: WeatherQuery<T3>) async throws -> (T1, T2, T3) {
+    final public func weather<T1, T2, T3>(
+        for location: Location,
+        including dataSet1: WeatherQuery<T1>,
+        _ dataSet2: WeatherQuery<T2>,
+        _ dataSet3: WeatherQuery<T3>
+    ) async throws -> (T1, T2, T3) {
         fatalError("not implemented")
     }
 
-    final public func weather<T1, T2, T3, T4>(for location: CLLocation, including dataSet1: WeatherQuery<T1>, _ dataSet2: WeatherQuery<T2>, _ dataSet3: WeatherQuery<T3>, _ dataSet4: WeatherQuery<T4>) async throws -> (T1, T2, T3, T4) {
+    final public func weather<T1, T2, T3, T4>(
+        for location: Location,
+        including dataSet1: WeatherQuery<T1>,
+        _ dataSet2: WeatherQuery<T2>,
+        _ dataSet3: WeatherQuery<T3>,
+        _ dataSet4: WeatherQuery<T4>
+    ) async throws -> (T1, T2, T3, T4) {
         fatalError("not implemented")
     }
 
-    final public func weather<T1, T2, T3, T4, T5>(for location: CLLocation, including dataSet1: WeatherQuery<T1>, _ dataSet2: WeatherQuery<T2>, _ dataSet3: WeatherQuery<T3>, _ dataSet4: WeatherQuery<T4>, _ dataSet5: WeatherQuery<T5>) async throws -> (T1, T2, T3, T4, T5) {
+    final public func weather<T1, T2, T3, T4, T5>(
+        for location: Location,
+        including dataSet1: WeatherQuery<T1>,
+        _ dataSet2: WeatherQuery<T2>,
+        _ dataSet3: WeatherQuery<T3>,
+        _ dataSet4: WeatherQuery<T4>,
+        _ dataSet5: WeatherQuery<T5>
+    ) async throws -> (T1, T2, T3, T4, T5) {
         fatalError("not implemented")
     }
 
-    final public func weather<T1, T2, T3, T4, T5, T6>(for location: CLLocation, including dataSet1: WeatherQuery<T1>, _ dataSet2: WeatherQuery<T2>, _ dataSet3: WeatherQuery<T3>, _ dataSet4: WeatherQuery<T4>, _ dataSet5: WeatherQuery<T5>, _ dataSet6: WeatherQuery<T6>) async throws -> (T1, T2, T3, T4, T5, T6) {
+    final public func weather<T1, T2, T3, T4, T5, T6>(
+        for location: Location,
+        including dataSet1: WeatherQuery<T1>,
+        _ dataSet2: WeatherQuery<T2>,
+        _ dataSet3: WeatherQuery<T3>,
+        _ dataSet4: WeatherQuery<T4>,
+        _ dataSet5: WeatherQuery<T5>,
+        _ dataSet6: WeatherQuery<T6>
+    ) async throws -> (T1, T2, T3, T4, T5, T6) {
         fatalError("not implemented")
     }
 }
