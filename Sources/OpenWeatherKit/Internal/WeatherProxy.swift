@@ -9,12 +9,14 @@ import Foundation
 
 struct WeatherProxy {
     init(
+        availability: WeatherAvailability?,
         currentWeather: CurrentWeather?,
         dailyForecast: Forecast<DayWeather>?,
         hourlyForecast: Forecast<HourWeather>?,
         minuteForecast: Forecast<MinuteWeather>?,
         weatherAlerts: [WeatherAlert]?
     ) {
+        self.availability = availability
         self.currentWeather = currentWeather
         self.dailyForecast = dailyForecast
         self.hourlyForecast = hourlyForecast
@@ -22,6 +24,7 @@ struct WeatherProxy {
         self.weatherAlerts = weatherAlerts
     }
 
+    var availability: WeatherAvailability?
     var currentWeather: CurrentWeather?
     var dailyForecast: Forecast<DayWeather>?
     var hourlyForecast: Forecast<HourWeather>?
@@ -32,6 +35,7 @@ struct WeatherProxy {
 extension APIWeather {
     var weatherProxy: WeatherProxy {
         WeatherProxy(
+            availability: nil,
             currentWeather: currentWeather?.currentWeather,
             dailyForecast: forecastDaily?.dailyForecast,
             hourlyForecast: forecastHourly?.hourForecast,
