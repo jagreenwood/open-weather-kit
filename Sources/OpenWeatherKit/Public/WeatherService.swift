@@ -8,12 +8,49 @@
 import Foundation
 
 final public class WeatherService : @unchecked Sendable {
+    public struct Configuration {
+        public enum Language {
+            case englishUS
+
+            var languageCode: String {
+                switch self {
+                case .englishUS: return "en_US"
+                }
+            }
+        }
+
+        public var jwt: () -> String
+        public var language: Language
+
+        public init(
+            jwt: @escaping () -> String,
+            language: WeatherService.Configuration.Language = .englishUS
+        ) {
+            self.jwt = jwt
+            self.language = language
+        }
+    }
+
+    private let configuration: Configuration
+
+    public init(configuration: Configuration) {
+        self.configuration = configuration
+    }
+
+    public static func configure(_ configure: (inout Configuration) -> Void) {
+        var configuration = Configuration(jwt: { preconditionFailure("The JWT must be configured.") })
+        configure(&configuration)
+
+        Self.shared = .init(configuration: configuration)
+    }
 
     /// The shared weather service. Use to instantiate one instance of `WeatherService`
     /// for use throughout your application. If finer-grained optimizations are desired, create
     /// separate instances. See the `init` documentation for more details.
-    public static let shared: WeatherService = {
-        fatalError("not implemented")
+    public static var shared: WeatherService = {
+        WeatherService(configuration: Configuration {
+            preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).")
+        })
     }()
 
     /// The required attribution which includes a legal attribution page and Apple Weather mark.
