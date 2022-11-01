@@ -8,22 +8,13 @@
 import Foundation
 
 public struct WeatherQuery<T> {
-    let endDate: Date?
-    let query: String
-    let startDate: Date?
+    let queryType: QueryType
     let weatherKeyPath: KeyPath<WeatherProxy, T?>
-
-    init(endDate: Date? = nil, query: String, startDate: Date? = nil, weatherKeyPath: KeyPath<WeatherProxy, T?>) {
-        self.endDate = endDate
-        self.query = query
-        self.startDate = startDate
-        self.weatherKeyPath = weatherKeyPath
-    }
 
     /// The current weather query.
     public static var current: WeatherQuery<CurrentWeather> {
         WeatherQuery<CurrentWeather>(
-            query: APIWeather.CodingKeys.currentWeather.rawValue,
+            queryType: .current(APIWeather.CodingKeys.currentWeather.rawValue),
             weatherKeyPath: \.currentWeather
         )
     }
@@ -31,7 +22,7 @@ public struct WeatherQuery<T> {
     /// The minute forecast query.
     public static var minute: WeatherQuery<Forecast<MinuteWeather>?> {
         WeatherQuery<Forecast<MinuteWeather>?>(
-            query: APIWeather.CodingKeys.forecastNextHour.rawValue,
+            queryType: .minute(APIWeather.CodingKeys.forecastNextHour.rawValue),
             weatherKeyPath: \.minuteForecast?
         )
     }
@@ -39,7 +30,11 @@ public struct WeatherQuery<T> {
     /// The hourly forecast query.
     public static var hourly: WeatherQuery<Forecast<HourWeather>> {
         WeatherQuery<Forecast<HourWeather>>(
-            query: APIWeather.CodingKeys.forecastHourly.rawValue,
+            queryType: .hourly(
+                APIWeather.CodingKeys.forecastHourly.rawValue,
+                Date(),
+                Date()
+            ),
             weatherKeyPath: \.hourlyForecast
         )
     }
@@ -47,52 +42,65 @@ public struct WeatherQuery<T> {
     /// The daily forecast query.
     public static var daily: WeatherQuery<Forecast<DayWeather>> {
         WeatherQuery<Forecast<DayWeather>>(
-            query: APIWeather.CodingKeys.forecastDaily.rawValue,
+            queryType: .daily(
+                APIWeather.CodingKeys.forecastDaily.rawValue,
+                Date(),
+                Date()
+            ),
             weatherKeyPath: \.dailyForecast
-        )
-    }
-
-    /// The weather alerts query.
-    public static var alerts: WeatherQuery<[WeatherAlert]?> {
-        WeatherQuery<[WeatherAlert]?>(
-            query: APIWeather.CodingKeys.weatherAlerts.rawValue,
-            weatherKeyPath: \.weatherAlerts?
         )
     }
 
     /// The availability query.
     public static var availability: WeatherQuery<WeatherAvailability> {
         WeatherQuery<WeatherAvailability>(
-            query: "availability",
+            queryType: .availability("availability"),
             weatherKeyPath: \.availability)
     }
 }
 
-public extension WeatherQuery<Forecast<DayWeather>> {
+public extension WeatherQuery where T == Forecast<DayWeather> {
     /// The daily forecast query that takes a start date and end date for the request.
     static func daily(
         startDate: Date,
         endDate: Date
     ) -> WeatherQuery<T> {
         WeatherQuery<Forecast<DayWeather>>(
-            endDate: endDate,
-            query: APIWeather.CodingKeys.forecastDaily.rawValue,
-            startDate: startDate,
+            queryType: .daily(
+                APIWeather.CodingKeys.forecastDaily.rawValue,
+                Date(),
+                Date()
+            ),
             weatherKeyPath: \.dailyForecast
         )
     }
 }
 
-public extension WeatherQuery<Forecast<HourWeather>> {
+public extension WeatherQuery where T == Forecast<HourWeather> {
     static func hourly(
         startDate: Date,
         endDate: Date
     ) -> WeatherQuery<T> {
         WeatherQuery<Forecast<HourWeather>>(
-            endDate: endDate,
-            query: APIWeather.CodingKeys.forecastHourly.rawValue,
-            startDate: startDate,
+            queryType: .hourly(
+                APIWeather.CodingKeys.forecastHourly.rawValue,
+                Date(),
+                Date()
+            ),
             weatherKeyPath: \.hourlyForecast
+        )
+    }
+}
+
+public extension WeatherQuery where T == [WeatherAlert]? {
+    /// The weather alerts query.
+    static func alerts(countryCode: String) -> WeatherQuery<T> {
+        WeatherQuery<[WeatherAlert]?>(
+            queryType: .alerts(
+                dataSet: APIWeather.CodingKeys.weatherAlerts.rawValue,
+                countryCode
+            ),
+            weatherKeyPath: \.weatherAlerts?
         )
     }
 }

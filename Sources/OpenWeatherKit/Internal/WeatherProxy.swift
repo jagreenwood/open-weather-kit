@@ -30,27 +30,26 @@ struct WeatherProxy {
     var hourlyForecast: Forecast<HourWeather>?
     var minuteForecast: Forecast<MinuteWeather>?
     var weatherAlerts: [WeatherAlert]?
-}
 
-extension APIWeather {
-    var weatherProxy: WeatherProxy {
+    func combined(with weatherProxy: WeatherProxy) -> WeatherProxy {
         WeatherProxy(
-            availability: nil,
-            currentWeather: currentWeather?.currentWeather,
-            dailyForecast: forecastDaily?.dailyForecast,
-            hourlyForecast: forecastHourly?.hourForecast,
-            minuteForecast: forecastNextHour?.minuteForecast,
-            weatherAlerts: weatherAlerts?.map(\.weatherAlert)
+            availability: availability ?? weatherProxy.availability,
+            currentWeather: currentWeather ?? weatherProxy.currentWeather,
+            dailyForecast: dailyForecast ?? weatherProxy.dailyForecast,
+            hourlyForecast: hourlyForecast ?? weatherProxy.hourlyForecast,
+            minuteForecast: minuteForecast ?? weatherProxy.minuteForecast,
+            weatherAlerts: weatherAlerts ?? weatherProxy.weatherAlerts
         )
     }
 }
 
-extension APIMetadata {
-    var weatherMetadata: WeatherMetadata {
-        WeatherMetadata(
-            date: readTime,
-            expirationDate: expireTime,
-            location: Location(latitude: latitude, longitude: longitude)
-        )
-    }
+extension WeatherProxy {
+    static var empty: Self = WeatherProxy(
+        availability: nil,
+        currentWeather: nil,
+        dailyForecast: nil,
+        hourlyForecast: nil,
+        minuteForecast: nil,
+        weatherAlerts: nil
+    )
 }
