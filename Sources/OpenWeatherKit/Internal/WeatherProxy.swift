@@ -31,7 +31,7 @@ struct WeatherProxy {
     var minuteForecast: Forecast<MinuteWeather>?
     var weatherAlerts: [WeatherAlert]?
 
-    func combine(with weatherProxy: WeatherProxy) -> WeatherProxy {
+    func combined(with weatherProxy: WeatherProxy) -> WeatherProxy {
         WeatherProxy(
             availability: availability ?? weatherProxy.availability,
             currentWeather: currentWeather ?? weatherProxy.currentWeather,
@@ -41,4 +41,15 @@ struct WeatherProxy {
             weatherAlerts: weatherAlerts ?? weatherProxy.weatherAlerts
         )
     }
+}
+
+extension WeatherProxy {
+    static var empty: Self = WeatherProxy(
+        availability: nil,
+        currentWeather: nil,
+        dailyForecast: nil,
+        hourlyForecast: nil,
+        minuteForecast: nil,
+        weatherAlerts: nil
+    )
 }
