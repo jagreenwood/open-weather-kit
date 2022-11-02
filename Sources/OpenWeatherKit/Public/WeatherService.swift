@@ -54,9 +54,15 @@ final public class WeatherService : @unchecked Sendable {
     }()
 
     /// The required attribution which includes a legal attribution page and Apple Weather mark.
-    /// async throws
     final public var attribution: WeatherAttribution {
-        fatalError("not implemented")
+        get {
+            WeatherAttribution(
+                serviceName: "Apple Weather",
+                legalPageURL: URL(string: "https://weather-data.apple.com/legal-attribution.html")!,
+                squareMarkURL: URL(string: "https://weather-data.apple.com/assets/branding/square-mark.png")!,
+                combinedMarkDarkURL: URL(string: "https://weather-data.apple.com/assets/branding/combined-mark-dark.png")!,
+                combinedMarkLightURL: URL(string: "https://weather-data.apple.com/assets/branding/combined-mark-light.png")!)
+        }
     }
 
     ///

@@ -1,4 +1,8 @@
 
+"Error.permissionDenied" = "Permission Denied";
+"Error.unknown" = "Unknown Error";
+"Error.missingData" = "The data `%@` is missing from the response";
+
 "MoonPhase.new" = "New";
 "MoonPhase.waxingCrescent" = "Waxing Crescent";
 "MoonPhase.firstQuarter" = "First Quarter";
