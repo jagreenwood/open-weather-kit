@@ -24,13 +24,13 @@ public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hasha
     public var description: String {
         switch self {
         case .rising:
-            return NSLocalizedString("PressureTrend.rising", bundle: BundleLocator.bundle, comment: "Rising")
+            return NSLocalizedString("PressureTrend.rising", bundle: Bundle.main, comment: "Rising")
         case .falling:
-            return NSLocalizedString("PressureTrend.falling", bundle: BundleLocator.bundle, comment: "Falling")
+            return NSLocalizedString("PressureTrend.falling", bundle: Bundle.main, comment: "Falling")
         case .steady:
-            return NSLocalizedString("PressureTrend.steady", bundle: BundleLocator.bundle, comment: "Steady")
+            return NSLocalizedString("PressureTrend.steady", bundle: Bundle.main, comment: "Steady")
         case .undefined:
-            return NSLocalizedString("PressureTrend.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+            return NSLocalizedString("PressureTrend.undefined", bundle: Bundle.main, comment: "Undefined")
         }
     }
 
@@ -39,13 +39,13 @@ public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hasha
     public var accessibilityDescription: String {
         switch self {
         case .rising:
-            return NSLocalizedString("PressureTrend.accessibility.rising", bundle: BundleLocator.bundle, comment: "Rising")
+            return NSLocalizedString("PressureTrend.accessibility.rising", bundle: Bundle.main, comment: "Rising")
         case .falling:
-            return NSLocalizedString("PressureTrend.accessibility.falling", bundle: BundleLocator.bundle, comment: "Falling")
+            return NSLocalizedString("PressureTrend.accessibility.falling", bundle: Bundle.main, comment: "Falling")
         case .steady:
-            return NSLocalizedString("PressureTrend.accessibility.steady", bundle: BundleLocator.bundle, comment: "Steady")
+            return NSLocalizedString("PressureTrend.accessibility.steady", bundle: Bundle.main, comment: "Steady")
         case .undefined:
-            return NSLocalizedString("PressureTrend.accessibility.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+            return NSLocalizedString("PressureTrend.accessibility.undefined", bundle: Bundle.main, comment: "Undefined")
         }
     }
 }
