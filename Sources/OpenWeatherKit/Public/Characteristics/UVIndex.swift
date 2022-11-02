@@ -60,15 +60,15 @@ public struct UVIndex {
         public var description: String {
             switch self {
             case .low:
-                return NSLocalizedString("UVIndex.low", bundle: BundleLocator.bundle, comment: "Low")
+                return NSLocalizedString("UVIndex.low", bundle: Bundle.main, comment: "Low")
             case .moderate:
-                return NSLocalizedString("UVIndex.moderate", bundle: BundleLocator.bundle, comment: "Moderate")
+                return NSLocalizedString("UVIndex.moderate", bundle: Bundle.main, comment: "Moderate")
             case .high:
-                return NSLocalizedString("UVIndex.high", bundle: BundleLocator.bundle, comment: "High")
+                return NSLocalizedString("UVIndex.high", bundle: Bundle.main, comment: "High")
             case .veryHigh:
-                return NSLocalizedString("UVIndex.veryHigh", bundle: BundleLocator.bundle, comment: "Very High")
+                return NSLocalizedString("UVIndex.veryHigh", bundle: Bundle.main, comment: "Very High")
             case .extreme:
-                return NSLocalizedString("UVIndex.extreme", bundle: BundleLocator.bundle, comment: "Extreme")
+                return NSLocalizedString("UVIndex.extreme", bundle: Bundle.main, comment: "Extreme")
             }
         }
 
@@ -77,15 +77,15 @@ public struct UVIndex {
         public var accessibilityDescription: String {
             switch self {
             case .low:
-                return NSLocalizedString("UVIndex.accessibility.low", bundle: BundleLocator.bundle, comment: "Low")
+                return NSLocalizedString("UVIndex.accessibility.low", bundle: Bundle.main, comment: "Low")
             case .moderate:
-                return NSLocalizedString("UVIndex.accessibility.moderate", bundle: BundleLocator.bundle, comment: "Moderate")
+                return NSLocalizedString("UVIndex.accessibility.moderate", bundle: Bundle.main, comment: "Moderate")
             case .high:
-                return NSLocalizedString("UVIndex.accessibility.high", bundle: BundleLocator.bundle, comment: "High")
+                return NSLocalizedString("UVIndex.accessibility.high", bundle: Bundle.main, comment: "High")
             case .veryHigh:
-                return NSLocalizedString("UVIndex.accessibility.veryHigh", bundle: BundleLocator.bundle, comment: "Very High")
+                return NSLocalizedString("UVIndex.accessibility.veryHigh", bundle: Bundle.main, comment: "Very High")
             case .extreme:
-                return NSLocalizedString("UVIndex.accessibility.extreme", bundle: BundleLocator.bundle, comment: "Extreme")
+                return NSLocalizedString("UVIndex.accessibility.extreme", bundle: Bundle.main, comment: "Extreme")
             }
         }
 

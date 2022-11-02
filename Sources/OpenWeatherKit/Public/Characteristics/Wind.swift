@@ -68,39 +68,39 @@ public struct Wind {
         public var abbreviation: String {
             switch self {
             case .north:
-                return NSLocalizedString("Wind.abbreviation.north", bundle: BundleLocator.bundle, comment: "N")
+                return NSLocalizedString("Wind.abbreviation.north", bundle: Bundle.main, comment: "N")
             case .northNortheast:
-                return NSLocalizedString("Wind.abbreviation.northNortheast", bundle: BundleLocator.bundle, comment: "NNE")
+                return NSLocalizedString("Wind.abbreviation.northNortheast", bundle: Bundle.main, comment: "NNE")
             case .northeast:
-                return NSLocalizedString("Wind.abbreviation.northeast", bundle: BundleLocator.bundle, comment: "NE")
+                return NSLocalizedString("Wind.abbreviation.northeast", bundle: Bundle.main, comment: "NE")
             case .eastNortheast:
-                return NSLocalizedString("Wind.abbreviation.eastNortheast", bundle: BundleLocator.bundle, comment: "ENE")
+                return NSLocalizedString("Wind.abbreviation.eastNortheast", bundle: Bundle.main, comment: "ENE")
             case .east:
-                return NSLocalizedString("Wind.abbreviation.east", bundle: BundleLocator.bundle, comment: "E")
+                return NSLocalizedString("Wind.abbreviation.east", bundle: Bundle.main, comment: "E")
             case .eastSoutheast:
-                return NSLocalizedString("Wind.abbreviation.eastSoutheast", bundle: BundleLocator.bundle, comment: "ESE")
+                return NSLocalizedString("Wind.abbreviation.eastSoutheast", bundle: Bundle.main, comment: "ESE")
             case .southeast:
-                return NSLocalizedString("Wind.abbreviation.southeast", bundle: BundleLocator.bundle, comment: "SE")
+                return NSLocalizedString("Wind.abbreviation.southeast", bundle: Bundle.main, comment: "SE")
             case .southSoutheast:
-                return NSLocalizedString("Wind.abbreviation.southSoutheast", bundle: BundleLocator.bundle, comment: "SSE")
+                return NSLocalizedString("Wind.abbreviation.southSoutheast", bundle: Bundle.main, comment: "SSE")
             case .south:
-                return NSLocalizedString("Wind.abbreviation.south", bundle: BundleLocator.bundle, comment: "S")
+                return NSLocalizedString("Wind.abbreviation.south", bundle: Bundle.main, comment: "S")
             case .southSouthwest:
-                return NSLocalizedString("Wind.abbreviation.southSouthwest", bundle: BundleLocator.bundle, comment: "SSW")
+                return NSLocalizedString("Wind.abbreviation.southSouthwest", bundle: Bundle.main, comment: "SSW")
             case .southwest:
-                return NSLocalizedString("Wind.abbreviation.southwest", bundle: BundleLocator.bundle, comment: "SW")
+                return NSLocalizedString("Wind.abbreviation.southwest", bundle: Bundle.main, comment: "SW")
             case .westSouthwest:
-                return NSLocalizedString("Wind.abbreviation.westSouthwest", bundle: BundleLocator.bundle, comment: "WSW")
+                return NSLocalizedString("Wind.abbreviation.westSouthwest", bundle: Bundle.main, comment: "WSW")
             case .west:
-                return NSLocalizedString("Wind.abbreviation.west", bundle: BundleLocator.bundle, comment: "W")
+                return NSLocalizedString("Wind.abbreviation.west", bundle: Bundle.main, comment: "W")
             case .westNorthwest:
-                return NSLocalizedString("Wind.abbreviation.westNorthwest", bundle: BundleLocator.bundle, comment: "WNW")
+                return NSLocalizedString("Wind.abbreviation.westNorthwest", bundle: Bundle.main, comment: "WNW")
             case .northwest:
-                return NSLocalizedString("Wind.abbreviation.northwest", bundle: BundleLocator.bundle, comment: "NW")
+                return NSLocalizedString("Wind.abbreviation.northwest", bundle: Bundle.main, comment: "NW")
             case .northNorthwest:
-                return NSLocalizedString("Wind.abbreviation.northNorthwest", bundle: BundleLocator.bundle, comment: "NNW")
+                return NSLocalizedString("Wind.abbreviation.northNorthwest", bundle: Bundle.main, comment: "NNW")
             case .undefined:
-                return NSLocalizedString("Wind.abbreviation.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+                return NSLocalizedString("Wind.abbreviation.undefined", bundle: Bundle.main, comment: "Undefined")
             }
         }
 
@@ -109,39 +109,39 @@ public struct Wind {
         public var description: String {
             switch self {
             case .north:
-                return NSLocalizedString("Wind.north", bundle: BundleLocator.bundle, comment: "North")
+                return NSLocalizedString("Wind.north", bundle: Bundle.main, comment: "North")
             case .northNortheast:
-                return NSLocalizedString("Wind.northNortheast", bundle: BundleLocator.bundle, comment: "North Northeast")
+                return NSLocalizedString("Wind.northNortheast", bundle: Bundle.main, comment: "North Northeast")
             case .northeast:
-                return NSLocalizedString("Wind.northeast", bundle: BundleLocator.bundle, comment: "Northeast")
+                return NSLocalizedString("Wind.northeast", bundle: Bundle.main, comment: "Northeast")
             case .eastNortheast:
-                return NSLocalizedString("Wind.eastNortheast", bundle: BundleLocator.bundle, comment: "East Northeast")
+                return NSLocalizedString("Wind.eastNortheast", bundle: Bundle.main, comment: "East Northeast")
             case .east:
-                return NSLocalizedString("Wind.east", bundle: BundleLocator.bundle, comment: "East")
+                return NSLocalizedString("Wind.east", bundle: Bundle.main, comment: "East")
             case .eastSoutheast:
-                return NSLocalizedString("Wind.eastSoutheast", bundle: BundleLocator.bundle, comment: "East Souteast")
+                return NSLocalizedString("Wind.eastSoutheast", bundle: Bundle.main, comment: "East Souteast")
             case .southeast:
-                return NSLocalizedString("Wind.southeast", bundle: BundleLocator.bundle, comment: "Southeast")
+                return NSLocalizedString("Wind.southeast", bundle: Bundle.main, comment: "Southeast")
             case .southSoutheast:
-                return NSLocalizedString("Wind.southSoutheast", bundle: BundleLocator.bundle, comment: "South")
+                return NSLocalizedString("Wind.southSoutheast", bundle: Bundle.main, comment: "South")
             case .south:
-                return NSLocalizedString("Wind.south", bundle: BundleLocator.bundle, comment: "South Southeast")
+                return NSLocalizedString("Wind.south", bundle: Bundle.main, comment: "South Southeast")
             case .southSouthwest:
-                return NSLocalizedString("Wind.southSouthwest", bundle: BundleLocator.bundle, comment: "South Southwest")
+                return NSLocalizedString("Wind.southSouthwest", bundle: Bundle.main, comment: "South Southwest")
             case .southwest:
-                return NSLocalizedString("Wind.southwest", bundle: BundleLocator.bundle, comment: "Southwest")
+                return NSLocalizedString("Wind.southwest", bundle: Bundle.main, comment: "Southwest")
             case .westSouthwest:
-                return NSLocalizedString("Wind.westSouthwest", bundle: BundleLocator.bundle, comment: "West Southwest")
+                return NSLocalizedString("Wind.westSouthwest", bundle: Bundle.main, comment: "West Southwest")
             case .west:
-                return NSLocalizedString("Wind.west", bundle: BundleLocator.bundle, comment: "West")
+                return NSLocalizedString("Wind.west", bundle: Bundle.main, comment: "West")
             case .westNorthwest:
-                return NSLocalizedString("Wind.westNorthwest", bundle: BundleLocator.bundle, comment: "West Northwest")
+                return NSLocalizedString("Wind.westNorthwest", bundle: Bundle.main, comment: "West Northwest")
             case .northwest:
-                return NSLocalizedString("Wind.northwest", bundle: BundleLocator.bundle, comment: "Northwest")
+                return NSLocalizedString("Wind.northwest", bundle: Bundle.main, comment: "Northwest")
             case .northNorthwest:
-                return NSLocalizedString("Wind.northNorthwest", bundle: BundleLocator.bundle, comment: "North Northwest")
+                return NSLocalizedString("Wind.northNorthwest", bundle: Bundle.main, comment: "North Northwest")
             case .undefined:
-                return NSLocalizedString("Wind.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+                return NSLocalizedString("Wind.undefined", bundle: Bundle.main, comment: "Undefined")
             }
         }
 
@@ -152,39 +152,39 @@ public struct Wind {
         public var accessibilityDescription: String {
             switch self {
             case .north:
-                return NSLocalizedString("Wind.accessibility.north", bundle: BundleLocator.bundle, comment: "North")
+                return NSLocalizedString("Wind.accessibility.north", bundle: Bundle.main, comment: "North")
             case .northNortheast:
-                return NSLocalizedString("Wind.accessibility.northNortheast", bundle: BundleLocator.bundle, comment: "North Northeast")
+                return NSLocalizedString("Wind.accessibility.northNortheast", bundle: Bundle.main, comment: "North Northeast")
             case .northeast:
-                return NSLocalizedString("Wind.accessibility.northeast", bundle: BundleLocator.bundle, comment: "Northeast")
+                return NSLocalizedString("Wind.accessibility.northeast", bundle: Bundle.main, comment: "Northeast")
             case .eastNortheast:
-                return NSLocalizedString("Wind.accessibility.eastNortheast", bundle: BundleLocator.bundle, comment: "East Northeast")
+                return NSLocalizedString("Wind.accessibility.eastNortheast", bundle: Bundle.main, comment: "East Northeast")
             case .east:
-                return NSLocalizedString("Wind.accessibility.east", bundle: BundleLocator.bundle, comment: "East")
+                return NSLocalizedString("Wind.accessibility.east", bundle: Bundle.main, comment: "East")
             case .eastSoutheast:
-                return NSLocalizedString("Wind.accessibility.eastSoutheast", bundle: BundleLocator.bundle, comment: "East Souteast")
+                return NSLocalizedString("Wind.accessibility.eastSoutheast", bundle: Bundle.main, comment: "East Souteast")
             case .southeast:
-                return NSLocalizedString("Wind.accessibility.southeast", bundle: BundleLocator.bundle, comment: "Southeast")
+                return NSLocalizedString("Wind.accessibility.southeast", bundle: Bundle.main, comment: "Southeast")
             case .southSoutheast:
-                return NSLocalizedString("Wind.accessibility.southSoutheast", bundle: BundleLocator.bundle, comment: "South")
+                return NSLocalizedString("Wind.accessibility.southSoutheast", bundle: Bundle.main, comment: "South")
             case .south:
-                return NSLocalizedString("Wind.accessibility.south", bundle: BundleLocator.bundle, comment: "South Southeast")
+                return NSLocalizedString("Wind.accessibility.south", bundle: Bundle.main, comment: "South Southeast")
             case .southSouthwest:
-                return NSLocalizedString("Wind.accessibility.southSouthwest", bundle: BundleLocator.bundle, comment: "South Southwest")
+                return NSLocalizedString("Wind.accessibility.southSouthwest", bundle: Bundle.main, comment: "South Southwest")
             case .southwest:
-                return NSLocalizedString("Wind.accessibility.southwest", bundle: BundleLocator.bundle, comment: "Southwest")
+                return NSLocalizedString("Wind.accessibility.southwest", bundle: Bundle.main, comment: "Southwest")
             case .westSouthwest:
-                return NSLocalizedString("Wind.accessibility.westSouthwest", bundle: BundleLocator.bundle, comment: "West Southwest")
+                return NSLocalizedString("Wind.accessibility.westSouthwest", bundle: Bundle.main, comment: "West Southwest")
             case .west:
-                return NSLocalizedString("Wind.accessibility.west", bundle: BundleLocator.bundle, comment: "West")
+                return NSLocalizedString("Wind.accessibility.west", bundle: Bundle.main, comment: "West")
             case .westNorthwest:
-                return NSLocalizedString("Wind.accessibility.westNorthwest", bundle: BundleLocator.bundle, comment: "West Northwest")
+                return NSLocalizedString("Wind.accessibility.westNorthwest", bundle: Bundle.main, comment: "West Northwest")
             case .northwest:
-                return NSLocalizedString("Wind.accessibility.northwest", bundle: BundleLocator.bundle, comment: "Northwest")
+                return NSLocalizedString("Wind.accessibility.northwest", bundle: Bundle.main, comment: "Northwest")
             case .northNorthwest:
-                return NSLocalizedString("Wind.accessibility.northNorthwest", bundle: BundleLocator.bundle, comment: "North Northwest")
+                return NSLocalizedString("Wind.accessibility.northNorthwest", bundle: Bundle.main, comment: "North Northwest")
             case .undefined:
-                return NSLocalizedString("Wind.accessibility.undefined", bundle: BundleLocator.bundle, comment: "Undefined")
+                return NSLocalizedString("Wind.accessibility.undefined", bundle: Bundle.main, comment: "Undefined")
             }
         }
 

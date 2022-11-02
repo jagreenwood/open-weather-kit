@@ -12,11 +12,15 @@ enum Route {
     case weather(WeatherService.Configuration.Language, Location)
 
     var url: URL {
-        let base = "https://weatherkit.apple.com"
+        let urlString: String = {
+            let base = "https://weatherkit.apple.com"
 
-        switch self {
-        case let .availability(location): return URL(string: "\(base)/api/v1/availability/\(location.latitude)/\(location.longitude)")!
-        case let .weather(language, location): return URL(string: "\(base)/api/v1/weather/\(language.languageCode)/\(location.latitude)/\(location.longitude)")!
-        }
+            switch self {
+            case let .availability(location): return "\(base)/api/v1/availability/\(location.latitude)/\(location.longitude)"
+            case let .weather(language, location): return "\(base)/api/v1/weather/\(language.languageCode)/\(location.latitude)/\(location.longitude)"
+            }
+        }()
+
+        return URL(string: urlString)!
     }
 }

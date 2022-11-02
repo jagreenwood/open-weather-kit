@@ -54,9 +54,15 @@ final public class WeatherService : @unchecked Sendable {
     }()
 
     /// The required attribution which includes a legal attribution page and Apple Weather mark.
-    /// async throws
     final public var attribution: WeatherAttribution {
-        fatalError("not implemented")
+        get {
+            WeatherAttribution(
+                serviceName: "Apple Weather",
+                legalPageURL: URL(string: "https://weather-data.apple.com/legal-attribution.html")!,
+                squareMarkURL: URL(string: "https://weather-data.apple.com/assets/branding/square-mark.png")!,
+                combinedMarkDarkURL: URL(string: "https://weather-data.apple.com/assets/branding/combined-mark-dark.png")!,
+                combinedMarkLightURL: URL(string: "https://weather-data.apple.com/assets/branding/combined-mark-light.png")!)
+        }
     }
 
     ///
@@ -65,8 +71,35 @@ final public class WeatherService : @unchecked Sendable {
     /// - Throws: Weather data error `WeatherError`
     /// - Returns: The aggregate weather.
     ///
-    final public func weather(for location: Location) async throws -> Weather {
-        fatalError("not implemented")
+    final public func weather(for location: Location, countryCode: String) async throws -> Weather {
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: WeatherQuery<CurrentWeather>.current,
+                WeatherQuery<Forecast<MinuteWeather>?>.minute,
+                WeatherQuery<Forecast<HourWeather>>.hourly,
+                WeatherQuery<Forecast<DayWeather>>.daily,
+                WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
+                WeatherQuery<WeatherAvailability>.availability,
+            jwt: configuration.jwt()
+        )
+
+        return try Weather(
+            currentWeather: proxy.currentWeather.unwrap(
+                or: WeatherError.missingData(APIWeather.CodingKeys.currentWeather.rawValue)
+            ),
+            minuteForecast: proxy.minuteForecast,
+            hourlyForecast: proxy.hourlyForecast.unwrap(
+                or: WeatherError.missingData(APIWeather.CodingKeys.forecastHourly.rawValue)
+            ),
+            dailyForecast: proxy.dailyForecast.unwrap(
+                or: WeatherError.missingData(APIWeather.CodingKeys.forecastDaily.rawValue)
+            ),
+            weatherAlerts: proxy.weatherAlerts,
+            availability: proxy.availability.unwrap(
+                or: WeatherError.missingData(QueryContants.availability)
+            )
+        )
     }
 
     ///
@@ -83,7 +116,15 @@ final public class WeatherService : @unchecked Sendable {
         for location: Location,
         including dataSet: WeatherQuery<T>
     ) async throws -> T {
-        fatalError("not implemented")
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: dataSet,
+            jwt: configuration.jwt()
+        )
+
+        return try proxy[keyPath: dataSet.weatherKeyPath]
+            .unwrap(or: WeatherError.missingData(dataSet.queryType.dataSet))
     }
 
     ///
@@ -101,7 +142,19 @@ final public class WeatherService : @unchecked Sendable {
         including dataSet1: WeatherQuery<T1>,
         _ dataSet2: WeatherQuery<T2>
     ) async throws -> (T1, T2) {
-        fatalError("not implemented")
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: dataSet1, dataSet2,
+            jwt: configuration.jwt()
+        )
+
+        return try (
+            proxy[keyPath: dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
+            proxy[keyPath: dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet))
+        )
     }
 
     final public func weather<T1, T2, T3>(
@@ -110,7 +163,21 @@ final public class WeatherService : @unchecked Sendable {
         _ dataSet2: WeatherQuery<T2>,
         _ dataSet3: WeatherQuery<T3>
     ) async throws -> (T1, T2, T3) {
-        fatalError("not implemented")
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: dataSet1, dataSet2, dataSet3,
+            jwt: configuration.jwt()
+        )
+
+        return try (
+            proxy[keyPath: dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
+            proxy[keyPath: dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
+            proxy[keyPath: dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet))
+        )
     }
 
     final public func weather<T1, T2, T3, T4>(
@@ -120,7 +187,23 @@ final public class WeatherService : @unchecked Sendable {
         _ dataSet3: WeatherQuery<T3>,
         _ dataSet4: WeatherQuery<T4>
     ) async throws -> (T1, T2, T3, T4) {
-        fatalError("not implemented")
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: dataSet1, dataSet2, dataSet3, dataSet4,
+            jwt: configuration.jwt()
+        )
+
+        return try (
+            proxy[keyPath: dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
+            proxy[keyPath: dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
+            proxy[keyPath: dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet)),
+            proxy[keyPath: dataSet4.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet4.queryType.dataSet))
+        )
     }
 
     final public func weather<T1, T2, T3, T4, T5>(
@@ -131,7 +214,25 @@ final public class WeatherService : @unchecked Sendable {
         _ dataSet4: WeatherQuery<T4>,
         _ dataSet5: WeatherQuery<T5>
     ) async throws -> (T1, T2, T3, T4, T5) {
-        fatalError("not implemented")
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5,
+            jwt: configuration.jwt()
+        )
+
+        return try (
+            proxy[keyPath: dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
+            proxy[keyPath: dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
+            proxy[keyPath: dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet)),
+            proxy[keyPath: dataSet4.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet4.queryType.dataSet)),
+            proxy[keyPath: dataSet5.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet5.queryType.dataSet))
+        )
     }
 
     final public func weather<T1, T2, T3, T4, T5, T6>(
@@ -143,6 +244,26 @@ final public class WeatherService : @unchecked Sendable {
         _ dataSet5: WeatherQuery<T5>,
         _ dataSet6: WeatherQuery<T6>
     ) async throws -> (T1, T2, T3, T4, T5, T6) {
-        fatalError("not implemented")
+        let proxy = try await NetworkClient.fetchWeather(
+            location: location,
+            language: configuration.language,
+            queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6,
+            jwt: configuration.jwt()
+        )
+
+        return try (
+            proxy[keyPath: dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
+            proxy[keyPath: dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
+            proxy[keyPath: dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet)),
+            proxy[keyPath: dataSet4.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet4.queryType.dataSet)),
+            proxy[keyPath: dataSet5.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet5.queryType.dataSet)),
+            proxy[keyPath: dataSet6.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(dataSet6.queryType.dataSet))
+        )
     }
 }
