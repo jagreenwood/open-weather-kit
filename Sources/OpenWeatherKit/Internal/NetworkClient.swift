@@ -22,23 +22,28 @@ struct NetworkClient {
         jwt: String
     ) async throws -> WeatherProxy {
         try await withThrowingTaskGroup(of: WeatherProxy.self) { group in
+            var _queries = queries
+
+            if let index = _queries.firstIndex(where: { $0 is WeatherQuery<WeatherAvailability> }) {
+                group.addTask {
+                    let availability: [APIWeatherAvailability] = try await fetchAvailability(location: location, jwt: jwt)
+                    return availability.weatherProxy
+                }
+
+                _queries.remove(at: index)
+            }
+
             // if queries other than availability
-            if queries.contains(where: { !($0 is WeatherQuery<WeatherAvailability>) }) && queries.count > 1 {
+            if !_queries.isEmpty {
+                let queryItems = _queries.queryItems
                 group.addTask {
                     let weather: APIWeather = try await Self.get(
                         .weather(language,
                         location),
-                        queryItems: queries.queryItems,
+                        queryItems: queryItems,
                         jwt: jwt
                     )
                     return weather.weatherProxy
-                }
-            }
-
-            if queries.contains(where: { $0 is WeatherQuery<WeatherAvailability> }) {
-                group.addTask {
-                    let availability: [APIWeatherAvailability] = try await fetchAvailability(location: location, jwt: jwt)
-                    return availability.weatherProxy
                 }
             }
 
@@ -59,12 +64,19 @@ extension NetworkClient {
         queryItems: [URLQueryItem] = [],
         jwt: String
     ) async throws -> T where T: Decodable {
-        var components = URLComponents(url: route.url, resolvingAgainstBaseURL: false)
-        components?.queryItems = queryItems
+        let url: URL = {
+            guard !queryItems.isEmpty else {
+                return route.url
+            }
 
-        let url = components?.url ?? route.url
+            var components = URLComponents(url: route.url, resolvingAgainstBaseURL: false)
+            components?.queryItems = queryItems
+
+            return components?.url ?? route.url
+        }()
+
         var request = URLRequest(url: url)
-        request.addValue("Authorization", forHTTPHeaderField: "Bearer \(jwt)")
+        request.addValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
 
         let (data, _) = try await URLSession.shared.data(for: request)
         let decoder = JSONDecoder()
