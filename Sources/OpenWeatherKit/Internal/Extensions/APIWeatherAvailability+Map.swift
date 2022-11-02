@@ -10,8 +10,8 @@ import Foundation
 extension Array where Element == APIWeatherAvailability {
     var weatherAvailability: WeatherAvailability {
         WeatherAvailability(
-            minuteAvailability: contains(.forecastNextHour) ? .available : .unsupported,
-            alertAvailability: contains(.weatherAlerts) ? .available :.unsupported
+            minuteAvailability: contains(.forecastNextHour) ? .available : .temporarilyUnavailable,
+            alertAvailability: contains(.weatherAlerts) ? .available :.temporarilyUnavailable
         )
     }
 

@@ -15,6 +15,8 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// An unknown error.
     case unknown
 
+    case missingData(_ attributeName: String)
+
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
         fatalError("not implemented")

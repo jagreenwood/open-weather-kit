@@ -7,6 +7,10 @@
 
 import Foundation
 
+enum QueryContants {
+    static let availability = "availability"
+}
+
 public struct WeatherQuery<T> {
     let queryType: QueryType
     let weatherKeyPath: KeyPath<WeatherProxy, T?>
@@ -33,7 +37,7 @@ public struct WeatherQuery<T> {
             queryType: .hourly(
                 APIWeather.CodingKeys.forecastHourly.rawValue,
                 Date(),
-                Date()
+                Date.hoursFromNow(24)
             ),
             weatherKeyPath: \.hourlyForecast
         )
@@ -45,7 +49,7 @@ public struct WeatherQuery<T> {
             queryType: .daily(
                 APIWeather.CodingKeys.forecastDaily.rawValue,
                 Date(),
-                Date()
+                Date.daysFromNow(10)
             ),
             weatherKeyPath: \.dailyForecast
         )
@@ -54,7 +58,7 @@ public struct WeatherQuery<T> {
     /// The availability query.
     public static var availability: WeatherQuery<WeatherAvailability> {
         WeatherQuery<WeatherAvailability>(
-            queryType: .availability("availability"),
+            queryType: .availability(QueryContants.availability),
             weatherKeyPath: \.availability)
     }
 }
@@ -68,8 +72,8 @@ public extension WeatherQuery where T == Forecast<DayWeather> {
         WeatherQuery<Forecast<DayWeather>>(
             queryType: .daily(
                 APIWeather.CodingKeys.forecastDaily.rawValue,
-                Date(),
-                Date()
+                startDate,
+                endDate
             ),
             weatherKeyPath: \.dailyForecast
         )
@@ -84,8 +88,8 @@ public extension WeatherQuery where T == Forecast<HourWeather> {
         WeatherQuery<Forecast<HourWeather>>(
             queryType: .hourly(
                 APIWeather.CodingKeys.forecastHourly.rawValue,
-                Date(),
-                Date()
+                startDate,
+                endDate
             ),
             weatherKeyPath: \.hourlyForecast
         )
