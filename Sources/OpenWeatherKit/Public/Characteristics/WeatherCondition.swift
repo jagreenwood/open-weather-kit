@@ -10,75 +10,75 @@ import Foundation
 public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Hashable {
 
     /// The kind of condition.
-    case blizzard
+    case blizzard = "Blizzard"
 
-    case blowingDust
+    case blowingDust = "BlowingDust"
 
-    case blowingSnow
+    case blowingSnow = "BlowingSnow"
 
-    case breezy
+    case breezy = "Breezy"
 
-    case clear
+    case clear = "Clear"
 
-    case cloudy
+    case cloudy = "Cloudy"
 
-    case drizzle
+    case drizzle = "Drizzle"
 
-    case flurries
+    case flurries = "Flurries"
 
-    case foggy
+    case foggy = "Foggy"
 
-    case freezingDrizzle
+    case freezingDrizzle = "FreezingDrizzle"
 
-    case freezingRain
+    case freezingRain = "FreezingRain"
 
-    case frigid
+    case frigid = "Frigid"
 
-    case hail
+    case hail = "Hail"
 
-    case haze
+    case haze = "Haze"
 
-    case heavyRain
+    case heavyRain = "HeavyRain"
 
-    case heavySnow
+    case heavySnow = "HeavySnow"
 
-    case hot
+    case hot = "Hot"
 
-    case hurricane
+    case hurricane = "Hurricane"
 
-    case isolatedThunderstorms
+    case isolatedThunderstorms = "IsolatedThunderstorms"
 
-    case mostlyClear
+    case mostlyClear = "MostlyClear"
 
-    case mostlyCloudy
+    case mostlyCloudy = "MostlyCloudy"
 
-    case partlyCloudy
+    case partlyCloudy = "PartlyCloudy"
 
-    case rain
+    case rain = "Rain"
 
-    case scatteredThunderstorms
+    case scatteredThunderstorms = "ScatteredThunderstorms"
 
-    case sleet
+    case sleet = "Sleet"
 
-    case smoky
+    case smoky = "Smoky"
 
-    case snow
+    case snow = "Snow"
 
-    case strongStorms
+    case strongStorms = "StrongStorms"
 
-    case sunFlurries
+    case sunFlurries = "SunFlurries"
 
-    case sunShowers
+    case sunShowers = "SunShowers"
 
-    case thunderstorms
+    case thunderstorms = "Thunderstorms"
 
-    case tropicalStorm
+    case tropicalStorm = "TropicalStorm"
 
-    case undefined
+    case undefined = "Undefined"
 
-    case windy
+    case windy = "Windy"
 
-    case wintryMix
+    case wintryMix = "WintryMix"
 
     /// Standard string describing the current condition.
     public var description: String {
