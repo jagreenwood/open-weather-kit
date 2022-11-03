@@ -2,7 +2,7 @@
 
 This package is Swift wrapper around the [WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi).
 Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package 
-is near identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit). 
+is nearly identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit). 
 
 ## Supported Platforms
 - iOS 13+
@@ -14,10 +14,10 @@ is near identical to Apple's [WeatherKit](https://developer.apple.com/documentat
 
 ## Setup
 
-The REST API requires a signed JWT to be attached to each request. To set this up you need:
+The REST API requires a signed JWT to be sent with each request. To set this up you need:
 
 - A paid developer account
-- An App Identifier
+- A Service Identifier
 - A key
 
 ### Apple Developer Portal Setup
@@ -47,7 +47,7 @@ logic necessary to generate a JWT is beyond the scope of the OpenWeatherKit proj
  
 For general infomation on JWT please visit https://jwt.io
 
-That being said, the recommended packge to handle this task is Vapor's [jwt-kit](https://github.com/vapor/jwt-kit). Here is how to set that up:
+That being said, the recommended package to handle this task is Vapor's [jwt-kit](https://github.com/vapor/jwt-kit). Here is how to set that up:
 
 Implement model conforming to `JWTPayload`
 
@@ -94,8 +94,11 @@ struct JWTProvider {
 Note the variables:
 
 PRIVATE_KEY_FROM_DEV_PORTAL: The contents of the private key file including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
+
 TEAM_ID: Found in Membership Details on the developer portal
+
 SERVICE_IDENTIFIER: The reverse-domain name noted earlier
+
 KEY_ID: The ID of the service key
 
 ## Usage
@@ -103,7 +106,7 @@ KEY_ID: The ID of the service key
 ### Configure Service
 
 The service must be configured with a JWT generating closure and optionally a language.
-If you choice to use the `WeatherService.shared` instance, call the following before referencing `shared`:
+If you choose to use the `WeatherService.shared` instance, call the following before referencing `shared`:
 
 ```swift
 WeatherService.configure {
