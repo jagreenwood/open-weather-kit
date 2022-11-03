@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct CurrentWeather {
+public struct CurrentWeather: Sendable {
     public init(
         date: Date,
         cloudCover: Double,
@@ -103,3 +103,8 @@ public struct CurrentWeather {
 }
 
 extension CurrentWeather: Codable {}
+extension UnitTemperature: @unchecked Sendable {}
+extension UnitPressure: @unchecked Sendable {}
+extension UnitLength: @unchecked Sendable {}
+extension UnitAngle: @unchecked Sendable {}
+extension UnitSpeed: @unchecked Sendable {}

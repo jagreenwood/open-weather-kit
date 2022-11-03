@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum AlertUrgency: String, Codable, Equatable {
+public enum AlertUrgency: String, Codable, Equatable, Sendable {
     // Take responsive action immediately.
     case immediate
 

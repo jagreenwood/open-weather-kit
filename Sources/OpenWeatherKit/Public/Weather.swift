@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Weather {
+public struct Weather: Sendable {
 
     /// The current weather forecast.
     public var currentWeather: CurrentWeather

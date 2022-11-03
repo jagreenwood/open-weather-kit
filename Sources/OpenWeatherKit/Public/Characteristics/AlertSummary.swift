@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct AlertSummary: Codable, Equatable {
+public struct AlertSummary: Codable, Equatable, Sendable {
     public var name: String
     public var id: String
     public var areaID: String
@@ -71,7 +71,7 @@ public struct AlertSummary: Codable, Equatable {
     }
 }
 
-public enum WeatherResponse: String, Codable, Equatable {
+public enum WeatherResponse: String, Codable, Equatable, Sendable {
     /// Take shelter in place.
     case shelter
 

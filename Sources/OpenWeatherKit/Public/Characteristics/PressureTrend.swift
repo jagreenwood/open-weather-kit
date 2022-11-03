@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hashable {
+public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// The pressure is rising.
     case rising

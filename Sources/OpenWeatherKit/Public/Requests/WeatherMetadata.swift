@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WeatherMetadata {
+public struct WeatherMetadata: Sendable {
 
     /// The date of the weather data request.
     public var date: Date

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WeatherAvailability {
+public struct WeatherAvailability: Sendable {
 
     /// The minute forecast availability.
     public var minuteAvailability: WeatherAvailability.AvailabilityKind
@@ -16,7 +16,7 @@ public struct WeatherAvailability {
     public var alertAvailability: WeatherAvailability.AvailabilityKind
 
     /// The availability kind.
-    public enum AvailabilityKind : String, Codable {
+    public enum AvailabilityKind : String, Codable, Sendable {
 
         /// The data is available.
         case available

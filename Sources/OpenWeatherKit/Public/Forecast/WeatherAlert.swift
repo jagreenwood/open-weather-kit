@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct WeatherAlert {
+public struct WeatherAlert: Sendable {
 
     /// The site for more details about the weather alert. Required link for attribution.
     public var detailsURL: URL

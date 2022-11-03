@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Hashable {
+public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// The kind of condition.
     case blizzard = "Blizzard"

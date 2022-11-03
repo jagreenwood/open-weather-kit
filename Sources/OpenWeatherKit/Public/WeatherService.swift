@@ -7,9 +7,9 @@
 
 import Foundation
 
-final public class WeatherService : @unchecked Sendable {
-    public struct Configuration {
-        public enum Language {
+final public class WeatherService: @unchecked Sendable {
+    public struct Configuration: Sendable {
+        public enum Language: Sendable {
             case englishUS
 
             var languageCode: String {
@@ -19,11 +19,11 @@ final public class WeatherService : @unchecked Sendable {
             }
         }
 
-        public var jwt: () -> String
+        public var jwt: @Sendable () -> String
         public var language: Language
 
         public init(
-            jwt: @escaping () -> String,
+            jwt: @escaping @Sendable () -> String,
             language: WeatherService.Configuration.Language = .englishUS
         ) {
             self.jwt = jwt
