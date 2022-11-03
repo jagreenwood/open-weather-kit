@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import WeatherKit
 
 public struct AlertSummary: Codable, Equatable {
     public var name: String
