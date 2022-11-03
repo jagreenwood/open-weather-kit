@@ -81,17 +81,16 @@ import Foundation
     ///
     /// The SF Symbol icon that represents the moon phase.
     ///
-    #warning("Implement sfSymbol")
     public var symbolName: String {
         switch self {
-        case .new: return ""
-        case .waxingCrescent: return ""
-        case .firstQuarter: return ""
-        case .waxingGibbous: return ""
-        case .full: return ""
-        case .waningGibbous: return ""
-        case .lastQuarter: return ""
-        case .waningCrescent: return ""
+        case .new: return "moonphase.new.moon"
+        case .waxingCrescent: return "moonphase.waxing.crescent"
+        case .firstQuarter: return "moonphase.first.quarter"
+        case .waxingGibbous: return "moonphase.waxing.gibbous"
+        case .full: return "moonphase.full.moon"
+        case .waningGibbous: return "moonphase.waning.gibbous"
+        case .lastQuarter: return "moonphase.last.quarter"
+        case .waningCrescent: return "moonphase.waning.crescent"
         }
     }
 }
