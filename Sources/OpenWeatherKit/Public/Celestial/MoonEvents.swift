@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct MoonEvents {
+public struct MoonEvents: Sendable {
 
     /// The moon phase.
     public var phase: MoonPhase

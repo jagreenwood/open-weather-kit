@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum WeatherSeverity : String, Codable, CaseIterable, CustomStringConvertible, Hashable {
+public enum WeatherSeverity : String, Codable, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// Specifies "minimal" or no threat to life or property.
     case minor

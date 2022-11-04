@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Certainty: String, Codable, Equatable {
+public enum Certainty: String, Codable, Equatable, Sendable {
     
     // The event has already occurred or is ongoing.
     case observed

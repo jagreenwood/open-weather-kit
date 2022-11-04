@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct UVIndex {
+public struct UVIndex: Sendable {
 
     /// The UV Index value.
     public var value: Int
@@ -18,7 +18,7 @@ public struct UVIndex {
     ///
     /// An enumeration that indicates risk of harm from unprotected sun exposure.
     ///
-    @frozen public enum ExposureCategory : String, Codable, Comparable, CustomStringConvertible, CaseIterable {
+    @frozen public enum ExposureCategory : String, Codable, Comparable, CustomStringConvertible, CaseIterable, Sendable {
 
         /// The UV index is low.
         ///

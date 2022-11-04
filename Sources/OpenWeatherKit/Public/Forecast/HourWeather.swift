@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct HourWeather {
+public struct HourWeather: Sendable {
 
     /// The start date of the hour weather.
     public var date: Date

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hashable {
+public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// No precipitation.
     case none

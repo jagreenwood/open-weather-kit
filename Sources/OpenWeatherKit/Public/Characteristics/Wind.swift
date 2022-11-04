@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct Wind {
+public struct Wind: Sendable {
 
     /// General indicator of wind direction, often referred to as "due north", "due south", etc.
     /// Refers to the direction the wind is coming from, for instance, a north wind blows from
@@ -26,7 +26,7 @@ public struct Wind {
     /// Specifies the 16-wind compass rose composed of the cardinal directions—north, east, south, and
     /// west—and its intercardinal directions. `Wind.CompassDirection` represents true headings.
     /// It's the direction the wind is coming from in degrees, measured clockwise from true north.
-    @frozen public enum CompassDirection : String, Codable, CaseIterable, CustomStringConvertible {
+    @frozen public enum CompassDirection : String, Codable, CaseIterable, CustomStringConvertible, Sendable {
 
         case north
 

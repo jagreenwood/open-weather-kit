@@ -7,7 +7,7 @@
 
 import Foundation
 
-public struct SunEvents {
+public struct SunEvents: Sendable {
 
     /// The time of astronomical sunrise when the sun’s center is 18° below the horizon.
     ///
