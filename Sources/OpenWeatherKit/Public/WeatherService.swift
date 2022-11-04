@@ -31,27 +31,23 @@ final public class WeatherService: @unchecked Sendable {
         }
     }
 
-    private let configuration: Configuration
+    private static var configuration: Configuration = Configuration(
+        jwt: { preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).") })
 
     public init(configuration: Configuration) {
-        self.configuration = configuration
+        Self.configuration = Self.configuration
     }
 
     public static func configure(_ configure: (inout Configuration) -> Void) {
-        var configuration = Configuration(jwt: { preconditionFailure("The JWT must be configured.") })
-        configure(&configuration)
+        configure(&Self.configuration)
 
-        Self.shared = .init(configuration: configuration)
+        Self.configuration = configuration
     }
 
     /// The shared weather service. Use to instantiate one instance of `WeatherService`
     /// for use throughout your application. If finer-grained optimizations are desired, create
     /// separate instances. See the `init` documentation for more details.
-    public static var shared: WeatherService = {
-        WeatherService(configuration: Configuration {
-            preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).")
-        })
-    }()
+    public static let shared: WeatherService = .init(configuration: configuration)
 
     /// The required attribution which includes a legal attribution page and Apple Weather mark.
     final public var attribution: WeatherAttribution {
@@ -74,14 +70,14 @@ final public class WeatherService: @unchecked Sendable {
     final public func weather(for location: Location, countryCode: String) async throws -> Weather {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: WeatherQuery<CurrentWeather>.current,
                 WeatherQuery<Forecast<MinuteWeather>?>.minute,
                 WeatherQuery<Forecast<HourWeather>>.hourly,
                 WeatherQuery<Forecast<DayWeather>>.daily,
                 WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
                 WeatherQuery<WeatherAvailability>.availability,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try Weather(
@@ -118,9 +114,9 @@ final public class WeatherService: @unchecked Sendable {
     ) async throws -> T {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: dataSet,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try proxy[keyPath: dataSet.weatherKeyPath]
@@ -144,9 +140,9 @@ final public class WeatherService: @unchecked Sendable {
     ) async throws -> (T1, T2) {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: dataSet1, dataSet2,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try (
@@ -165,9 +161,9 @@ final public class WeatherService: @unchecked Sendable {
     ) async throws -> (T1, T2, T3) {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try (
@@ -189,9 +185,9 @@ final public class WeatherService: @unchecked Sendable {
     ) async throws -> (T1, T2, T3, T4) {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3, dataSet4,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try (
@@ -216,9 +212,9 @@ final public class WeatherService: @unchecked Sendable {
     ) async throws -> (T1, T2, T3, T4, T5) {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try (
@@ -246,9 +242,9 @@ final public class WeatherService: @unchecked Sendable {
     ) async throws -> (T1, T2, T3, T4, T5, T6) {
         let proxy = try await NetworkClient.fetchWeather(
             location: location,
-            language: configuration.language,
+            language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6,
-            jwt: configuration.jwt()
+            jwt: Self.configuration.jwt()
         )
 
         return try (
