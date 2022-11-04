@@ -7,7 +7,7 @@
 
 import Foundation
 
-final public class WeatherService: @unchecked Sendable {
+final public class WeatherService: Sendable {
     public struct Configuration: Sendable {
         public enum Language: Sendable {
             case englishUS
