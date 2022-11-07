@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/26/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 extension APIWeatherAlerts {
     var weatherAlert: WeatherAlert {

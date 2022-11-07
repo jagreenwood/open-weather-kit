@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 11/2/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 extension Date {
     static func daysFromNow(_ days: Int) -> Date {

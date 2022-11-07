@@ -6,7 +6,7 @@
 //
 
 #if os(Linux)
-import Foundation
+@preconcurrency import Foundation
 import AsyncHTTPClient
 import NIOCore
 

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/26/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 public struct AlertSummary: Codable, Equatable, Sendable {
     public var name: String

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 8/28/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 

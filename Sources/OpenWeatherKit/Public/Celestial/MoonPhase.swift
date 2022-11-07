@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 8/28/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 @frozen public enum MoonPhase : String, CustomStringConvertible, CaseIterable {
     enum CodingKeys: String, CodingKey {

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/27/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 enum APIWeatherAvailability: String, Codable, Equatable {
     case currentWeather

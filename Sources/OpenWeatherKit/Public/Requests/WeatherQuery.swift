@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 8/28/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 enum QueryContants {
     static let availability = "availability"

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/31/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 extension APIMetadata {
     var weatherMetadata: WeatherMetadata {

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 9/29/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 public struct Location: Equatable, Codable, Sendable {
     public let latitude: Double

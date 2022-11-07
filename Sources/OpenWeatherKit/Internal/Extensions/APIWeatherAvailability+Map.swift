@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/27/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 extension Array where Element == APIWeatherAvailability {
     var weatherAvailability: WeatherAvailability {

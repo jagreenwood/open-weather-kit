@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/16/22.
 //
 
-import Foundation
+@preconcurrency import Foundation
 
 // MARK: - APIForecastHourly
 struct APIForecastHourly: Codable, Equatable {
