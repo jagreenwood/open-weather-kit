@@ -9,6 +9,7 @@ import Foundation
 #if os(Linux)
 import AsyncHTTPClient
 import NIOCore
+import NIOFoundationCompat
 #endif
 
 struct NetworkClient {
