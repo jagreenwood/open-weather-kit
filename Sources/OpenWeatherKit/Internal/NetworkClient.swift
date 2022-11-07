@@ -6,16 +6,30 @@
 //
 
 import Foundation
+#if os(Linux)
+import AsyncHTTPClient
+import NIOCore
+#endif
 
 struct NetworkClient {
-    static func fetchAvailability(
+    enum Constants {
+        static let authorization = "Authorization"
+        static let bearer = "Bearer"
+    }
+
+#if os(Linux)
+    let httpClient: HTTPClient
+#endif
+
+
+    func fetchAvailability(
         location: Location,
         jwt: String
     ) async throws -> [APIWeatherAvailability] {
-        try await Self.get(.availability(location), jwt: jwt)
+        try await get(.availability(location), jwt: jwt)
     }
 
-    static func fetchWeather(
+    func fetchWeather(
         location: Location,
         language: WeatherService.Configuration.Language,
         queries: any Query...,
@@ -37,7 +51,7 @@ struct NetworkClient {
             if !_queries.isEmpty {
                 let queryItems = _queries.queryItems
                 group.addTask {
-                    let weather: APIWeather = try await Self.get(
+                    let weather: APIWeather = try await get(
                         .weather(language,
                         location),
                         queryItems: queryItems,
@@ -59,7 +73,7 @@ struct NetworkClient {
 }
 
 extension NetworkClient {
-    static func get<T>(
+    func get<T>(
         _ route: Route,
         queryItems: [URLQueryItem] = [],
         jwt: String
@@ -75,10 +89,18 @@ extension NetworkClient {
             return components?.url ?? route.url
         }()
 
+#if os(Linux)
+        var request = HTTPClientRequest(url: url.absoluteString)
+        request.headers.add(name: Constants.authorization, value: "\(Constants.bearer) \(jwt)")
+        let response = try await httpClient.execute(request, timeout: .seconds(30))
+        let data = try await response.body.collect(upTo: 1024 * 1024)
+#else
         var request = URLRequest(url: url)
-        request.addValue("Bearer \(jwt)", forHTTPHeaderField: "Authorization")
+        request.addValue("\(Constants.bearer) \(jwt)", forHTTPHeaderField: Constants.authorization)
 
         let (data, _) = try await URLSession.shared.data(for: request)
+#endif
+
         let decoder = JSONDecoder()
         decoder.dateDecodingStrategy = .iso8601
 

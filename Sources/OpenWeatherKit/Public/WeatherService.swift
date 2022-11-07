@@ -6,6 +6,10 @@
 //
 
 import Foundation
+#if os(Linux)
+import AsyncHTTPClient
+import NIOCore
+#endif
 
 final public class WeatherService: Sendable {
     public struct Configuration: Sendable {
@@ -21,7 +25,19 @@ final public class WeatherService: Sendable {
 
         public var jwt: @Sendable () -> String
         public var language: Language
+#if os(Linux)
+        public var eventLoopGroupProvider: NIOEventLoopGroupProvider
 
+        public init(
+            jwt: @escaping @Sendable () -> String,
+            language: WeatherService.Configuration.Language = .englishUS,
+            eventLoopGroupProvider: NIOEventLoopGroupProvider = .createNew
+        ) {
+            self.jwt = jwt
+            self.language = language
+            self.eventLoopGroupProvider = eventLoopGroupProvider
+        }
+#else
         public init(
             jwt: @escaping @Sendable () -> String,
             language: WeatherService.Configuration.Language = .englishUS
@@ -29,14 +45,37 @@ final public class WeatherService: Sendable {
             self.jwt = jwt
             self.language = language
         }
+#endif
     }
 
     private static var configuration: Configuration = Configuration(
-        jwt: { preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).") })
+        jwt: { preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).") }
+    )
+
+    private let networkClient: NetworkClient
+
+#if os(Linux)
 
     public init(configuration: Configuration) {
         Self.configuration = configuration
+        self.networkClient = NetworkClient(
+            httpClient: HTTPClient(
+                eventLoopGroupProvider: configuration.eventLoopGroupProvider.eventLoopGroupProvider
+            )
+        )
     }
+
+    public func shutdown() async throws {
+        try await networkClient.httpClient.shutdown()
+    }
+
+#else
+    public init(configuration: Configuration) {
+        Self.configuration = configuration
+        self.networkClient = NetworkClient()
+    }
+#endif
+
 
     public static func configure(_ configure: (inout Configuration) -> Void) {
         configure(&Self.configuration)
@@ -68,7 +107,7 @@ final public class WeatherService: Sendable {
     /// - Returns: The aggregate weather.
     ///
     final public func weather(for location: Location, countryCode: String) async throws -> Weather {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: WeatherQuery<CurrentWeather>.current,
@@ -112,7 +151,7 @@ final public class WeatherService: Sendable {
         for location: Location,
         including dataSet: WeatherQuery<T>
     ) async throws -> T {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: dataSet,
@@ -138,7 +177,7 @@ final public class WeatherService: Sendable {
         including dataSet1: WeatherQuery<T1>,
         _ dataSet2: WeatherQuery<T2>
     ) async throws -> (T1, T2) {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: dataSet1, dataSet2,
@@ -159,7 +198,7 @@ final public class WeatherService: Sendable {
         _ dataSet2: WeatherQuery<T2>,
         _ dataSet3: WeatherQuery<T3>
     ) async throws -> (T1, T2, T3) {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3,
@@ -183,7 +222,7 @@ final public class WeatherService: Sendable {
         _ dataSet3: WeatherQuery<T3>,
         _ dataSet4: WeatherQuery<T4>
     ) async throws -> (T1, T2, T3, T4) {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3, dataSet4,
@@ -210,7 +249,7 @@ final public class WeatherService: Sendable {
         _ dataSet4: WeatherQuery<T4>,
         _ dataSet5: WeatherQuery<T5>
     ) async throws -> (T1, T2, T3, T4, T5) {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5,
@@ -240,7 +279,7 @@ final public class WeatherService: Sendable {
         _ dataSet5: WeatherQuery<T5>,
         _ dataSet6: WeatherQuery<T6>
     ) async throws -> (T1, T2, T3, T4, T5, T6) {
-        let proxy = try await NetworkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
             queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6,
