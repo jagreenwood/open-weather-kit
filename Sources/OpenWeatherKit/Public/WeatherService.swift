@@ -35,7 +35,7 @@ final public class WeatherService: Sendable {
         jwt: { preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).") })
 
     public init(configuration: Configuration) {
-        Self.configuration = Self.configuration
+        Self.configuration = configuration
     }
 
     public static func configure(_ configure: (inout Configuration) -> Void) {
