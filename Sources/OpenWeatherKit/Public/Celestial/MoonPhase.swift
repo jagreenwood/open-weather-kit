@@ -8,6 +8,10 @@
 import Foundation
 
 @frozen public enum MoonPhase : String, CustomStringConvertible, CaseIterable {
+    enum CodingKeys: String, CodingKey {
+        case new, waxingCrescent, firstQuarter, waxingGibbous, full, waningGibbous, waningCrescent
+        case lastQuarter = "thirdQuarter"
+    }
 
     /// The disk is unlit where the moon is not visible.
     case new
@@ -32,6 +36,21 @@ import Foundation
 
     /// The disk is partially lit as the moon is waning.
     case waningCrescent
+
+    public init?(rawValue: String) {
+        switch rawValue {
+        case CodingKeys.new.rawValue: self = .new
+        case CodingKeys.waxingCrescent.rawValue: self = .waxingCrescent
+        case CodingKeys.firstQuarter.rawValue: self = .firstQuarter
+        case CodingKeys.waxingGibbous.rawValue: self = .waxingGibbous
+        case CodingKeys.full.rawValue: self = .full
+        case CodingKeys.waningGibbous.rawValue: self = .waningGibbous
+        case CodingKeys.lastQuarter.rawValue: self = .lastQuarter
+        case CodingKeys.waningCrescent.rawValue: self = .waningCrescent
+        default:
+            return nil
+        }
+    }
 
     /// A localized string describing the moon phase.
     public var description: String {
