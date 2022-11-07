@@ -29,3 +29,10 @@ let package = Package(
             dependencies: ["OpenWeatherKit"]),
     ]
 )
+
+#if os(Linux)
+package.dependencies.append(.package(url: "https://github.com/swift-server/async-http-client.git", from: "1.9.0"))
+package.targets.first { $0.name == "OpenWeatherKit" }?.dependencies.append(.product(name: "AsyncHTTPClient", package: "async-http-client"))
+#endif
+
+
