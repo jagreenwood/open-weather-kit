@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/16/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 // MARK: - APIForecastDaily
 struct APIForecastDaily: Codable, Equatable {

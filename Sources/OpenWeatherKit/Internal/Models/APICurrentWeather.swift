@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 9/4/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 // MARK: - APICurrentWeather
 struct APICurrentWeather: Codable, Equatable {

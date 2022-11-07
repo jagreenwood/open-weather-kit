@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/31/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 extension APIWeather {
     var weatherProxy: WeatherProxy {

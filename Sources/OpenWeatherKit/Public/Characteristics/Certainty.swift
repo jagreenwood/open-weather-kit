@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/26/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 public enum Certainty: String, Codable, Equatable, Sendable {
     

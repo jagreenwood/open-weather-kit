@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 8/28/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 8/28/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 public struct Forecast<Element> : RandomAccessCollection, Codable, Equatable, Sendable where Element : Decodable, Element : Encodable, Element : Equatable, Element : Sendable {
     public init(forecast: [Element], metadata: WeatherMetadata) {

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 8/28/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 public struct UVIndex: Sendable {
 

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 11/2/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 extension Optional {
     func unwrap(or error: @autoclosure () -> Error) throws -> Wrapped {

@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 11/1/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 protocol Query {
     var queryType: QueryType { get }

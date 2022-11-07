@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/26/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 public enum AlertUrgency: String, Codable, Equatable, Sendable {
     // Take responsive action immediately.

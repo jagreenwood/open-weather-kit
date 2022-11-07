@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/23/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 struct WeatherProxy {
     init(

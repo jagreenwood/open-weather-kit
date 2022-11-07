@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/28/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 let isoFormatter: ISO8601DateFormatter = {
     let formatter = ISO8601DateFormatter()

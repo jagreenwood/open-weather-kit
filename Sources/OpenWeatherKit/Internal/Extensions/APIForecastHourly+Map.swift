@@ -5,7 +5,7 @@
 //  Created by Jeremy Greenwood on 10/25/22.
 //
 
-@preconcurrency import Foundation
+import Foundation
 
 extension APIForecastHourly {
     var hourForecast: Forecast<HourWeather> {
