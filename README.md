@@ -9,7 +9,7 @@ is nearly identical to Apple's [WeatherKit](https://developer.apple.com/document
 - watchOS 6+
 - tvOS 13+
 - macOS 11+
-- Linix ???
+- Linux ???
 - Windows ???
 
 ## Setup
