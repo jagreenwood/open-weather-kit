@@ -72,7 +72,9 @@ final public class WeatherService: Sendable {
 #else
     public init(configuration: Configuration) {
         Self.configuration = configuration
-        self.networkClient = NetworkClient()
+        self.networkClient = NetworkClient(
+            session: URLSession.shared
+        )
     }
 #endif
 

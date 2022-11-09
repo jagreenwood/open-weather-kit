@@ -20,6 +20,8 @@ struct NetworkClient {
 
 #if os(Linux)
     let httpClient: HTTPClient
+#else
+    let session: URLSession
 #endif
 
 
@@ -99,7 +101,7 @@ extension NetworkClient {
         var request = URLRequest(url: url)
         request.addValue("\(Constants.bearer) \(jwt)", forHTTPHeaderField: Constants.authorization)
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await session.data(for: request)
 #endif
 
         let decoder = JSONDecoder()
