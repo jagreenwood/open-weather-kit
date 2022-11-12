@@ -15,7 +15,7 @@ extension APIWeather {
             dailyForecast: forecastDaily?.dailyForecast,
             hourlyForecast: forecastHourly?.hourForecast,
             minuteForecast: forecastNextHour?.minuteForecast,
-            weatherAlerts: weatherAlerts?.map(\.weatherAlert)
+            weatherAlerts: weatherAlerts == nil ? nil : [weatherAlerts!.weatherAlert]
         )
     }
 }
