@@ -50,8 +50,7 @@ struct NetworkClient {
                 let queryItems = _queries.queryItems
                 group.addTask {
                     let weather: APIWeather = try await get(
-                        .weather(language,
-                        location),
+                        .weather(language, location),
                         queryItems: queryItems,
                         jwt: jwt
                     )

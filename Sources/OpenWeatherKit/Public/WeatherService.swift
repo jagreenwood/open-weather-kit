@@ -54,6 +54,14 @@ final public class WeatherService: Sendable {
 
     private let networkClient: NetworkClient
 
+    internal init(
+        configuration: Configuration,
+        networkClient: NetworkClient
+    ) {
+        Self.configuration = configuration
+        self.networkClient = networkClient
+    }
+
 #if os(Linux)
     public init(configuration: Configuration) {
         Self.configuration = configuration

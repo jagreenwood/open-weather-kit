@@ -13,8 +13,12 @@ import NIOCore
 import NIOFoundationCompat
 #endif
 
-struct MockClient: Client {
-    enum Include {
+actor MockClient: Client {
+    internal init(include: Set<MockClient.Include>) {
+        self.include = include
+    }
+
+    enum Include: CaseIterable {
         case availability
         case current
         case daily
@@ -23,7 +27,7 @@ struct MockClient: Client {
         case alerts
     }
 
-    let include: Set<Include>
+    var include: Set<Include>
 
 #if os(Linux)
     func execute(_ request: HTTPClientRequest, timeout: TimeAmount) async throws -> HTTPClientResponse {
@@ -37,16 +41,8 @@ struct MockClient: Client {
                     allocator: .init()
                 )
             } else {
-                let apiWeather = APIWeather(
-                    currentWeather: include.contains(.current) ? MockData.currentWeather : nil,
-                    forecastDaily: include.contains(.daily) ? MockData.dailyWeather : nil,
-                    forecastHourly: include.contains(.hourly) ? MockData.hourlyWeather : nil,
-                    forecastNextHour: include.contains(.nextHour) ? MockData.nextHourWeather : nil,
-                    weatherAlerts: include.contains(.alerts) ? MockData.alerts : nil
-                )
-
                 return try! encoder.encodeAsByteBuffer(
-                    apiWeather,
+                    Self.apiWeather(with: include),
                     allocator: .init()
                 )
             }
@@ -63,21 +59,24 @@ struct MockClient: Client {
 
         let data: Data = {
             if include.contains(.availability) {
+                include.remove(.availability)
                 return try! encoder.encode(MockData.availability)
             } else {
-                let apiWeather = APIWeather(
-                    currentWeather: include.contains(.current) ? MockData.currentWeather : nil,
-                    forecastDaily: include.contains(.daily) ? MockData.dailyWeather : nil,
-                    forecastHourly: include.contains(.hourly) ? MockData.hourlyWeather : nil,
-                    forecastNextHour: include.contains(.nextHour) ? MockData.nextHourWeather : nil,
-                    weatherAlerts: include.contains(.alerts) ? MockData.alerts : nil
-                )
-
-                return try! encoder.encode(apiWeather)
+                return try! encoder.encode(Self.apiWeather(with: include))
             }
         }()
 
         return (data, URLResponse())
     }
 #endif
+
+    static func apiWeather(with include: Set<Include>) -> APIWeather {
+        APIWeather(
+            currentWeather: include.contains(.current) ? MockData.currentWeather : nil,
+            forecastDaily: include.contains(.daily) ? MockData.dailyWeather : nil,
+            forecastHourly: include.contains(.hourly) ? MockData.hourlyWeather : nil,
+            forecastNextHour: include.contains(.nextHour) ? MockData.nextHourWeather : nil,
+            weatherAlerts: include.contains(.alerts) ? [MockData.alerts] : nil
+        )
+    }
 }

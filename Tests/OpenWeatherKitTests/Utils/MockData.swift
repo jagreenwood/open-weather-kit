@@ -9,8 +9,8 @@ import Foundation
 @testable import OpenWeatherKit
 
 struct MockData {
-    static var availability: APIWeatherAvailability {
-        decode(APIWeatherAvailability.self, from: availabilityJSON)
+    static var availability: [APIWeatherAvailability] {
+        decode([APIWeatherAvailability].self, from: availabilityJSON)
     }
 
     static var currentWeather: APICurrentWeather {
