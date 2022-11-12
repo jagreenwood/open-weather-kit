@@ -26,7 +26,7 @@ extension Array where Element == any Query {
             case let .alerts(dataSet: _, countryCode):
                 queryItems.append(
                     URLQueryItem(
-                        name: "countryCode",
+                        name: "country",
                         value: countryCode)
                 )
             case let .daily(_, startDate, endDate):
