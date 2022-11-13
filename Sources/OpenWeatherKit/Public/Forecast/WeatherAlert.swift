@@ -8,7 +8,6 @@
 import Foundation
 
 public struct WeatherAlert: Sendable {
-
     /// The site for more details about the weather alert. Required link for attribution.
     public var detailsURL: URL
 
@@ -16,7 +15,7 @@ public struct WeatherAlert: Sendable {
     public var metadata: WeatherMetadata
 
     /// Detailed information about the weather alert.
-    public var alerts: [AlertSummary]
+    public var alert: AlertSummary
 }
 
 extension WeatherAlert: Codable {}

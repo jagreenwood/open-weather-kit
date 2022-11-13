@@ -124,7 +124,7 @@ final public class WeatherService: Sendable {
                 WeatherQuery<Forecast<HourWeather>>.hourly,
                 WeatherQuery<Forecast<DayWeather>>.daily,
                 WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
-                WeatherQuery<WeatherAvailability>.availability,
+                WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode),
             jwt: Self.configuration.jwt()
         )
 
