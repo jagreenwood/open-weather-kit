@@ -18,10 +18,7 @@ struct NetworkClient {
         static let bearer = "Bearer"
     }
 
-#if os(Linux)
-    let httpClient: HTTPClient
-#endif
-
+    let client: any Client
 
     func fetchAvailability(
         location: Location,
@@ -65,8 +62,7 @@ struct NetworkClient {
                 let queryItems = _queries.queryItems
                 group.addTask {
                     let weather: APIWeather = try await get(
-                        .weather(language,
-                        location),
+                        .weather(language, location),
                         queryItems: queryItems,
                         jwt: jwt
                     )
@@ -105,13 +101,13 @@ extension NetworkClient {
 #if os(Linux)
         var request = HTTPClientRequest(url: url.absoluteString)
         request.headers.add(name: Constants.authorization, value: "\(Constants.bearer) \(jwt)")
-        let response = try await httpClient.execute(request, timeout: .seconds(30))
+        let response = try await client.execute(request, timeout: .seconds(30))
         let data = try await response.body.collect(upTo: 1024 * 1024)
 #else
         var request = URLRequest(url: url)
         request.addValue("\(Constants.bearer) \(jwt)", forHTTPHeaderField: Constants.authorization)
 
-        let (data, _) = try await URLSession.shared.data(for: request)
+        let (data, _) = try await client.data(for: request)
 #endif
 
         let decoder = JSONDecoder()

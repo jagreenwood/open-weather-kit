@@ -54,25 +54,34 @@ final public class WeatherService: Sendable {
 
     private let networkClient: NetworkClient
 
-#if os(Linux)
+    internal init(
+        configuration: Configuration,
+        networkClient: NetworkClient
+    ) {
+        Self.configuration = configuration
+        self.networkClient = networkClient
+    }
 
+#if os(Linux)
     public init(configuration: Configuration) {
         Self.configuration = configuration
         self.networkClient = NetworkClient(
-            httpClient: HTTPClient(
+            client: HTTPClient(
                 eventLoopGroupProvider: configuration.eventLoopGroupProvider.eventLoopGroupProvider
             )
         )
     }
 
     public func shutdown() async throws {
-        try await networkClient.httpClient.shutdown()
+        try await networkClient.client.shutdown()
     }
 
 #else
     public init(configuration: Configuration) {
         Self.configuration = configuration
-        self.networkClient = NetworkClient()
+        self.networkClient = NetworkClient(
+            client: URLSession.shared
+        )
     }
 #endif
 
