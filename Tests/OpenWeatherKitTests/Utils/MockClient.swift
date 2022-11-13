@@ -36,6 +36,7 @@ actor MockClient: Client {
 
         let buffer: ByteBuffer = {
             if include.contains(.availability) {
+                include.remove(.availability)
                 return try! encoder.encodeAsByteBuffer(
                     MockData.availability,
                     allocator: .init()
