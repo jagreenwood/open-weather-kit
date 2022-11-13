@@ -29,8 +29,8 @@ struct MockData {
         decode(APIForecastNextHour.self, from: nextHourWeatherJSON)
     }
 
-    static var alerts: [APIWeatherAlerts] {
-        decode([APIWeatherAlerts].self, from: alertJSON)
+    static var alerts: APIWeatherAlerts {
+        decode(APIWeatherAlerts.self, from: alertJSON)
     }
 }
 
