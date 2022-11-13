@@ -7,10 +7,6 @@
 
 import Foundation
 
-enum QueryContants {
-    static let availability = "availability"
-}
-
 public struct WeatherQuery<T> {
     let queryType: QueryType
     let weatherKeyPath: KeyPath<WeatherProxy, T?>
@@ -53,13 +49,6 @@ public struct WeatherQuery<T> {
             ),
             weatherKeyPath: \.dailyForecast
         )
-    }
-
-    /// The availability query.
-    public static var availability: WeatherQuery<WeatherAvailability> {
-        WeatherQuery<WeatherAvailability>(
-            queryType: .availability(QueryContants.availability),
-            weatherKeyPath: \.availability)
     }
 }
 
@@ -106,5 +95,17 @@ public extension WeatherQuery where T == [WeatherAlert]? {
             ),
             weatherKeyPath: \.weatherAlerts?
         )
+    }
+}
+
+public extension WeatherQuery where T == WeatherAvailability {
+    /// The availability query.
+    static func availability(countryCode: String) -> WeatherQuery<WeatherAvailability> {
+        WeatherQuery<WeatherAvailability>(
+            queryType: .availability(
+                QueryContants.availability,
+                countryCode
+            ),
+            weatherKeyPath: \.availability)
     }
 }
