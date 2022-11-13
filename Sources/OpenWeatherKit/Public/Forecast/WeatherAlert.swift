@@ -6,7 +6,6 @@
 //
 
 import Foundation
-import WeatherKit
 
 public struct WeatherAlert: Sendable {
     /// The site for more details about the weather alert. Required link for attribution.
