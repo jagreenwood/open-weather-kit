@@ -25,9 +25,14 @@ struct NetworkClient {
 
     func fetchAvailability(
         location: Location,
+        countryCode: String,
         jwt: String
     ) async throws -> [APIWeatherAvailability] {
-        try await get(.availability(location), jwt: jwt)
+        try await get(
+            .availability(location),
+            queryItems: [URLQueryItem(name: QueryContants.country, value: countryCode)],
+            jwt: jwt
+        )
     }
 
     func fetchWeather(
@@ -40,8 +45,15 @@ struct NetworkClient {
             var _queries = queries
 
             if let index = _queries.firstIndex(where: { $0 is WeatherQuery<WeatherAvailability> }) {
+                guard case let .availability(_, countryCode) = _queries[index].queryType else {
+                    preconditionFailure("Invalid QueryType on WeatherQuery<WeatherAvailability>")
+                }
+
                 group.addTask {
-                    let availability: [APIWeatherAvailability] = try await fetchAvailability(location: location, jwt: jwt)
+                    let availability: [APIWeatherAvailability] = try await fetchAvailability(
+                        location: location,
+                        countryCode: countryCode,
+                        jwt: jwt)
                     return availability.weatherProxy
                 }
 

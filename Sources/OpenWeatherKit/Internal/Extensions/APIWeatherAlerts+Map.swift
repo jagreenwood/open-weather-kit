@@ -8,12 +8,14 @@
 import Foundation
 
 extension APIWeatherAlerts {
-    var weatherAlert: WeatherAlert {
-        WeatherAlert(
-            detailsURL: detailsURL,
-            metadata: metadata.weatherMetadata,
-            alerts: alerts.map(\.alertSummary)
-        )
+    var weatherAlerts: [WeatherAlert] {
+        alerts.map {
+            WeatherAlert(
+                detailsURL: detailsURL,
+                metadata: metadata.weatherMetadata,
+                alert: $0.alertSummary
+            )
+        }
     }
 }
 
