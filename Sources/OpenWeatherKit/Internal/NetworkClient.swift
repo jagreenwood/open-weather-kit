@@ -21,7 +21,7 @@ struct NetworkClient {
     let client: any Client
 
     func fetchAvailability(
-        location: Location,
+        location: LocationProtocol,
         countryCode: String,
         jwt: String
     ) async throws -> [APIWeatherAvailability] {
@@ -33,7 +33,7 @@ struct NetworkClient {
     }
 
     func fetchWeather(
-        location: Location,
+        location: LocationProtocol,
         language: WeatherService.Configuration.Language,
         queries: any Query...,
         jwt: String

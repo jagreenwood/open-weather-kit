@@ -8,8 +8,8 @@
 import Foundation
 
 enum Route {
-    case availability(Location)
-    case weather(WeatherService.Configuration.Language, Location)
+    case availability(LocationProtocol)
+    case weather(WeatherService.Configuration.Language, LocationProtocol)
 
     var url: URL {
         let urlString: String = {
