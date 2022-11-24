@@ -8,6 +8,8 @@
 import Foundation
 
 public enum WeatherError : LocalizedError, Equatable, Hashable {
+    /// Could not find country code
+    case countryCode
 
     /// An error indicating permission denied.
     case permissionDenied
@@ -20,6 +22,7 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
+        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.main, comment: "Could not determine country code")
         case .permissionDenied:
             return NSLocalizedString("Error.permissionDenied", bundle: Bundle.main, comment: "Permission Denied")
         case .unknown:
@@ -32,6 +35,7 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// A localized message describing the reason for the failure.
     public var failureReason: String? {
         switch self {
+        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.main, comment: "Could not determine country code")
         case .permissionDenied:
             return NSLocalizedString("Error.permissionDenied", bundle: Bundle.main, comment: "Permission Denied")
         case .unknown:

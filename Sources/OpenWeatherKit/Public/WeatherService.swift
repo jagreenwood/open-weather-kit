@@ -10,6 +10,9 @@ import Foundation
 import AsyncHTTPClient
 import NIOCore
 #endif
+#if canImport(CoreLocation)
+import CoreLocation
+#endif
 
 final public class WeatherService: Sendable {
     public struct Configuration: Sendable {
@@ -53,7 +56,19 @@ final public class WeatherService: Sendable {
     )
 
     private let networkClient: NetworkClient
+#if canImport(CoreLocation)
+    private let geocoder: Geocoder
 
+    internal init(
+        configuration: Configuration,
+        networkClient: NetworkClient,
+        geocoder: Geocoder
+    ) {
+        Self.configuration = configuration
+        self.networkClient = networkClient
+        self.geocoder = geocoder
+    }
+#else
     internal init(
         configuration: Configuration,
         networkClient: NetworkClient
@@ -61,6 +76,7 @@ final public class WeatherService: Sendable {
         Self.configuration = configuration
         self.networkClient = networkClient
     }
+#endif
 
 #if os(Linux)
     public init(configuration: Configuration) {
@@ -82,9 +98,9 @@ final public class WeatherService: Sendable {
         self.networkClient = NetworkClient(
             client: URLSession.shared
         )
+        self.geocoder = .live
     }
 #endif
-
 
     public static func configure(_ configure: (inout Configuration) -> Void) {
         configure(&Self.configuration)
@@ -109,13 +125,23 @@ final public class WeatherService: Sendable {
         }
     }
 
+#if canImport(CoreLocation)
+    final public func weather(for location: LocationProtocol) async throws -> Weather {
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+        return try await getWeather(location: location, countryCode: countryCode)
+    }
+#endif
+    final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
+        try await getWeather(location: location, countryCode: countryCode)
+    }
+
     ///
     /// Returns the weather forecast for the requested location. Includes all available weather data sets.
     /// - Parameter location: The requested location.
     /// - Throws: Weather data error `WeatherError`
     /// - Returns: The aggregate weather.
     ///
-    final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
+    func getWeather(location: LocationProtocol, countryCode: String) async throws -> Weather {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
@@ -160,15 +186,23 @@ final public class WeatherService: Sendable {
         for location: LocationProtocol,
         including dataSet: WeatherQuery<T>
     ) async throws -> T {
+#if canImport(CoreLocation)
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+
+        let _dataSet = dataSet.update(with: countryCode)
+#else
+        let _dataSet = dataSet
+#endif
+
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
-            queries: dataSet,
+            queries: _dataSet,
             jwt: Self.configuration.jwt()
         )
 
-        return try proxy[keyPath: dataSet.weatherKeyPath]
-            .unwrap(or: WeatherError.missingData(dataSet.queryType.dataSet))
+        return try proxy[keyPath: _dataSet.weatherKeyPath]
+            .unwrap(or: WeatherError.missingData(_dataSet.queryType.dataSet))
     }
 
     ///
@@ -186,18 +220,28 @@ final public class WeatherService: Sendable {
         including dataSet1: WeatherQuery<T1>,
         _ dataSet2: WeatherQuery<T2>
     ) async throws -> (T1, T2) {
+#if canImport(CoreLocation)
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+
+        let _dataSet1 = dataSet1.update(with: countryCode)
+        let _dataSet2 = dataSet2.update(with: countryCode)
+#else
+        let _dataSet1 = dataSet1
+        let _dataSet2 = dataSet2
+#endif
+
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
-            queries: dataSet1, dataSet2,
+            queries: _dataSet1, _dataSet2,
             jwt: Self.configuration.jwt()
         )
 
         return try (
-            proxy[keyPath: dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
-            proxy[keyPath: dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet))
+            proxy[keyPath: _dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
+            proxy[keyPath: _dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet))
         )
     }
 
@@ -207,20 +251,32 @@ final public class WeatherService: Sendable {
         _ dataSet2: WeatherQuery<T2>,
         _ dataSet3: WeatherQuery<T3>
     ) async throws -> (T1, T2, T3) {
+#if canImport(CoreLocation)
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+
+        let _dataSet1 = dataSet1.update(with: countryCode)
+        let _dataSet2 = dataSet2.update(with: countryCode)
+        let _dataSet3 = dataSet3.update(with: countryCode)
+#else
+        let _dataSet1 = dataSet1
+        let _dataSet2 = dataSet2
+        let _dataSet3 = dataSet3
+#endif
+
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
-            queries: dataSet1, dataSet2, dataSet3,
+            queries: _dataSet1, _dataSet2, _dataSet3,
             jwt: Self.configuration.jwt()
         )
 
         return try (
-            proxy[keyPath: dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
-            proxy[keyPath: dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
-            proxy[keyPath: dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet))
+            proxy[keyPath: _dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
+            proxy[keyPath: _dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
+            proxy[keyPath: _dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet))
         )
     }
 
@@ -231,22 +287,36 @@ final public class WeatherService: Sendable {
         _ dataSet3: WeatherQuery<T3>,
         _ dataSet4: WeatherQuery<T4>
     ) async throws -> (T1, T2, T3, T4) {
+#if canImport(CoreLocation)
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+
+        let _dataSet1 = dataSet1.update(with: countryCode)
+        let _dataSet2 = dataSet2.update(with: countryCode)
+        let _dataSet3 = dataSet3.update(with: countryCode)
+        let _dataSet4 = dataSet4.update(with: countryCode)
+#else
+        let _dataSet1 = dataSet1
+        let _dataSet2 = dataSet2
+        let _dataSet3 = dataSet3
+        let _dataSet4 = dataSet4
+#endif
+        
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
-            queries: dataSet1, dataSet2, dataSet3, dataSet4,
+            queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4,
             jwt: Self.configuration.jwt()
         )
 
         return try (
-            proxy[keyPath: dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
-            proxy[keyPath: dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
-            proxy[keyPath: dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet)),
-            proxy[keyPath: dataSet4.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet4.queryType.dataSet))
+            proxy[keyPath: _dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
+            proxy[keyPath: _dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
+            proxy[keyPath: _dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet)),
+            proxy[keyPath: _dataSet4.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet4.queryType.dataSet))
         )
     }
 
@@ -258,24 +328,40 @@ final public class WeatherService: Sendable {
         _ dataSet4: WeatherQuery<T4>,
         _ dataSet5: WeatherQuery<T5>
     ) async throws -> (T1, T2, T3, T4, T5) {
+#if canImport(CoreLocation)
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+
+        let _dataSet1 = dataSet1.update(with: countryCode)
+        let _dataSet2 = dataSet2.update(with: countryCode)
+        let _dataSet3 = dataSet3.update(with: countryCode)
+        let _dataSet4 = dataSet4.update(with: countryCode)
+        let _dataSet5 = dataSet5.update(with: countryCode)
+#else
+        let _dataSet1 = dataSet1
+        let _dataSet2 = dataSet2
+        let _dataSet3 = dataSet3
+        let _dataSet4 = dataSet4
+        let _dataSet5 = dataSet5
+#endif
+
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
-            queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5,
+            queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5,
             jwt: Self.configuration.jwt()
         )
 
         return try (
-            proxy[keyPath: dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
-            proxy[keyPath: dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
-            proxy[keyPath: dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet)),
-            proxy[keyPath: dataSet4.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet4.queryType.dataSet)),
-            proxy[keyPath: dataSet5.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet5.queryType.dataSet))
+            proxy[keyPath: _dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
+            proxy[keyPath: _dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
+            proxy[keyPath: _dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet)),
+            proxy[keyPath: _dataSet4.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet4.queryType.dataSet)),
+            proxy[keyPath: _dataSet5.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet5.queryType.dataSet))
         )
     }
 
@@ -288,26 +374,44 @@ final public class WeatherService: Sendable {
         _ dataSet5: WeatherQuery<T5>,
         _ dataSet6: WeatherQuery<T6>
     ) async throws -> (T1, T2, T3, T4, T5, T6) {
+#if canImport(CoreLocation)
+        guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
+
+        let _dataSet1 = dataSet1.update(with: countryCode)
+        let _dataSet2 = dataSet2.update(with: countryCode)
+        let _dataSet3 = dataSet3.update(with: countryCode)
+        let _dataSet4 = dataSet4.update(with: countryCode)
+        let _dataSet5 = dataSet5.update(with: countryCode)
+        let _dataSet6 = dataSet6.update(with: countryCode)
+#else
+        let _dataSet1 = dataSet1
+        let _dataSet2 = dataSet2
+        let _dataSet3 = dataSet3
+        let _dataSet4 = dataSet4
+        let _dataSet5 = dataSet5
+        let _dataSet6 = dataSet6
+#endif
+
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: Self.configuration.language,
-            queries: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6,
+            queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5, _dataSet6,
             jwt: Self.configuration.jwt()
         )
 
         return try (
-            proxy[keyPath: dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet1.queryType.dataSet)),
-            proxy[keyPath: dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet2.queryType.dataSet)),
-            proxy[keyPath: dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet3.queryType.dataSet)),
-            proxy[keyPath: dataSet4.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet4.queryType.dataSet)),
-            proxy[keyPath: dataSet5.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet5.queryType.dataSet)),
-            proxy[keyPath: dataSet6.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(dataSet6.queryType.dataSet))
+            proxy[keyPath: _dataSet1.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
+            proxy[keyPath: _dataSet2.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
+            proxy[keyPath: _dataSet3.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet)),
+            proxy[keyPath: _dataSet4.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet4.queryType.dataSet)),
+            proxy[keyPath: _dataSet5.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet5.queryType.dataSet)),
+            proxy[keyPath: _dataSet6.weatherKeyPath]
+                .unwrap(or: WeatherError.missingData(_dataSet6.queryType.dataSet))
         )
     }
 }

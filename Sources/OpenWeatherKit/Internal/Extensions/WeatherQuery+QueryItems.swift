@@ -33,7 +33,7 @@ extension Array where Element == any Query {
             dataSets.append(query.queryType.dataSet)
 
             switch query.queryType {
-            case let .alerts(dataSet: _, countryCode):
+            case let .alerts(_, countryCode):
                 queryItems.append(
                     URLQueryItem(
                         name: QueryContants.country,

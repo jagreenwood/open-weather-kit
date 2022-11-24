@@ -50,6 +50,25 @@ public struct WeatherQuery<T> {
             weatherKeyPath: \.dailyForecast
         )
     }
+
+#if canImport(CoreLocation)
+    public static var alerts: WeatherQuery<[WeatherAlert]?> {
+        WeatherQuery<[WeatherAlert]?>(
+            queryType: .availability(
+                APIWeather.CodingKeys.weatherAlerts.rawValue, ""
+            ),
+            weatherKeyPath: \.weatherAlerts?
+        )
+    }
+
+    public static var availability: WeatherQuery<WeatherAvailability> {
+        WeatherQuery<WeatherAvailability>(
+            queryType: .availability(
+                QueryContants.availability, ""
+            ),
+            weatherKeyPath: \.availability)
+    }
+#endif
 }
 
 public extension WeatherQuery where T == Forecast<DayWeather> {
@@ -90,7 +109,7 @@ public extension WeatherQuery where T == [WeatherAlert]? {
     static func alerts(countryCode: String) -> WeatherQuery<T> {
         WeatherQuery<[WeatherAlert]?>(
             queryType: .alerts(
-                dataSet: APIWeather.CodingKeys.weatherAlerts.rawValue,
+                APIWeather.CodingKeys.weatherAlerts.rawValue,
                 countryCode
             ),
             weatherKeyPath: \.weatherAlerts?
@@ -107,5 +126,27 @@ public extension WeatherQuery where T == WeatherAvailability {
                 countryCode
             ),
             weatherKeyPath: \.availability)
+    }
+}
+
+extension WeatherQuery {
+    func update(with countryCode: String) -> WeatherQuery {
+        switch queryType {
+        case let .alerts(dataSet, _):
+            return WeatherQuery(
+                queryType: .alerts(
+                    dataSet,
+                    countryCode),
+                weatherKeyPath: weatherKeyPath
+            )
+        case let .availability(dataSet, _):
+            return WeatherQuery(
+                queryType: .availability(
+                    dataSet,
+                    countryCode),
+                weatherKeyPath: weatherKeyPath
+            )
+        default: return self
+        }
     }
 }
