@@ -7,18 +7,10 @@ on: [push, pull_request]
 
 jobs:
   build:
-    name: Swift ${{ matrix.swift }} on ${{ matrix.os }}
-    strategy:
-      matrix:
-        os: [macos-latest]
-        swift: ["5.5", "5.7"]
-    runs-on: ${{ matrix.os }}
+    runs-on: macos-latest
     steps:
-      - uses: swift-actions/setup-swift@v1.19.0
-        with:
-          swift-version: ${{ matrix.swift }}
-      - uses: actions/checkout@v3
-      - name: Build
-        run: swift build
-      - name: Run tests
-        run: swift test
+    - uses: actions/checkout@v3
+    - name: Build
+      run: swift build -v
+    - name: Run tests
+      run: swift test -v
