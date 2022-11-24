@@ -1,4 +1,5 @@
 
+"Error.countryCode" = "Could not determine country code";
 "Error.permissionDenied" = "Permission Denied";
 "Error.unknown" = "Unknown Error";
 "Error.missingData" = "The data `%@` is missing from the response";

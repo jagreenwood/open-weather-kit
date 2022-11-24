@@ -9,14 +9,27 @@ final class OpenWeatherKitTests: XCTestCase {
 
         let service = WeatherService(
             configuration: .init(jwt: { "" }),
-            networkClient: networkClient
+            networkClient: networkClient,
+            geocoder: .mock
         )
 
+#if canImport(CoreLocation)
         let _ = try await service.weather(
-            for: Location(latitude: 0,
-            longitude: 0),
+            for: Location(
+                latitude: 0,
+                longitude: 0
+            )
+        )
+
+#else
+        let _ = try await service.weather(
+            for: Location(
+                latitude: 0,
+                longitude: 0
+            ),
             countryCode: ""
         )
+#endif
     }
 
     func testDataSet1() async throws {
@@ -26,7 +39,8 @@ final class OpenWeatherKitTests: XCTestCase {
 
         let service = WeatherService(
             configuration: .init(jwt: { "" }),
-            networkClient: networkClient
+            networkClient: networkClient,
+            geocoder: .mock
         )
 
         let _ = try await service.weather(
@@ -43,7 +57,8 @@ final class OpenWeatherKitTests: XCTestCase {
 
         let service = WeatherService(
             configuration: .init(jwt: { "" }),
-            networkClient: networkClient
+            networkClient: networkClient,
+            geocoder: .mock
         )
 
         let _ = try await service.weather(
@@ -60,7 +75,8 @@ final class OpenWeatherKitTests: XCTestCase {
 
         let service = WeatherService(
             configuration: .init(jwt: { "" }),
-            networkClient: networkClient
+            networkClient: networkClient,
+            geocoder: .mock
         )
 
         let _ = try await service.weather(

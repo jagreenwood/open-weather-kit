@@ -14,7 +14,7 @@ protocol Query {
 extension WeatherQuery: Query {}
 
 enum QueryType {
-    case alerts(dataSet: String, _ countryCode: String)
+    case alerts(_ dataSet: String, _ countryCode: String)
     case current(_ dataSet: String)
     case daily(_ dataSet: String, _ startDate: Date, _ endDate: Date)
     case hourly(_ dataSet: String, _ startDate: Date, _ endDate: Date)
