@@ -15,4 +15,7 @@ extension UnitLength: @unchecked Sendable {}
 extension UnitPressure: @unchecked Sendable {}
 extension UnitSpeed: @unchecked Sendable {}
 extension UnitTemperature: @unchecked Sendable {}
+
+#if !os(Linux)
 extension URLSession: @unchecked Sendable {}
+#endif
