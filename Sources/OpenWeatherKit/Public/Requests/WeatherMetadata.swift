@@ -21,3 +21,4 @@ public struct WeatherMetadata: Sendable {
 
 extension WeatherMetadata: Codable {}
 extension WeatherMetadata: Equatable {}
+extension Date: Sendable {}
