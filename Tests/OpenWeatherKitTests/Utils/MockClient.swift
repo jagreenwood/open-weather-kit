@@ -54,7 +54,7 @@ actor MockClient: Client {
 
     func shutdown() async throws {}
 #else
-    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
+    func data(_ request: URLRequest) async throws -> (Data, URLResponse) {
         let encoder = JSONEncoder()
         encoder.dateEncodingStrategy = .iso8601
 

@@ -107,7 +107,7 @@ extension NetworkClient {
         var request = URLRequest(url: url)
         request.addValue("\(Constants.bearer) \(jwt)", forHTTPHeaderField: Constants.authorization)
 
-        let (data, _) = try await client.data(for: request)
+        let (data, _) = try await client.data(request)
 #endif
 
         let decoder = JSONDecoder()

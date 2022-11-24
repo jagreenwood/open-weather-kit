@@ -17,7 +17,7 @@ protocol Client: Sendable {
 
     func shutdown() async throws
 #else
-    func data(for request: URLRequest) async throws -> (Data, URLResponse)
+    func data(_ request: URLRequest) async throws -> (Data, URLResponse)
 #endif
 }
 
@@ -29,21 +29,23 @@ extension HTTPClient: Client {
 }
 #else
 extension URLSession: Client {
-#if swift(<5.7)
-    func data(for request: URLRequest) async throws -> (Data, URLResponse) {
-        try await withCheckedThrowingContinuation { continuation in
-            let task = self.dataTask(with: request) { data, response, error in
-                guard let data = data, let response = response else {
-                    let error = error ?? URLError(.badServerResponse)
-                    return continuation.resume(throwing: error)
+    func data(_ request: URLRequest) async throws -> (Data, URLResponse) {
+        if #available(iOS 15, *) {
+            return try await data(for: request)
+        } else {
+            return try await withCheckedThrowingContinuation { continuation in
+                let task = dataTask(with: request) { data, response, error in
+                    guard let data = data, let response = response else {
+                        let error = error ?? URLError(.badServerResponse)
+                        return continuation.resume(throwing: error)
+                    }
+
+                    continuation.resume(returning: (data, response))
                 }
 
-                continuation.resume(returning: (data, response))
+                task.resume()
             }
-
-            task.resume()
         }
     }
-#endif
 }
 #endif
