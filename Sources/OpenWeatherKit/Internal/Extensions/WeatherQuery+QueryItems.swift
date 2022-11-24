@@ -24,7 +24,7 @@ enum QueryContants {
     static let hourlyStart = "hourlyStart"
 }
 
-extension Array where Element == any Query {
+extension Array where Element == Query {
     var queryItems: [URLQueryItem] {
         var queryItems: [URLQueryItem] = []
         var dataSets: [String] = []
