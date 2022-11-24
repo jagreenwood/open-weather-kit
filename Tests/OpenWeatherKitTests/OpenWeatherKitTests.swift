@@ -90,7 +90,8 @@ final class OpenWeatherKitTests: XCTestCase {
             for: Location(
                 latitude: 0,
                 longitude: 0
-            )
+            ),
+            countryCode: ""
         )
     }
 

@@ -8,6 +8,8 @@
 @testable import OpenWeatherKit
 import Foundation
 
+#if canImport(CoreLocation)
 extension Geocoder {
     static var mock = Self(countryCode: { _ in "" })
 }
+#endif
