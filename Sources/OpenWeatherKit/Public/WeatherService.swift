@@ -56,7 +56,7 @@ final public class WeatherService: Sendable {
     )
 
     private let networkClient: NetworkClient
-    #if canImport(CoreLocation)
+#if canImport(CoreLocation)
     private let geocoder: Geocoder
 
     internal init(
@@ -68,7 +68,7 @@ final public class WeatherService: Sendable {
         self.networkClient = networkClient
         self.geocoder = geocoder
     }
-    #else
+#else
     internal init(
         configuration: Configuration,
         networkClient: NetworkClient
@@ -76,7 +76,7 @@ final public class WeatherService: Sendable {
         Self.configuration = configuration
         self.networkClient = networkClient
     }
-    #endif
+#endif
 
 #if os(Linux)
     public init(configuration: Configuration) {
@@ -130,11 +130,10 @@ final public class WeatherService: Sendable {
         guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
         return try await getWeather(location: location, countryCode: countryCode)
     }
-#else
+#endif
     final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
         try await getWeather(location: location, countryCode: countryCode)
     }
-#endif
 
     ///
     /// Returns the weather forecast for the requested location. Includes all available weather data sets.
