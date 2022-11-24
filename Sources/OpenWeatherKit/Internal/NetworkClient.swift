@@ -18,7 +18,7 @@ struct NetworkClient {
         static let bearer = "Bearer"
     }
 
-    let client: any Client
+    let client: Client
 
     func fetchAvailability(
         location: LocationProtocol,
@@ -35,7 +35,7 @@ struct NetworkClient {
     func fetchWeather(
         location: LocationProtocol,
         language: WeatherService.Configuration.Language,
-        queries: any Query...,
+        queries: Query...,
         jwt: String
     ) async throws -> WeatherProxy {
         try await withThrowingTaskGroup(of: WeatherProxy.self) { group in
