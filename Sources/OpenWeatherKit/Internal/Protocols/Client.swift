@@ -30,7 +30,7 @@ extension HTTPClient: Client {
 #else
 extension URLSession: Client {
     func data(_ request: URLRequest) async throws -> (Data, URLResponse) {
-        if #available(iOS 15, *) {
+        if #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) {
             return try await data(for: request)
         } else {
             return try await withCheckedThrowingContinuation { continuation in
