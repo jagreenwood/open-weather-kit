@@ -34,7 +34,7 @@ actor MockClient: Client {
         encoder.dateEncodingStrategy = .iso8601
 
         let buffer: ByteBuffer = {
-            if request.url.absoluteString.contains("/api/v1/availability/") {
+            if request.url.contains("/api/v1/availability/") {
                 return try! encoder.encodeAsByteBuffer(
                     MockData.availability,
                     allocator: .init()
