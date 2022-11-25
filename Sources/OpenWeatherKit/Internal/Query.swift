@@ -7,12 +7,14 @@
 
 import Foundation
 
+@usableFromInline
 protocol Query {
     var queryType: QueryType { get }
 }
 
 extension WeatherQuery: Query {}
 
+@usableFromInline
 enum QueryType {
     case alerts(_ dataSet: String, _ countryCode: String)
     case current(_ dataSet: String)
@@ -21,6 +23,7 @@ enum QueryType {
     case minute(_ dataSet: String)
     case availability(_ dataSet: String, _ countryCode: String)
 
+    @usableFromInline
     var dataSet: String {
         switch self {
         case let .alerts(dataSet,_): return dataSet

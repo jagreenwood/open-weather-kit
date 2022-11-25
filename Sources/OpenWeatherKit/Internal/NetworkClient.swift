@@ -12,7 +12,8 @@ import NIOCore
 import NIOFoundationCompat
 #endif
 
-struct NetworkClient {
+@usableFromInline
+struct NetworkClient: Sendable {
     enum Constants {
         static let authorization = "Authorization"
         static let bearer = "Bearer"
@@ -20,6 +21,7 @@ struct NetworkClient {
 
     let client: Client
 
+    @usableFromInline
     func fetchAvailability(
         location: LocationProtocol,
         countryCode: String,
@@ -32,6 +34,7 @@ struct NetworkClient {
         )
     }
 
+    @usableFromInline
     func fetchWeather(
         location: LocationProtocol,
         language: WeatherService.Configuration.Language,

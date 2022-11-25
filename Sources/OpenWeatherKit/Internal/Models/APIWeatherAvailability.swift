@@ -7,6 +7,7 @@
 
 import Foundation
 
+@usableFromInline
 enum APIWeatherAvailability: String, Codable, Equatable {
     case currentWeather
     case forecastDaily

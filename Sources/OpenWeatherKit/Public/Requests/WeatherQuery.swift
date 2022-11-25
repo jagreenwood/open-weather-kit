@@ -8,7 +8,10 @@
 import Foundation
 
 public struct WeatherQuery<T> {
+    @usableFromInline
     let queryType: QueryType
+    
+    @usableFromInline
     let weatherKeyPath: KeyPath<WeatherProxy, T?>
 
     /// The current weather query.
@@ -130,6 +133,7 @@ public extension WeatherQuery where T == WeatherAvailability {
 }
 
 extension WeatherQuery {
+    @usableFromInline
     func update(with countryCode: String) -> WeatherQuery {
         switch queryType {
         case let .alerts(dataSet, _):

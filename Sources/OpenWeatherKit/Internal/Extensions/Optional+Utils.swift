@@ -8,6 +8,7 @@
 import Foundation
 
 extension Optional {
+    @usableFromInline
     func unwrap(or error: @autoclosure () -> Error) throws -> Wrapped {
         switch self {
         case .some(let wrapped): return wrapped
