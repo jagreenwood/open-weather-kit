@@ -19,7 +19,6 @@ actor MockClient: Client {
     }
 
     enum Include: CaseIterable {
-        case availability
         case current
         case daily
         case hourly
@@ -35,8 +34,7 @@ actor MockClient: Client {
         encoder.dateEncodingStrategy = .iso8601
 
         let buffer: ByteBuffer = {
-            if include.contains(.availability) {
-                include.remove(.availability)
+            if request.url!.absoluteString.contains("/api/v1/availability/") {
                 return try! encoder.encodeAsByteBuffer(
                     MockData.availability,
                     allocator: .init()
@@ -59,8 +57,7 @@ actor MockClient: Client {
         encoder.dateEncodingStrategy = .iso8601
 
         let data: Data = {
-            if include.contains(.availability) {
-                include.remove(.availability)
+            if request.url!.absoluteString.contains("/api/v1/availability/") {
                 return try! encoder.encode(MockData.availability)
             } else {
                 return try! encoder.encode(Self.apiWeather(with: include))
