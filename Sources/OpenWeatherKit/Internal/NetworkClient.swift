@@ -18,7 +18,7 @@ struct NetworkClient {
         static let bearer = "Bearer"
     }
 
-    let client: any Client
+    let client: Client
 
     func fetchAvailability(
         location: LocationProtocol,
@@ -35,7 +35,7 @@ struct NetworkClient {
     func fetchWeather(
         location: LocationProtocol,
         language: WeatherService.Configuration.Language,
-        queries: any Query...,
+        queries: Query...,
         jwt: String
     ) async throws -> WeatherProxy {
         try await withThrowingTaskGroup(of: WeatherProxy.self) { group in
@@ -107,7 +107,7 @@ extension NetworkClient {
         var request = URLRequest(url: url)
         request.addValue("\(Constants.bearer) \(jwt)", forHTTPHeaderField: Constants.authorization)
 
-        let (data, _) = try await client.data(for: request)
+        let (data, _) = try await client.data(request)
 #endif
 
         let decoder = JSONDecoder()

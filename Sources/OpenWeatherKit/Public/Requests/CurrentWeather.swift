@@ -103,8 +103,3 @@ public struct CurrentWeather: Sendable {
 }
 
 extension CurrentWeather: Codable {}
-extension UnitTemperature: @unchecked Sendable {}
-extension UnitPressure: @unchecked Sendable {}
-extension UnitLength: @unchecked Sendable {}
-extension UnitAngle: @unchecked Sendable {}
-extension UnitSpeed: @unchecked Sendable {}

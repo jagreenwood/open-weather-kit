@@ -9,8 +9,8 @@ import Foundation
 #if canImport(CoreLocation)
 import CoreLocation
 
-struct Geocoder {
-    var countryCode: (LocationProtocol) async throws -> String?
+struct Geocoder: Sendable {
+    var countryCode: @Sendable (LocationProtocol) async throws -> String?
 
     static var live: Self {
         let geocoder = CLGeocoder()
