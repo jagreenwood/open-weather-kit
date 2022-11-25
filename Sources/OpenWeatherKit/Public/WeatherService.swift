@@ -51,13 +51,16 @@ final public class WeatherService: Sendable {
 #endif
     }
 
-    private static var configuration: Configuration = Configuration(
+    @usableFromInline
+    static var configuration: Configuration = Configuration(
         jwt: { preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).") }
     )
 
-    private let networkClient: NetworkClient
+    @usableFromInline
+    let networkClient: NetworkClient
 #if canImport(CoreLocation)
-    private let geocoder: Geocoder
+    @usableFromInline
+    let geocoder: Geocoder
 
     internal init(
         configuration: Configuration,
@@ -126,11 +129,14 @@ final public class WeatherService: Sendable {
     }
 
 #if canImport(CoreLocation)
+    @inlinable
     final public func weather(for location: LocationProtocol) async throws -> Weather {
         guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
         return try await getWeather(location: location, countryCode: countryCode)
     }
 #endif
+
+    @inlinable
     final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
         try await getWeather(location: location, countryCode: countryCode)
     }
@@ -141,6 +147,7 @@ final public class WeatherService: Sendable {
     /// - Throws: Weather data error `WeatherError`
     /// - Returns: The aggregate weather.
     ///
+    @usableFromInline
     func getWeather(location: LocationProtocol, countryCode: String) async throws -> Weather {
         let proxy = try await networkClient.fetchWeather(
             location: location,
@@ -182,6 +189,7 @@ final public class WeatherService: Sendable {
     /// Example usage:
     /// `let current = try await service.weather(for: newYork, including: .current)`
     ///
+    @inlinable
     final public func weather<T>(
         for location: LocationProtocol,
         including dataSet: WeatherQuery<T>
@@ -215,6 +223,7 @@ final public class WeatherService: Sendable {
     /// Example usage:
     /// `let (current, minute) = try await service.weather(for: newYork, including: .current, .minute)`
     ///
+    @inlinable
     final public func weather<T1, T2>(
         for location: LocationProtocol,
         including dataSet1: WeatherQuery<T1>,
@@ -245,6 +254,7 @@ final public class WeatherService: Sendable {
         )
     }
 
+    @inlinable
     final public func weather<T1, T2, T3>(
         for location: LocationProtocol,
         including dataSet1: WeatherQuery<T1>,
@@ -280,6 +290,7 @@ final public class WeatherService: Sendable {
         )
     }
 
+    @inlinable
     final public func weather<T1, T2, T3, T4>(
         for location: LocationProtocol,
         including dataSet1: WeatherQuery<T1>,
@@ -320,6 +331,7 @@ final public class WeatherService: Sendable {
         )
     }
 
+    @inlinable
     final public func weather<T1, T2, T3, T4, T5>(
         for location: LocationProtocol,
         including dataSet1: WeatherQuery<T1>,
@@ -365,6 +377,7 @@ final public class WeatherService: Sendable {
         )
     }
 
+    @inlinable
     final public func weather<T1, T2, T3, T4, T5, T6>(
         for location: LocationProtocol,
         including dataSet1: WeatherQuery<T1>,

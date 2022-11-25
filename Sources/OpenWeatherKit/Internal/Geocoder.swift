@@ -9,7 +9,9 @@ import Foundation
 #if canImport(CoreLocation)
 import CoreLocation
 
+@usableFromInline
 struct Geocoder: Sendable {
+    @usableFromInline
     var countryCode: @Sendable (LocationProtocol) async throws -> String?
 
     static var live: Self {

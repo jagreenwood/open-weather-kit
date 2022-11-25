@@ -12,7 +12,6 @@ public struct Forecast<Element> : RandomAccessCollection, Codable, Equatable, Se
         self.forecast = forecast
         self.metadata = metadata
     }
-    
 
     /// The forecast index.
     public typealias Index = Int

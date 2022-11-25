@@ -7,6 +7,7 @@
 
 import Foundation
 
+@usableFromInline
 struct WeatherProxy {
     init(
         availability: WeatherAvailability?,
