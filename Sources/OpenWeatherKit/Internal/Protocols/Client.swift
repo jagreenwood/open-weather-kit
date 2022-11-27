@@ -35,21 +35,29 @@ extension HTTPClient: Client {
 #else
 extension URLSession: Client {
     func data(_ request: URLRequest) async throws -> (Data, URLResponse) {
+#if os(Windows)
+        return try await compatData(request)
+#else
         if #available(macOS 12, iOS 15, tvOS 15, watchOS 8, *) {
             return try await data(for: request)
         } else {
-            return try await withCheckedThrowingContinuation { continuation in
-                let task = dataTask(with: request) { data, response, error in
-                    guard let data = data, let response = response else {
-                        let error = error ?? URLError(.badServerResponse)
-                        return continuation.resume(throwing: error)
-                    }
+            return try await compatData(request)
+        }
+#endif
+    }
 
-                    continuation.resume(returning: (data, response))
+    func compatData(_ request: URLRequest) async throws -> (Data, URLResponse) {
+        try await withCheckedThrowingContinuation { continuation in
+            let task = dataTask(with: request) { data, response, error in
+                guard let data = data, let response = response else {
+                    let error = error ?? URLError(.badServerResponse)
+                    return continuation.resume(throwing: error)
                 }
 
-                task.resume()
+                continuation.resume(returning: (data, response))
             }
+
+            task.resume()
         }
     }
 }
