@@ -1,5 +1,10 @@
 # OpenWeatherKit
 
+[![Linux](https://github.com/jagreenwood/OpenWeatherKit/workflows/swift-ubuntu/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-linux)
+[![macOS](https://github.com/jagreenwood/OpenWeatherKit/workflows/swift-macos/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-macos)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2FOpenWeatherKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jagreenwood/OpenWeatherKit)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2FOpenWeatherKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/OpenWeatherKit)
+
 This package is Swift wrapper around the [WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi).
 Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package 
 is nearly identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit). 
@@ -9,8 +14,7 @@ is nearly identical to Apple's [WeatherKit](https://developer.apple.com/document
 - watchOS 6+
 - tvOS 13+
 - macOS 11+
-- Linux
-- Windows ???
+- Ubuntu 18.04+
 
 ## Setup
 
@@ -152,6 +156,10 @@ let availabilty = try await WeatherService.shared
         including: .availability
     )
 ```
+
+### Geocoding for Country Code (Apple platforms only)
+
+When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the libary will use `CoreLocation` to reverve geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
 
 ## Attribution
 
