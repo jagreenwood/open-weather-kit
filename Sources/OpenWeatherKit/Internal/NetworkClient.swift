@@ -6,10 +6,15 @@
 //
 
 import Foundation
+
 #if os(Linux)
 import AsyncHTTPClient
 import NIOCore
 import NIOFoundationCompat
+#endif
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
 #endif
 
 @usableFromInline

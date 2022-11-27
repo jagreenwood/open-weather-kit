@@ -6,9 +6,14 @@
 //
 
 import Foundation
+
 #if os(Linux)
 import AsyncHTTPClient
 import NIOCore
+#endif
+
+#if canImport(FoundationNetworking)
+import FoundationNetworking
 #endif
 
 protocol Client: Sendable {

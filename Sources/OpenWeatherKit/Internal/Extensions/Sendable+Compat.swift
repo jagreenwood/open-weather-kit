@@ -7,6 +7,10 @@
 
 import Foundation
 
+#if canImport(FoundationNetworking)
+import FoundationNetworking
+#endif
+
 extension Date: @unchecked Sendable {}
 extension Measurement: @unchecked Sendable {}
 extension URL: @unchecked Sendable {}
