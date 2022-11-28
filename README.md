@@ -9,14 +9,14 @@ This package is Swift wrapper around the [WeatherKit REST API](https://developer
 Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package 
 is nearly identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit). 
 
-## Supported Platforms
+## 💻 Supported Platforms
 - iOS 13+
 - watchOS 6+
 - tvOS 13+
 - macOS 11+
 - Ubuntu 18.04+
 
-## Setup
+## ⚙️ Setup
 
 The REST API requires a signed JWT to be sent with each request. To set this up you need:
 
@@ -49,7 +49,7 @@ The REST API requires a signed JWT to be sent with each request. To set this up 
 The WeatherKit REST KIT requires a JSON Web Token (JWT) to be sent with every request. Implementing the 
 logic necessary to generate a JWT is beyond the scope of the OpenWeatherKit project at this time.
  
-For general infomation on JWT please visit https://jwt.io
+For general information on JWT please visit https://jwt.io
 
 That being said, the recommended package to handle this task is Vapor's [jwt-kit](https://github.com/vapor/jwt-kit). Here is how to set that up:
 
@@ -97,19 +97,20 @@ struct JWTProvider {
 
 Note the variables:
 
-PRIVATE_KEY_FROM_DEV_PORTAL: The contents of the private key file including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
+`PRIVATE_KEY_FROM_DEV_PORTAL`: The contents of the private key file including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
 
-TEAM_ID: Found in Membership Details on the developer portal
+`TEAM_ID`: Found in Membership Details on the developer portal
 
-SERVICE_IDENTIFIER: The reverse-domain name noted earlier
+`SERVICE_IDENTIFIER`: The reverse-domain name noted earlier
 
-KEY_ID: The ID of the service key
+`KEY_ID`: The ID of the service key
 
-## Usage
+## 🌤️ Usage
 
 ### Configure Service
 
 The service must be configured with a JWT generating closure and optionally a language.
+
 If you choose to use the `WeatherService.shared` instance, call the following before referencing `shared`:
 
 ```swift
@@ -159,9 +160,9 @@ let availabilty = try await WeatherService.shared
 
 ### Geocoding for Country Code (Apple platforms only)
 
-When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the libary will use `CoreLocation` to reverve geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
+When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the libary will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
 
-## Attribution
+## 📝 Attribution
 
 Please be advised of [Apple's attribution guidelines](https://developer.apple.com/weatherkit/get-started/#attribution-requirements) when using this package.
 
