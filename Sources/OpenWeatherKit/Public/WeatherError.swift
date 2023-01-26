@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// An error WeatherKit returns.
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// Could not find country code
     case countryCode

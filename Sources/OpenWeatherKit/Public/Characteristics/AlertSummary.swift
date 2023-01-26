@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// All information related to the weather alert
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public struct AlertSummary: Codable, Equatable, Sendable {
     public var name: String
     public var id: String

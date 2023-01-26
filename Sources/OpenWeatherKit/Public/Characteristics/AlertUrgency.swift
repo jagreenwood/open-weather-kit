@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// The urgency of the weather alert
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public enum AlertUrgency: String, Codable, Equatable, Sendable {
     // Take responsive action immediately.
     case immediate

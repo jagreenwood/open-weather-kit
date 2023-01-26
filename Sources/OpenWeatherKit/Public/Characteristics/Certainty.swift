@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// The likelihood the weather alert event will happen
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public enum Certainty: String, Codable, Equatable, Sendable {
     
     // The event has already occurred or is ongoing.

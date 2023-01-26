@@ -14,7 +14,12 @@ import NIOCore
 import CoreLocation
 #endif
 
+/// Provides an interface for obtaining weather data.
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 final public class WeatherService: Sendable {
+
+    /// Establishes the configuration for weather requests.
+    @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
     public struct Configuration: Sendable {
         public enum Language: Sendable {
             case englishUS
@@ -41,6 +46,10 @@ final public class WeatherService: Sendable {
             self.eventLoopGroupProvider = eventLoopGroupProvider
         }
 #else
+        /// Initializes an instance of Configuation
+        /// - Parameters:
+        ///   - jwt: A closure to provide a JWT.
+        ///   - language: A language to localize human readable strings.
         public init(
             jwt: @escaping @Sendable () -> String,
             language: WeatherService.Configuration.Language = .englishUS
@@ -129,6 +138,12 @@ final public class WeatherService: Sendable {
     }
 
 #if canImport(CoreLocation)
+    ///
+    /// Returns the weather forecast for the requested location. Includes all available weather data sets.
+    /// - Parameter location: The requested location.
+    /// - Throws: Weather data error `WeatherError`
+    /// - Returns: The aggregate weather.
+    ///
     @inlinable
     final public func weather(for location: LocationProtocol) async throws -> Weather {
         guard let countryCode = try await geocoder.countryCode(location) else { throw WeatherError.countryCode }
@@ -136,55 +151,26 @@ final public class WeatherService: Sendable {
     }
 #endif
 
-    @inlinable
-    final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
-        try await getWeather(location: location, countryCode: countryCode)
-    }
-
     ///
     /// Returns the weather forecast for the requested location. Includes all available weather data sets.
     /// - Parameter location: The requested location.
     /// - Throws: Weather data error `WeatherError`
     /// - Returns: The aggregate weather.
     ///
-    @usableFromInline
-    func getWeather(location: LocationProtocol, countryCode: String) async throws -> Weather {
-        let proxy = try await networkClient.fetchWeather(
-            location: location,
-            language: Self.configuration.language,
-            queries: WeatherQuery<CurrentWeather>.current,
-                WeatherQuery<Forecast<MinuteWeather>?>.minute,
-                WeatherQuery<Forecast<HourWeather>>.hourly,
-                WeatherQuery<Forecast<DayWeather>>.daily,
-                WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
-                WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode),
-            jwt: Self.configuration.jwt()
-        )
-
-        return try Weather(
-            currentWeather: proxy.currentWeather.unwrap(
-                or: WeatherError.missingData(APIWeather.CodingKeys.currentWeather.rawValue)
-            ),
-            minuteForecast: proxy.minuteForecast,
-            hourlyForecast: proxy.hourlyForecast.unwrap(
-                or: WeatherError.missingData(APIWeather.CodingKeys.forecastHourly.rawValue)
-            ),
-            dailyForecast: proxy.dailyForecast.unwrap(
-                or: WeatherError.missingData(APIWeather.CodingKeys.forecastDaily.rawValue)
-            ),
-            weatherAlerts: proxy.weatherAlerts,
-            availability: proxy.availability.unwrap(
-                or: WeatherError.missingData(QueryContants.availability)
-            )
-        )
+    @inlinable
+    final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
+        try await getWeather(location: location, countryCode: countryCode)
     }
 
     ///
-    /// Returns the weather forecast for the requested location. This is a variadic API in which any
-    /// combination of data sets can be requested and returned as a tuple.
-    /// - Parameter location: The requested location.
+    /// Returns the weather forecast for the requested location.
+    /// - Parameters:
+    ///    - location: The requested location.
+    ///    - including: Weather query
     /// - Throws: Weather data error `WeatherError`
     /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple.
     ///
     /// Example usage:
     /// `let current = try await service.weather(for: newYork, including: .current)`
@@ -214,11 +200,14 @@ final public class WeatherService: Sendable {
     }
 
     ///
-    /// Returns the weather forecast for the requested location. This is a variadic API in which any
-    /// combination of data sets can be requested and returned as a tuple.
-    /// - Parameter location: The requested location.
+    /// Returns the weather forecast for the requested location.
+    /// - Parameters:
+    ///    - location: The requested location.
+    ///    - including: Weather queries
     /// - Throws: Weather data error `WeatherError`
-    /// - Returns: The requested weather data sets as a tuple.
+    /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple.
     ///
     /// Example usage:
     /// `let (current, minute) = try await service.weather(for: newYork, including: .current, .minute)`
@@ -254,6 +243,16 @@ final public class WeatherService: Sendable {
         )
     }
 
+    ///
+    /// Returns the weather forecast for the requested location.
+    /// - Parameters:
+    ///    - location: The requested location.
+    ///    - including: Weather queries
+    /// - Throws: Weather data error `WeatherError`
+    /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple.
+    ///
     @inlinable
     final public func weather<T1, T2, T3>(
         for location: LocationProtocol,
@@ -290,6 +289,16 @@ final public class WeatherService: Sendable {
         )
     }
 
+    ///
+    /// Returns the weather forecast for the requested location.
+    /// - Parameters:
+    ///    - location: The requested location.
+    ///    - including: Weather queries
+    /// - Throws: Weather data error `WeatherError`
+    /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple.
+    ///
     @inlinable
     final public func weather<T1, T2, T3, T4>(
         for location: LocationProtocol,
@@ -331,6 +340,16 @@ final public class WeatherService: Sendable {
         )
     }
 
+    ///
+    /// Returns the weather forecast for the requested location.
+    /// - Parameters:
+    ///    - location: The requested location.
+    ///    - including: Weather queries
+    /// - Throws: Weather data error `WeatherError`
+    /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple.
+    ///
     @inlinable
     final public func weather<T1, T2, T3, T4, T5>(
         for location: LocationProtocol,
@@ -377,6 +396,16 @@ final public class WeatherService: Sendable {
         )
     }
 
+    ///
+    /// Returns the weather forecast for the requested location.
+    /// - Parameters:
+    ///    - location: The requested location.
+    ///    - including: Weather queries
+    /// - Throws: Weather data error `WeatherError`
+    /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple.
+    ///
     @inlinable
     final public func weather<T1, T2, T3, T4, T5, T6>(
         for location: LocationProtocol,
@@ -425,6 +454,40 @@ final public class WeatherService: Sendable {
                 .unwrap(or: WeatherError.missingData(_dataSet5.queryType.dataSet)),
             proxy[keyPath: _dataSet6.weatherKeyPath]
                 .unwrap(or: WeatherError.missingData(_dataSet6.queryType.dataSet))
+        )
+    }
+}
+
+extension WeatherService {
+    @usableFromInline
+    func getWeather(location: LocationProtocol, countryCode: String) async throws -> Weather {
+        let proxy = try await networkClient.fetchWeather(
+            location: location,
+            language: Self.configuration.language,
+            queries: WeatherQuery<CurrentWeather>.current,
+            WeatherQuery<Forecast<MinuteWeather>?>.minute,
+            WeatherQuery<Forecast<HourWeather>>.hourly,
+            WeatherQuery<Forecast<DayWeather>>.daily,
+            WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
+            WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode),
+            jwt: Self.configuration.jwt()
+        )
+
+        return try Weather(
+            currentWeather: proxy.currentWeather.unwrap(
+                or: WeatherError.missingData(APIWeather.CodingKeys.currentWeather.rawValue)
+            ),
+            minuteForecast: proxy.minuteForecast,
+            hourlyForecast: proxy.hourlyForecast.unwrap(
+                or: WeatherError.missingData(APIWeather.CodingKeys.forecastHourly.rawValue)
+            ),
+            dailyForecast: proxy.dailyForecast.unwrap(
+                or: WeatherError.missingData(APIWeather.CodingKeys.forecastDaily.rawValue)
+            ),
+            weatherAlerts: proxy.weatherAlerts,
+            availability: proxy.availability.unwrap(
+                or: WeatherError.missingData(QueryContants.availability)
+            )
         )
     }
 }

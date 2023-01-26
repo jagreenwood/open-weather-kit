@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// A structure that describes the current conditions observed at a location.
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public struct CurrentWeather: Sendable {
     public init(
         date: Date,
