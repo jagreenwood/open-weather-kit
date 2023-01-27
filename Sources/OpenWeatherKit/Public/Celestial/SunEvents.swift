@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// An enumeration that represents dates of solar events, including sunrise, sunset, dawn, and dusk.
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public struct SunEvents: Sendable {
 
     /// The time of astronomical sunrise when the sun’s center is 18° below the horizon.
@@ -42,7 +44,7 @@ public struct SunEvents: Sendable {
     ///
     /// It may or
     /// may not be above the horizon at this time due to variations of solar events at extreme latitudes.
-    /// If the highest point isn't above the horizon, this property is ``nil``.
+    /// If the highest point isn't above the horizon, this property is `nil`.
     public var solarNoon: Date?
 
     /// The sunset time immediately after the solar transit closest to calendar noon.
@@ -78,7 +80,7 @@ public struct SunEvents: Sendable {
     ///
     /// It may or
     /// may not be above the horizon at this time due to variations of solar events at extreme latitudes.
-    /// If the lowest point is not below the horizon, this property is ``nil``.
+    /// If the lowest point is not below the horizon, this property is `nil`.
     public var solarMidnight: Date?
 }
 

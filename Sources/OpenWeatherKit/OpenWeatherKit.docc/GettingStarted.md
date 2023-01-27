@@ -1,30 +1,21 @@
-# OpenWeatherKit
+# GettingStarted
 
-[![Linux](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-ubuntu.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-linux)
-[![macOS](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-macos.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-macos)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2FOpenWeatherKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jagreenwood/OpenWeatherKit)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2FOpenWeatherKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/OpenWeatherKit)
+This is a quick start guide to help get set up and start getting weather data from Apple.
 
-This package is Swift wrapper around the [WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi).
-Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package 
-is nearly identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit). 
+## Overview
 
-## 💻 Supported Platforms
-- iOS 13+
-- watchOS 6+
-- tvOS 13+
-- macOS 11+
-- Ubuntu 18.04+
-
-## ⚙️ Setup
-
-The REST API requires a signed JWT to be sent with each request. To set this up you need:
+The WeatherKit REST API requires a signed JWT to be sent with each request. The following are prerequisites to set this up: 
 
 - A paid developer account
 - A Service Identifier
 - A key
 
 ### Apple Developer Portal Setup
+
+Since the WeatherKit REST API is a paid service, a paid Apple Developer account is required. The API has very generous
+(free) request limits that should be sufficent for most use cases.
+
+Once the developer account has been established, log in and continue set up on the Developer portal.
 
 #### App Identifier
 
@@ -47,11 +38,12 @@ The REST API requires a signed JWT to be sent with each request. To set this up 
 ### JWT
 
 The WeatherKit REST API requires a JSON Web Token (JWT) to be sent with every request. Implementing the 
-logic necessary to generate a JWT is beyond the scope of the OpenWeatherKit project at this time.
- 
+logic necessary to generate a JWT is beyond the scope of the `OpenWeatherKit` project at this time.
+
 For general information on JWT please visit https://jwt.io
 
-That being said, the recommended package to handle this task is Vapor's [jwt-kit](https://github.com/vapor/jwt-kit). Here is how to set that up:
+That being said, the recommended package to handle this task is Vapor's [jwt-kit](https://github.com/vapor/jwt-kit). 
+Here is how to set that up:
 
 Implement model conforming to `JWTPayload`
 
@@ -105,7 +97,7 @@ Note the variables:
 
 `KEY_ID`: The ID of the service key
 
-## 🌤️ Usage
+## Requesting Weather Data
 
 ### Configure Service
 
@@ -119,6 +111,10 @@ WeatherService.configure {
 }
 ```
 
+On Linux platforms only, this package uses [async-http-client](https://github.com/swift-server/async-http-client) to 
+make internal HTTP requests to the WeatherKit REST API. By default it uses `NIOEventLoopGroupProvider.createNew`. If
+more control is needed, an instance of `EventLoopGroup` can be passed to the configuration instead.
+
 ### Get a Full Weather Forecast 
 
 ```swift
@@ -128,7 +124,7 @@ let weather = try await WeatherService.shared
             latitude: 37.541290,
             longitude: -77.511429),
         countryCode: "US"
-    )
+)
 ```
 
 ### Get a Partial Weather Forecast
@@ -140,7 +136,7 @@ let (dailyForecast, hourlyForecast, alerts) = try await WeatherService.shared
             latitude: 37.541290,
             longitude: -77.511429),
         including: .daily, .hourly, .alerts(countryCode: "US")
-    )
+)
 ```
 
 ### Get Availability
@@ -155,14 +151,16 @@ let availabilty = try await WeatherService.shared
             latitude: 37.541290,
             longitude: -77.511429),
         including: .availability
-    )
+)
 ```
 
 ### Geocoding for Country Code (Apple platforms only)
 
-When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the libary will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
+When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the libary will 
+use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, 
+an error will be thrown.
 
-## 📝 Attribution
+## Attribution
 
 Please be advised of [Apple's attribution guidelines](https://developer.apple.com/weatherkit/get-started/#attribution-requirements) when using this package.
 

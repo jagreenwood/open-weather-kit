@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// A weather alert issued for the requested location by a governmental authority.
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public struct WeatherAlert: Sendable {
     /// The site for more details about the weather alert. Required link for attribution.
     public var detailsURL: URL

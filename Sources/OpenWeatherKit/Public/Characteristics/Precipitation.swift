@@ -7,6 +7,8 @@
 
 import Foundation
 
+/// The form of precipitation.
+@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
 public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// No precipitation.
