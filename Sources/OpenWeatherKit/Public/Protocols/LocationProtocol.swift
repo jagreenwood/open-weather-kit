@@ -11,7 +11,7 @@ import CoreLocation
 
 extension CLLocation: LocationProtocol, @unchecked Sendable {
     public var latitude: Double { coordinate.latitude }
-    public var longitude: Double { coordinate.latitude }
+    public var longitude: Double { coordinate.longitude }
 }
 #endif
 
