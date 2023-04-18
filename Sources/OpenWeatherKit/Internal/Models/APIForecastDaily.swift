@@ -28,7 +28,7 @@ struct APIDay: Codable, Equatable {
     let maxUvIndex: Int
     let moonPhase: String
     let moonrise: Date?
-    let moonset: Date
+    let moonset: Date?
     let precipitationAmount: Double
     let precipitationChance: Double
     let precipitationType: String
