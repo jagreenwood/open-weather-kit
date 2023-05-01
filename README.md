@@ -2,8 +2,8 @@
 
 [![Linux](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-ubuntu.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-linux)
 [![macOS](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-macos.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-macos)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2FOpenWeatherKit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jagreenwood/OpenWeatherKit)
-[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2FOpenWeatherKit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/OpenWeatherKit)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fopen-weather-kit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jagreenwood/open-weather-kit)
+[![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fopen-weather-kit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/open-weather-kit)
 
 This package is Swift wrapper around the [WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi).
 Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package 
