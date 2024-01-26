@@ -33,7 +33,17 @@ final public class WeatherService: Sendable {
 
         public var jwt: @Sendable () -> String
         public var language: Language
-
+#if os(Linux)
+        @available(*, deprecated, renamed: "init(jwt:language:)")
+        public init(
+            jwt: @escaping @Sendable () -> String,
+            language: WeatherService.Configuration.Language = .englishUS,
+            eventLoopGroupProvider: NIOEventLoopGroupProvider
+        ) {
+            self.jwt = jwt
+            self.language = language
+        }
+#endif
         /// Initializes an instance of Configuation
         /// - Parameters:
         ///   - jwt: A closure to provide a JWT.
