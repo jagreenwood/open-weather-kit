@@ -34,18 +34,16 @@ final public class WeatherService: Sendable {
         public var jwt: @Sendable () -> String
         public var language: Language
 #if os(Linux)
-        public var eventLoopGroupProvider: NIOEventLoopGroupProvider
-
+        @available(*, deprecated, renamed: "init(jwt:language:)")
         public init(
             jwt: @escaping @Sendable () -> String,
             language: WeatherService.Configuration.Language = .englishUS,
-            eventLoopGroupProvider: NIOEventLoopGroupProvider = .createNew
+            eventLoopGroupProvider: NIOEventLoopGroupProvider
         ) {
             self.jwt = jwt
             self.language = language
-            self.eventLoopGroupProvider = eventLoopGroupProvider
         }
-#else
+#endif
         /// Initializes an instance of Configuation
         /// - Parameters:
         ///   - jwt: A closure to provide a JWT.
@@ -57,7 +55,6 @@ final public class WeatherService: Sendable {
             self.jwt = jwt
             self.language = language
         }
-#endif
     }
 
     @usableFromInline
@@ -94,9 +91,7 @@ final public class WeatherService: Sendable {
     public init(configuration: Configuration) {
         Self.configuration = configuration
         self.networkClient = NetworkClient(
-            client: HTTPClient(
-                eventLoopGroupProvider: configuration.eventLoopGroupProvider.eventLoopGroupProvider
-            )
+            client: HTTPClient(eventLoopGroupProvider: .singleton)
         )
     }
 
