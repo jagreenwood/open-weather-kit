@@ -54,6 +54,11 @@ public struct HourWeather: Sendable {
     /// The pressure trend, or barometric tendency, is the kind and amount of atmospheric pressure
     /// change over time.
     public var pressureTrend: PressureTrend
+    
+    /// The rate at which snow crystals are falling, in millimeters per hour.
+    public var snowfallIntensity: Measurement<UnitSpeed>?
+    
+    public var snowfallAmount: Measurement<UnitLength>?
 
     /// The temperature during the hour.
     public var temperature: Measurement<UnitTemperature>

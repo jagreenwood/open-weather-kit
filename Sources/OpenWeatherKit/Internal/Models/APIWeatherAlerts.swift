@@ -26,7 +26,7 @@ struct APIAlertSummary: Codable, Equatable {
     let name: String
     let id: String
     let areaID: String
-    let areaName: String
+    let areaName: String?
     let attributionURL: String
     let countryCode: String
     let alertDescription: String

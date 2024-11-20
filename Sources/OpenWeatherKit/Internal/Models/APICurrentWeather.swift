@@ -16,7 +16,7 @@ struct APICurrentWeather: Codable, Equatable {
     let conditionCode: String
     let daylight: Bool
     let humidity: Double
-    let precipitationIntensity: Int
+    let precipitationIntensity: Double
     let pressure: Double
     let pressureTrend: String
     let temperature: Double

@@ -16,6 +16,7 @@ extension APICurrentWeather {
             symbolName: (WeatherCondition(rawValue: conditionCode) ?? .undefined).sfSymbol,
             dewPoint: Measurement(value: temperatureDewPoint, unit: .celsius),
             humidity: humidity,
+            percipationIntensity: Measurement(value: precipitationIntensity, unit: .millimetersPerHour),
             pressure: Measurement(value: pressure, unit: .millibars),
             pressureTrend: PressureTrend(rawValue: pressureTrend) ?? .undefined,
             isDaylight: daylight,
