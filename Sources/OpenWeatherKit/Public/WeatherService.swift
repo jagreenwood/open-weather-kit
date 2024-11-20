@@ -463,7 +463,7 @@ extension WeatherService {
             WeatherQuery<Forecast<MinuteWeather>?>.minute,
             WeatherQuery<Forecast<HourWeather>>.hourly,
             WeatherQuery<Forecast<DayWeather>>.daily,
-            WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
+            WeatherQuery<[WeatherAlert]>.alerts(countryCode: countryCode),
             WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode),
             jwt: Self.configuration.jwt()
         )

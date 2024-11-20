@@ -25,10 +25,10 @@ public struct WeatherQuery<T> {
     }
 
     /// The minute forecast query.
-    public static var minute: WeatherQuery<Forecast<MinuteWeather>?> {
-        WeatherQuery<Forecast<MinuteWeather>?>(
+    public static var minute: WeatherQuery<Forecast<MinuteWeather>> {
+        WeatherQuery<Forecast<MinuteWeather>>(
             queryType: .minute(APIWeather.CodingKeys.forecastNextHour.rawValue),
-            weatherKeyPath: \.minuteForecast?
+            weatherKeyPath: \.minuteForecast
         )
     }
 
@@ -57,12 +57,12 @@ public struct WeatherQuery<T> {
     }
 
 #if canImport(CoreLocation)
-    public static var alerts: WeatherQuery<[WeatherAlert]?> {
-        WeatherQuery<[WeatherAlert]?>(
+    public static var alerts: WeatherQuery<[WeatherAlert]> {
+        WeatherQuery<[WeatherAlert]>(
             queryType: .availability(
                 APIWeather.CodingKeys.weatherAlerts.rawValue, ""
             ),
-            weatherKeyPath: \.weatherAlerts?
+            weatherKeyPath: \.weatherAlerts
         )
     }
 
@@ -109,15 +109,15 @@ public extension WeatherQuery where T == Forecast<HourWeather> {
     }
 }
 
-public extension WeatherQuery where T == [WeatherAlert]? {
+public extension WeatherQuery where T == [WeatherAlert] {
     /// The weather alerts query.
     static func alerts(countryCode: String) -> WeatherQuery<T> {
-        WeatherQuery<[WeatherAlert]?>(
+        WeatherQuery<[WeatherAlert]>(
             queryType: .alerts(
                 APIWeather.CodingKeys.weatherAlerts.rawValue,
                 countryCode
             ),
-            weatherKeyPath: \.weatherAlerts?
+            weatherKeyPath: \.weatherAlerts
         )
     }
 }
