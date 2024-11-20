@@ -31,6 +31,7 @@ extension APIHour {
             precipitationAmount: Measurement(value: precipitationAmount, unit: .millimeters),
             pressure: Measurement(value: pressure, unit: .millibars),
             pressureTrend: PressureTrend(rawValue: pressureTrend) ?? .undefined,
+            snowfallIntensity: snowfallIntensity != nil ? Measurement(value: snowfallIntensity!, unit: .millimetersPerHour) : nil, 
             temperature: Measurement(value: temperature, unit: .celsius),
             apparentTemperature: Measurement(value: temperatureApparent, unit: .celsius),
             uvIndex: UVIndex(value: uvIndex, category: .init(value: uvIndex)),

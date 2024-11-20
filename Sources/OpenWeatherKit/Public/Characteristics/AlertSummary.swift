@@ -13,7 +13,7 @@ public struct AlertSummary: Codable, Equatable, Sendable {
     public var name: String
     public var id: String
     public var areaID: String
-    public var areaName: String
+    public var areaName: String?
     public var attributionURL: String
     public var countryCode: String
     public var alertDescription: String
@@ -34,7 +34,7 @@ public struct AlertSummary: Codable, Equatable, Sendable {
         name: String,
         id: String,
         areaID: String,
-        areaName: String,
+        areaName: String?,
         attributionURL: String,
         countryCode: String,
         alertDescription: String,

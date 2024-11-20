@@ -33,7 +33,7 @@ struct APIHour: Codable, Equatable {
     let precipitationType: String
     let pressure: Double
     let pressureTrend: String
-    let snowfallIntensity: Int
+    let snowfallIntensity: Double?
     let temperature: Double
     let temperatureApparent: Double
     let temperatureDewPoint: Double
