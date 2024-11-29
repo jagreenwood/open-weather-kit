@@ -21,14 +21,11 @@ final public class WeatherService: Sendable {
     /// Establishes the configuration for weather requests.
     @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
     public struct Configuration: Sendable {
-        public enum Language: Sendable {
-            case englishUS
-
-            var languageCode: String {
-                switch self {
-                case .englishUS: return "en_US"
-                }
-            }
+        
+        public enum Language: String, Sendable {
+            case englishUS = "en_US"
+            case germanDE = "de_DE"
+            
         }
 
         public var jwt: @Sendable () -> String
@@ -153,8 +150,8 @@ final public class WeatherService: Sendable {
     /// - Returns: The aggregate weather.
     ///
     @inlinable
-    final public func weather(for location: LocationProtocol, countryCode: String) async throws -> Weather {
-        try await getWeather(location: location, countryCode: countryCode)
+    final public func weather(for location: LocationProtocol, countryCode: String, language: WeatherService.Configuration.Language? = nil) async throws -> Weather {
+        try await getWeather(location: location, countryCode: countryCode, language: language)
     }
 
     ///
@@ -434,10 +431,10 @@ final public class WeatherService: Sendable {
 
 extension WeatherService {
     @usableFromInline
-    func getWeather(location: LocationProtocol, countryCode: String) async throws -> Weather {
+    func getWeather(location: LocationProtocol, countryCode: String, language: WeatherService.Configuration.Language? = nil) async throws -> Weather {
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: language ?? Self.configuration.language,
             queries: WeatherQuery<CurrentWeather>.current,
             WeatherQuery<Forecast<MinuteWeather>?>.minute,
             WeatherQuery<Forecast<HourWeather>>.hourly,
