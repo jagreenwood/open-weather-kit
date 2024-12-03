@@ -58,9 +58,9 @@ final class OpenWeatherKitTests: XCTestCase {
             including: .daily, .hourly)
     }
 
-    func testDataSet3Optional() async throws {
+    func testDataSet3() async throws {
         let networkClient = NetworkClient(
-            client: MockClient(include: Set([.daily, .hourly]))
+            client: MockClient(include: Set([.daily, .hourly, .alerts]))
         )
 
         let service = WeatherService(
@@ -74,6 +74,33 @@ final class OpenWeatherKitTests: XCTestCase {
                 latitude: 0,
                 longitude: 0),
             including: .daily, .hourly, .alerts)
+    }
+
+    func testDataSet3Optional() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([.daily, .hourly]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient,
+            geocoder: .mock
+        )
+
+        do {
+            let _ = try await service.weather(
+                for: Location(
+                    latitude: 0,
+                    longitude: 0),
+                including: .daily, .hourly, .alerts)
+        } catch {
+            switch error {
+            case let weatherError as WeatherError where weatherError == .missingData(APIWeather.CodingKeys.weatherAlerts.rawValue):
+                break
+            default:
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
     }
 #else
     func testWeather() async throws {
@@ -129,9 +156,9 @@ final class OpenWeatherKitTests: XCTestCase {
             including: .daily, .hourly)
     }
 
-    func testDataSet3Optional() async throws {
+    func testDataSet3() async throws {
         let networkClient = NetworkClient(
-            client: MockClient(include: Set([.daily, .hourly]))
+            client: MockClient(include: Set([.daily, .hourly, .alerts]))
         )
 
         let service = WeatherService(
@@ -144,6 +171,32 @@ final class OpenWeatherKitTests: XCTestCase {
                 latitude: 0,
                 longitude: 0),
             including: .daily, .hourly, .alerts(countryCode: ""))
+    }
+
+    func testDataSet3Optional() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([.daily, .hourly]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient
+        )
+
+        do {
+            let _ = try await service.weather(
+                for: Location(
+                    latitude: 0,
+                    longitude: 0),
+                including: .daily, .hourly, .alerts(countryCode: ""))
+        } catch {
+            switch error {
+            case let weatherError as WeatherError where weatherError == .missingData(APIWeather.CodingKeys.weatherAlerts.rawValue):
+                break
+            default:
+                XCTFail("Unexpected error: \(error)")
+            }
+        }
     }
 #endif
 }
