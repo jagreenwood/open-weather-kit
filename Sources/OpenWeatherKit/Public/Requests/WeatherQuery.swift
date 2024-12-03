@@ -12,15 +12,17 @@ import Foundation
 public struct WeatherQuery<T> {
     @usableFromInline
     let queryType: QueryType
-    
+
     @usableFromInline
-    let weatherKeyPath: KeyPath<WeatherProxy, T?>
+    let result: (WeatherProxy) throws -> T
 
     /// The current weather query.
     public static var current: WeatherQuery<CurrentWeather> {
         WeatherQuery<CurrentWeather>(
             queryType: .current(APIWeather.CodingKeys.currentWeather.rawValue),
-            weatherKeyPath: \.currentWeather
+            result: { try $0.currentWeather
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.currentWeather.rawValue))
+            }
         )
     }
 
@@ -28,7 +30,9 @@ public struct WeatherQuery<T> {
     public static var minute: WeatherQuery<Forecast<MinuteWeather>?> {
         WeatherQuery<Forecast<MinuteWeather>?>(
             queryType: .minute(APIWeather.CodingKeys.forecastNextHour.rawValue),
-            weatherKeyPath: \.minuteForecast?
+            result: { try $0.minuteForecast
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastNextHour.rawValue))
+            }
         )
     }
 
@@ -40,7 +44,9 @@ public struct WeatherQuery<T> {
                 Date(),
                 Date.hoursFromNow(24)
             ),
-            weatherKeyPath: \.hourlyForecast
+            result: { try $0.hourlyForecast
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastHourly.rawValue))
+            }
         )
     }
 
@@ -52,17 +58,21 @@ public struct WeatherQuery<T> {
                 Date(),
                 Date.daysFromNow(10)
             ),
-            weatherKeyPath: \.dailyForecast
+            result: { try $0.dailyForecast
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastDaily.rawValue))
+            }
         )
     }
 
 #if canImport(CoreLocation)
     public static var alerts: WeatherQuery<[WeatherAlert]?> {
         WeatherQuery<[WeatherAlert]?>(
-            queryType: .availability(
+            queryType: .alerts(
                 APIWeather.CodingKeys.weatherAlerts.rawValue, ""
             ),
-            weatherKeyPath: \.weatherAlerts?
+            result: { try $0.weatherAlerts
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.weatherAlerts.rawValue))
+            }
         )
     }
 
@@ -71,7 +81,10 @@ public struct WeatherQuery<T> {
             queryType: .availability(
                 QueryContants.availability, ""
             ),
-            weatherKeyPath: \.availability)
+            result: { try $0.availability
+                    .unwrap(or: WeatherError.missingData(QueryContants.availability))
+            }
+        )
     }
 #endif
 }
@@ -88,7 +101,9 @@ public extension WeatherQuery where T == Forecast<DayWeather> {
                 startDate,
                 endDate
             ),
-            weatherKeyPath: \.dailyForecast
+            result: { try $0.dailyForecast
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastDaily.rawValue))
+            }
         )
     }
 }
@@ -104,7 +119,9 @@ public extension WeatherQuery where T == Forecast<HourWeather> {
                 startDate,
                 endDate
             ),
-            weatherKeyPath: \.hourlyForecast
+            result: { try $0.hourlyForecast
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastHourly.rawValue))
+            }
         )
     }
 }
@@ -117,7 +134,9 @@ public extension WeatherQuery where T == [WeatherAlert]? {
                 APIWeather.CodingKeys.weatherAlerts.rawValue,
                 countryCode
             ),
-            weatherKeyPath: \.weatherAlerts?
+            result: { try $0.weatherAlerts
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.weatherAlerts.rawValue))
+            }
         )
     }
 }
@@ -130,7 +149,10 @@ public extension WeatherQuery where T == WeatherAvailability {
                 QueryContants.availability,
                 countryCode
             ),
-            weatherKeyPath: \.availability)
+            result: { try $0.availability
+                    .unwrap(or: WeatherError.missingData(QueryContants.availability))
+            }
+        )
     }
 }
 
@@ -143,14 +165,14 @@ extension WeatherQuery {
                 queryType: .alerts(
                     dataSet,
                     countryCode),
-                weatherKeyPath: weatherKeyPath
+                result: result
             )
         case let .availability(dataSet, _):
             return WeatherQuery(
                 queryType: .availability(
                     dataSet,
                     countryCode),
-                weatherKeyPath: weatherKeyPath
+                result: result
             )
         default: return self
         }

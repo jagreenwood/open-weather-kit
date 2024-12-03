@@ -190,8 +190,7 @@ final public class WeatherService: Sendable {
             jwt: Self.configuration.jwt()
         )
 
-        return try proxy[keyPath: _dataSet.weatherKeyPath]
-            .unwrap(or: WeatherError.missingData(_dataSet.queryType.dataSet))
+        return try _dataSet.result(proxy)
     }
 
     ///
@@ -231,10 +230,8 @@ final public class WeatherService: Sendable {
         )
 
         return try (
-            proxy[keyPath: _dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
-            proxy[keyPath: _dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet))
+            _dataSet1.result(proxy),
+            _dataSet2.result(proxy)
         )
     }
 
@@ -275,12 +272,9 @@ final public class WeatherService: Sendable {
         )
 
         return try (
-            proxy[keyPath: _dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
-            proxy[keyPath: _dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
-            proxy[keyPath: _dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet))
+            _dataSet1.result(proxy),
+            _dataSet2.result(proxy),
+            _dataSet3.result(proxy)
         )
     }
 
@@ -324,14 +318,10 @@ final public class WeatherService: Sendable {
         )
 
         return try (
-            proxy[keyPath: _dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
-            proxy[keyPath: _dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
-            proxy[keyPath: _dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet)),
-            proxy[keyPath: _dataSet4.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet4.queryType.dataSet))
+            _dataSet1.result(proxy),
+            _dataSet2.result(proxy),
+            _dataSet3.result(proxy),
+            _dataSet4.result(proxy)
         )
     }
 
@@ -378,16 +368,11 @@ final public class WeatherService: Sendable {
         )
 
         return try (
-            proxy[keyPath: _dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
-            proxy[keyPath: _dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
-            proxy[keyPath: _dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet)),
-            proxy[keyPath: _dataSet4.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet4.queryType.dataSet)),
-            proxy[keyPath: _dataSet5.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet5.queryType.dataSet))
+            _dataSet1.result(proxy),
+            _dataSet2.result(proxy),
+            _dataSet3.result(proxy),
+            _dataSet4.result(proxy),
+            _dataSet5.result(proxy)
         )
     }
 
@@ -437,18 +422,12 @@ final public class WeatherService: Sendable {
         )
 
         return try (
-            proxy[keyPath: _dataSet1.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet1.queryType.dataSet)),
-            proxy[keyPath: _dataSet2.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet2.queryType.dataSet)),
-            proxy[keyPath: _dataSet3.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet3.queryType.dataSet)),
-            proxy[keyPath: _dataSet4.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet4.queryType.dataSet)),
-            proxy[keyPath: _dataSet5.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet5.queryType.dataSet)),
-            proxy[keyPath: _dataSet6.weatherKeyPath]
-                .unwrap(or: WeatherError.missingData(_dataSet6.queryType.dataSet))
+            _dataSet1.result(proxy),
+            _dataSet2.result(proxy),
+            _dataSet3.result(proxy),
+            _dataSet4.result(proxy),
+            _dataSet5.result(proxy),
+            _dataSet6.result(proxy)
         )
     }
 }
