@@ -72,6 +72,7 @@ public struct CurrentWeather: Sendable {
     /// The range of this property is from 0 to 1, inclusive.
     public var humidity: Double
     
+    /// The precipitation intensity, in millimeters per hour.
     public var percipationIntensity: Measurement<UnitSpeed>
 
     /// The atmospheric pressure at sea level at a given location.
