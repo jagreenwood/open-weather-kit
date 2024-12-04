@@ -34,6 +34,7 @@ struct APIHour: Codable, Equatable {
     let pressure: Double
     let pressureTrend: String
     let snowfallIntensity: Double?
+    let snowfallAmount: Double?
     let temperature: Double
     let temperatureApparent: Double
     let temperatureDewPoint: Double
@@ -56,6 +57,7 @@ struct APIHour: Codable, Equatable {
         case pressure = "pressure"
         case pressureTrend = "pressureTrend"
         case snowfallIntensity = "snowfallIntensity"
+        case snowfallAmount = "snowfallAmount"
         case temperature = "temperature"
         case temperatureApparent = "temperatureApparent"
         case temperatureDewPoint = "temperatureDewPoint"
