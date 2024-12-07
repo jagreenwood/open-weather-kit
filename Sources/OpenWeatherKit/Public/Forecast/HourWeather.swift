@@ -56,9 +56,9 @@ public struct HourWeather: Sendable {
     public var pressureTrend: PressureTrend
     
     /// The rate at which snow crystals are falling, in millimeters per hour.
-    public var snowfallIntensity: Measurement<UnitSpeed>?
+    public var snowfallIntensity: Measurement<UnitSpeed>
     
-    public var snowfallAmount: Measurement<UnitLength>?
+    public var snowfallAmount: Measurement<UnitLength>
 
     /// The temperature during the hour.
     public var temperature: Measurement<UnitTemperature>
