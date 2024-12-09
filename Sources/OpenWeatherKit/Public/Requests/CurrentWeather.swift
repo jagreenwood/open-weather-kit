@@ -17,6 +17,7 @@ public struct CurrentWeather: Sendable {
         symbolName: String,
         dewPoint: Measurement<UnitTemperature>,
         humidity: Double,
+        percipationIntensity: Measurement<UnitSpeed>,
         pressure: Measurement<UnitPressure>,
         pressureTrend: PressureTrend,
         isDaylight: Bool,
@@ -33,6 +34,7 @@ public struct CurrentWeather: Sendable {
         self.symbolName = symbolName
         self.dewPoint = dewPoint
         self.humidity = humidity
+        self.percipationIntensity = percipationIntensity
         self.pressure = pressure
         self.pressureTrend = pressureTrend
         self.isDaylight = isDaylight
@@ -69,6 +71,9 @@ public struct CurrentWeather: Sendable {
     ///
     /// The range of this property is from 0 to 1, inclusive.
     public var humidity: Double
+    
+    /// The precipitation intensity, in millimeters per hour.
+    public var percipationIntensity: Measurement<UnitSpeed>
 
     /// The atmospheric pressure at sea level at a given location.
     ///
