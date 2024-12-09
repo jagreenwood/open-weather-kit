@@ -20,6 +20,15 @@ final class OpenWeatherKitTests: XCTestCase {
                 longitude: 0
             )
         )
+
+        let _ = try await service.weather(
+            for: Location(
+                latitude: 0,
+                longitude: 0
+            ),
+            countryCode: "US",
+            language: .germanDE
+        )
     }
 
     func testDataSet1() async throws {

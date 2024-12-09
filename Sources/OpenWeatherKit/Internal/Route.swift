@@ -17,7 +17,7 @@ enum Route {
 
             switch self {
             case let .availability(location): return "\(base)/api/v1/availability/\(location.latitude)/\(location.longitude)"
-            case let .weather(language, location): return "\(base)/api/v1/weather/\(language.languageCode)/\(location.latitude)/\(location.longitude)"
+            case let .weather(language, location): return "\(base)/api/v1/weather/\(language.rawValue)/\(location.latitude)/\(location.longitude)"
             }
         }()
 
