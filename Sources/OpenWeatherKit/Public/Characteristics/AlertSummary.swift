@@ -12,7 +12,7 @@ import Foundation
 public struct AlertSummary: Codable, Equatable, Sendable {
     public var name: String
     public var id: String
-    public var areaID: String
+    public var areaID: String?
     public var areaName: String?
     public var attributionURL: String
     public var countryCode: String
@@ -33,7 +33,7 @@ public struct AlertSummary: Codable, Equatable, Sendable {
     public init(
         name: String,
         id: String,
-        areaID: String,
+        areaID: String?,
         areaName: String?,
         attributionURL: String,
         countryCode: String,
