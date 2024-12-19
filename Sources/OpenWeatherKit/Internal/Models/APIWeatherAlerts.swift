@@ -25,7 +25,7 @@ struct APIWeatherAlerts: Codable, Equatable {
 struct APIAlertSummary: Codable, Equatable {
     let name: String
     let id: String
-    let areaID: String
+    let areaID: String?
     let areaName: String?
     let attributionURL: String
     let countryCode: String
