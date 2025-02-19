@@ -25,22 +25,11 @@ final public class WeatherService: Sendable {
         public enum Language: String, Sendable {
             case englishUS = "en_US"
             case germanDE = "de_DE"
-            
         }
 
         public var jwt: @Sendable () -> String
         public var language: Language
-#if os(Linux)
-        @available(*, deprecated, renamed: "init(jwt:language:)")
-        public init(
-            jwt: @escaping @Sendable () -> String,
-            language: WeatherService.Configuration.Language = .englishUS,
-            eventLoopGroupProvider: NIOEventLoopGroupProvider
-        ) {
-            self.jwt = jwt
-            self.language = language
-        }
-#endif
+
         /// Initializes an instance of Configuation
         /// - Parameters:
         ///   - jwt: A closure to provide a JWT.
@@ -55,12 +44,11 @@ final public class WeatherService: Sendable {
     }
 
     @usableFromInline
-    static var configuration: Configuration = Configuration(
-        jwt: { preconditionFailure("Configuration must first be set by calling WeatherService.configure(_:).") }
-    )
+    let configuration: Configuration
 
     @usableFromInline
     let networkClient: NetworkClient
+
 #if canImport(CoreLocation)
     @usableFromInline
     let geocoder: Geocoder
@@ -70,7 +58,7 @@ final public class WeatherService: Sendable {
         networkClient: NetworkClient,
         geocoder: Geocoder
     ) {
-        Self.configuration = configuration
+        self.configuration = configuration
         self.networkClient = networkClient
         self.geocoder = geocoder
     }
@@ -79,14 +67,14 @@ final public class WeatherService: Sendable {
         configuration: Configuration,
         networkClient: NetworkClient
     ) {
-        Self.configuration = configuration
+        self.configuration = configuration
         self.networkClient = networkClient
     }
 #endif
 
 #if os(Linux)
     public init(configuration: Configuration) {
-        Self.configuration = configuration
+        self.configuration = configuration
         self.networkClient = NetworkClient(
             client: HTTPClient(eventLoopGroupProvider: .singleton)
         )
@@ -98,24 +86,13 @@ final public class WeatherService: Sendable {
 
 #else
     public init(configuration: Configuration) {
-        Self.configuration = configuration
+        self.configuration = configuration
         self.networkClient = NetworkClient(
             client: URLSession.shared
         )
         self.geocoder = .live
     }
 #endif
-
-    public static func configure(_ configure: (inout Configuration) -> Void) {
-        configure(&Self.configuration)
-
-        Self.configuration = configuration
-    }
-
-    /// The shared weather service. Use to instantiate one instance of `WeatherService`
-    /// for use throughout your application. If finer-grained optimizations are desired, create
-    /// separate instances. See the `init` documentation for more details.
-    public static let shared: WeatherService = .init(configuration: configuration)
 
     /// The required attribution which includes a legal attribution page and Apple Weather mark.
     final public var attribution: WeatherAttribution {
@@ -182,9 +159,9 @@ final public class WeatherService: Sendable {
 
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: self.configuration.language,
             queries: _dataSet,
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try _dataSet.result(proxy)
@@ -221,9 +198,9 @@ final public class WeatherService: Sendable {
 
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: self.configuration.language,
             queries: _dataSet1, _dataSet2,
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try (
@@ -263,9 +240,9 @@ final public class WeatherService: Sendable {
 
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: self.configuration.language,
             queries: _dataSet1, _dataSet2, _dataSet3,
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try (
@@ -309,9 +286,9 @@ final public class WeatherService: Sendable {
         
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: self.configuration.language,
             queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4,
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try (
@@ -359,9 +336,9 @@ final public class WeatherService: Sendable {
 
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: self.configuration.language,
             queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5,
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try (
@@ -413,9 +390,9 @@ final public class WeatherService: Sendable {
 
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: Self.configuration.language,
+            language: self.configuration.language,
             queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5, _dataSet6,
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try (
@@ -434,14 +411,14 @@ extension WeatherService {
     func getWeather(location: LocationProtocol, countryCode: String, language: WeatherService.Configuration.Language? = nil) async throws -> Weather {
         let proxy = try await networkClient.fetchWeather(
             location: location,
-            language: language ?? Self.configuration.language,
+            language: language ?? self.configuration.language,
             queries: WeatherQuery<CurrentWeather>.current,
             WeatherQuery<Forecast<MinuteWeather>?>.minute,
             WeatherQuery<Forecast<HourWeather>>.hourly,
             WeatherQuery<Forecast<DayWeather>>.daily,
             WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
             WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode),
-            jwt: Self.configuration.jwt()
+            jwt: self.configuration.jwt()
         )
 
         return try Weather(
