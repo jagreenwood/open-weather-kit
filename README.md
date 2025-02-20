@@ -6,10 +6,11 @@
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fopen-weather-kit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/open-weather-kit)
 
 This package is Swift wrapper around the [WeatherKit REST API](https://developer.apple.com/documentation/weatherkitrestapi).
-Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package 
-is nearly identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit). 
+Its intention is to bring a native Swift WeatherKit alternative to platforms Apple does not currently support. The API of this package
+is nearly identical to Apple's [WeatherKit](https://developer.apple.com/documentation/weatherkit).
 
 ## 💻 Supported Platforms
+
 - iOS 13+
 - watchOS 6+
 - tvOS 13+
@@ -43,12 +44,10 @@ The REST API requires a signed JWT to be sent with each request. To set this up 
 5. Make note of the Key ID (you'll need it later)
 6. Download the private key
 
-
 ### JWT
 
-The WeatherKit REST API requires a JSON Web Token (JWT) to be sent with every request. Implementing the 
+The WeatherKit REST API requires a JSON Web Token (JWT) to be sent with every request. Implementing the
 logic necessary to generate a JWT is beyond the scope of the OpenWeatherKit project at this time.
- 
 For general information on JWT please visit https://jwt.io
 
 That being said, the recommended package to handle this task is Vapor's [jwt-kit](https://github.com/vapor/jwt-kit). Here is how to set that up:
@@ -107,22 +106,20 @@ Note the variables:
 
 ## 🌤️ Usage
 
-### Configure Service
+### Initialize Service
 
-The service must be configured with a JWT generating closure and optionally a language.
-
-If you choose to use the `WeatherService.shared` instance, call the following before referencing `shared`:
+The service must be initialized with a JWT generating closure and optionally a language.
 
 ```swift
-WeatherService.configure {
-    $0.jwt = JWTProvider.generate
-}
+let weatherService = WeatherService(
+    configuration: .init(jwt: JWTProvider.generate)
+)
 ```
 
-### Get a Full Weather Forecast 
+### Get a Full Weather Forecast
 
 ```swift
-let weather = try await WeatherService.shared
+let weather = try await weatherService
     .weather(
         for: Location(
             latitude: 37.541290,
@@ -134,7 +131,7 @@ let weather = try await WeatherService.shared
 ### Get a Partial Weather Forecast
 
 ```swift
-let (dailyForecast, hourlyForecast, alerts) = try await WeatherService.shared
+let (dailyForecast, hourlyForecast, alerts) = try await weatherService
     .weather(
         for: Location(
             latitude: 37.541290,
@@ -145,11 +142,10 @@ let (dailyForecast, hourlyForecast, alerts) = try await WeatherService.shared
 
 ### Get Availability
 
-Note that minute forecasts and alerts are not always available in all regions. Use the `.availability` query
-check their availability.
+Note that minute forecasts and alerts are not always available in all regions. Use the `.availability` query check their availability.
 
 ```swift
-let availabilty = try await WeatherService.shared
+let availability = try await weatherService
     .weather(
         for: Location(
             latitude: 37.541290,
@@ -160,7 +156,7 @@ let availabilty = try await WeatherService.shared
 
 ### Geocoding for Country Code (Apple platforms only)
 
-When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the libary will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
+When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the library will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
 
 ## 📝 Attribution
 
@@ -169,7 +165,7 @@ Please be advised of [Apple's attribution guidelines](https://developer.apple.co
 Attribution information can be accessed with:
 
 ```swift
-let attribution = WeatherService.shared.attribution
+let attribution = weatherService.attribution
 ```
 
 Note that this property returns a static `WeatherAttribution` instance using information from `WeatherKit` and is not guaranteed to be accurate or complete.

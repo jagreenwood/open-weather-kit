@@ -7,13 +7,6 @@
 
 import Foundation
 
-let isoFormatter: ISO8601DateFormatter = {
-    let formatter = ISO8601DateFormatter()
-    formatter.formatOptions = [.withInternetDateTime]
-
-    return formatter
-}()
-
 enum QueryContants {
     static let availability = "availability"
     static let country = "country"
@@ -28,6 +21,13 @@ extension Array where Element == Query {
     var queryItems: [URLQueryItem] {
         var queryItems: [URLQueryItem] = []
         var dataSets: [String] = []
+
+        let isoFormatter: ISO8601DateFormatter = {
+            let formatter = ISO8601DateFormatter()
+            formatter.formatOptions = [.withInternetDateTime]
+
+            return formatter
+        }()
 
         for query in self {
             dataSets.append(query.queryType.dataSet)

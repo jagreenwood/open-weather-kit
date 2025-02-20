@@ -7,7 +7,7 @@
 
 import Foundation
 #if canImport(CoreLocation)
-import CoreLocation
+@preconcurrency import CoreLocation
 
 @usableFromInline
 struct Geocoder: Sendable {

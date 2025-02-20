@@ -8,7 +8,7 @@
 import Foundation
 
 @usableFromInline
-struct WeatherProxy {
+struct WeatherProxy: Sendable {
     init(
         availability: WeatherAvailability?,
         currentWeather: CurrentWeather?,
@@ -45,7 +45,7 @@ struct WeatherProxy {
 }
 
 extension WeatherProxy {
-    static var empty: Self = WeatherProxy(
+    static let empty: Self = WeatherProxy(
         availability: nil,
         currentWeather: nil,
         dailyForecast: nil,
