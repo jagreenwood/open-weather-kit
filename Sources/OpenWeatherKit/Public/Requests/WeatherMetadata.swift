@@ -8,7 +8,7 @@
 import Foundation
 
 /// A structure that provides additional weather information.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct WeatherMetadata: Sendable {
 
     /// The date of the weather data request.

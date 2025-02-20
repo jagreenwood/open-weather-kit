@@ -16,7 +16,7 @@ extension CLLocation: LocationProtocol, @unchecked Sendable {
 #endif
 
 /// Defines the interface for a location
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public protocol LocationProtocol: Sendable {
     var latitude: Double { get }
     var longitude: Double { get }
@@ -24,7 +24,7 @@ public protocol LocationProtocol: Sendable {
     init(latitude: Double, longitude: Double)
 }
 
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct Location: LocationProtocol, Equatable, Codable, Sendable {
     public let latitude: Double
     public let longitude: Double

@@ -8,7 +8,7 @@
 import Foundation
 
 /// A structure that represents the weather conditions for the day.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct DayWeather: Sendable {
 
     /// The start date of the day weather.

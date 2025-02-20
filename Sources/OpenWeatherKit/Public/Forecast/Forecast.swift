@@ -8,7 +8,7 @@
 import Foundation
 
 /// A forecast collection for minute, hourly, and daily forecasts.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct Forecast<Element> : RandomAccessCollection, Codable, Equatable, Sendable where Element : Decodable, Element : Encodable, Element : Equatable, Element : Sendable {
     public init(forecast: [Element], metadata: WeatherMetadata) {
         self.forecast = forecast

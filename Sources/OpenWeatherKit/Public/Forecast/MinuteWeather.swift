@@ -8,7 +8,7 @@
 import Foundation
 
 /// A structure that represents the next hour minute forecasts.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct MinuteWeather: Sendable {
 
     /// The start date of the minute weather.
