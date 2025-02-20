@@ -8,7 +8,7 @@
 import Foundation
 
 /// An enumeration that specifies the moon phase kind.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 @frozen public enum MoonPhase : String, CustomStringConvertible, CaseIterable {
     enum CodingKeys: String, CodingKey {
         case new, waxingCrescent, firstQuarter, waxingGibbous, full, waningGibbous, waningCrescent

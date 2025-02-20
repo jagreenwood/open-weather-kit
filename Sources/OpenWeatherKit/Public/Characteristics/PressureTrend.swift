@@ -8,7 +8,7 @@
 import Foundation
 
 /// The atmospheric pressure change over time.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public enum PressureTrend : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// The pressure is rising.

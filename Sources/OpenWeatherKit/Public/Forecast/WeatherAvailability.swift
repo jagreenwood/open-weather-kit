@@ -8,7 +8,7 @@
 import Foundation
 
 /// A structure that indicates the availability of data at the requested location.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct WeatherAvailability: Sendable {
 
     /// The minute forecast availability.

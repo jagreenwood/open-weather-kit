@@ -8,7 +8,7 @@
 import Foundation
 
 /// A description of the current weather condition.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// The kind of condition.

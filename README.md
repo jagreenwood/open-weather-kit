@@ -11,9 +11,12 @@ is nearly identical to Apple's [WeatherKit](https://developer.apple.com/document
 
 ## 💻 Supported Platforms
 
+Minimum Swift version of 5.9
+
 - iOS 13+
 - watchOS 6+
 - tvOS 13+
+- visionOS 1+
 - macOS 11+
 - Ubuntu 18.04+
 

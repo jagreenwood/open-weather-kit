@@ -8,7 +8,7 @@
 import Foundation
 
 /// A model representing the aggregate weather data the caller requests.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct Weather: Sendable {
 
     /// The current weather forecast.

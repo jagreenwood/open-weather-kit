@@ -8,7 +8,7 @@
 import Foundation
 
 /// A description of the severity of the severe weather event.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public enum WeatherSeverity : String, Codable, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// Specifies "minimal" or no threat to life or property.

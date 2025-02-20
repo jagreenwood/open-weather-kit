@@ -8,7 +8,7 @@
 import Foundation
 
 /// The expected intensity of ultraviolet radiation from the sun.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct UVIndex: Sendable {
 
     /// The UV Index value.
