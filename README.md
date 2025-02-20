@@ -1,7 +1,6 @@
 # OpenWeatherKit
 
-[![Linux Swift 5](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-5.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-5)
-[![Linux Swift 6](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-6.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-6)
+[![Linux Swift](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-ubuntu.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-ubuntu)
 [![macOS](https://github.com/jagreenwood/OpenWeatherKit/actions/workflows/swift-macos.yml/badge.svg)](https://github.com/jagreenwood/OpenWeatherKit/actions?query=workflow%3Aswift-macos)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fopen-weather-kit%2Fbadge%3Ftype%3Dswift-versions)](https://swiftpackageindex.com/jagreenwood/open-weather-kit)
 [![](https://img.shields.io/endpoint?url=https%3A%2F%2Fswiftpackageindex.com%2Fapi%2Fpackages%2Fjagreenwood%2Fopen-weather-kit%2Fbadge%3Ftype%3Dplatforms)](https://swiftpackageindex.com/jagreenwood/open-weather-kit)
