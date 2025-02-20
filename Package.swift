@@ -28,12 +28,11 @@ let package = Package(
         .testTarget(
             name: "OpenWeatherKitTests",
             dependencies: ["OpenWeatherKit"]),
-    ]
+    ],
+    swiftLanguageVersions: [.version("6"), .v5]
 )
 
 #if os(Linux)
 package.dependencies.append(.package(url: "https://github.com/swift-server/async-http-client.git", from: "1.19.0"))
 package.targets.first { $0.name == "OpenWeatherKit" }?.dependencies.append(.product(name: "AsyncHTTPClient", package: "async-http-client"))
 #endif
-
-
