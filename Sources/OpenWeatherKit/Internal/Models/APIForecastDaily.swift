@@ -22,88 +22,146 @@ struct APIForecastDaily: Codable, Equatable {
 
 // MARK: - APIDay
 struct APIDay: Codable, Equatable {
-    let forecastStart: Date
-    let forecastEnd: Date
     let conditionCode: String
+    let daytimeForecast: APIForecast
+    let forecastEnd: Date
+    let forecastStart: Date
+    let humidityMax: Int
+    let humidityMin: Int
     let maxUvIndex: Int
     let moonPhase: String
     let moonrise: Date?
     let moonset: Date?
-    let precipitationAmount: Double
-    let precipitationChance: Double
-    let precipitationType: String
-    let snowfallAmount: Double
-    let solarMidnight: Date
-    let solarNoon: Date
-    let sunrise: Date
-    let sunriseCivil: Date
-    let sunriseNautical: Date
-    let sunriseAstronomical: Date
-    let sunset: Date
-    let sunsetCivil: Date
-    let sunsetNautical: Date
-    let sunsetAstronomical: Date
-    let temperatureMax: Double
-    let temperatureMin: Double
-    let daytimeForecast: APIForecast
     let overnightForecast: APIForecast
-    let restOfDayForecast: APIForecast?
+    let precipitationAmount: Int
+    let precipitationAmountByType: [APIPrecipitationAmountByType]
+    let precipitationChance: Int
+    let precipitationType: String
+    let restOfDayForecast: APIForecast
+    let snowfallAmount: Int
+    let solarMidnight: Date?
+    let solarNoon: Date?
+    let sunrise: Date?
+    let sunriseAstronomical: Date?
+    let sunriseCivil: Date?
+    let sunriseNautical: Date?
+    let sunset: Date?
+    let sunsetAstronomical: Date?
+    let sunsetCivil: Date?
+    let sunsetNautical: Date?
+    let temperatureMax: Double
+    let temperatureMaxTime: Date?
+    let temperatureMin: Double
+    let temperatureMinTime: Date?
+    let visibilityMax: Double
+    let visibilityMin: Double
+    let windGustSpeedMax: Double
+    let windSpeedAvg: Double
+    let windSpeedMax: Double
 
     enum CodingKeys: String, CodingKey {
-        case forecastStart = "forecastStart"
-        case forecastEnd = "forecastEnd"
         case conditionCode = "conditionCode"
+        case daytimeForecast = "daytimeForecast"
+        case forecastEnd = "forecastEnd"
+        case forecastStart = "forecastStart"
+        case humidityMax = "humidityMax"
+        case humidityMin = "humidityMin"
         case maxUvIndex = "maxUvIndex"
         case moonPhase = "moonPhase"
         case moonrise = "moonrise"
         case moonset = "moonset"
+        case overnightForecast = "overnightForecast"
         case precipitationAmount = "precipitationAmount"
+        case precipitationAmountByType = "precipitationAmountByType"
         case precipitationChance = "precipitationChance"
         case precipitationType = "precipitationType"
+        case restOfDayForecast = "restOfDayForecast"
         case snowfallAmount = "snowfallAmount"
         case solarMidnight = "solarMidnight"
         case solarNoon = "solarNoon"
         case sunrise = "sunrise"
+        case sunriseAstronomical = "sunriseAstronomical"
         case sunriseCivil = "sunriseCivil"
         case sunriseNautical = "sunriseNautical"
-        case sunriseAstronomical = "sunriseAstronomical"
         case sunset = "sunset"
+        case sunsetAstronomical = "sunsetAstronomical"
         case sunsetCivil = "sunsetCivil"
         case sunsetNautical = "sunsetNautical"
-        case sunsetAstronomical = "sunsetAstronomical"
         case temperatureMax = "temperatureMax"
+        case temperatureMaxTime = "temperatureMaxTime"
         case temperatureMin = "temperatureMin"
-        case daytimeForecast = "daytimeForecast"
-        case overnightForecast = "overnightForecast"
-        case restOfDayForecast = "restOfDayForecast"
+        case temperatureMinTime = "temperatureMinTime"
+        case visibilityMax = "visibilityMax"
+        case visibilityMin = "visibilityMin"
+        case windGustSpeedMax = "windGustSpeedMax"
+        case windSpeedAvg = "windSpeedAvg"
+        case windSpeedMax = "windSpeedMax"
     }
 }
 
 // MARK: - APIForecast
 struct APIForecast: Codable, Equatable {
-    let forecastStart: Date
-    let forecastEnd: Date
-    let cloudCover: Double
+    let cloudCover: Int
+    let cloudCoverHighAltPct: Int
+    let cloudCoverLowAltPct: Int
+    let cloudCoverMidAltPct: Int
     let conditionCode: String
-    let humidity: Double
-    let precipitationAmount: Double
-    let precipitationChance: Double
+    let daylight: Bool
+    let forecastEnd: Int
+    let forecastStart: Int
+    let humidity: Int
+    let humidityMax: Int
+    let humidityMin: Int
+    let perceivedPrecipitationIntensityMax: Int
+    let precipitationAmount: Int
+    let precipitationAmountByType: [APIPrecipitationAmountByType]
+    let precipitationChance: Int
+    let precipitationIntensityMax: Int
     let precipitationType: String
-    let snowfallAmount: Double
-    let windDirection: Double
+    let snowfallAmount: Int
+    let temperatureApparentMax: Double
+    let temperatureApparentMin: Double
+    let temperatureMax: Double
+    let temperatureMin: Double
+    let uvIndexMax: Int
+    let uvIndexMin: Int
+    let visibilityMax: Double
+    let visibilityMin: Double
+    let windDirection: Int
+    let windGustSpeedMax: Double
     let windSpeed: Double
+    let windSpeedMax: Double
 
     enum CodingKeys: String, CodingKey {
-        case forecastStart = "forecastStart"
-        case forecastEnd = "forecastEnd"
         case cloudCover = "cloudCover"
+        case cloudCoverHighAltPct = "cloudCoverHighAltPct"
+        case cloudCoverLowAltPct = "cloudCoverLowAltPct"
+        case cloudCoverMidAltPct = "cloudCoverMidAltPct"
         case conditionCode = "conditionCode"
+        case daylight = "daylight"
+        case forecastEnd = "forecastEnd"
+        case forecastStart = "forecastStart"
         case humidity = "humidity"
+        case humidityMax = "humidityMax"
+        case humidityMin = "humidityMin"
+        case perceivedPrecipitationIntensityMax = "perceivedPrecipitationIntensityMax"
         case precipitationAmount = "precipitationAmount"
+        case precipitationAmountByType = "precipitationAmountByType"
         case precipitationChance = "precipitationChance"
+        case precipitationIntensityMax = "precipitationIntensityMax"
         case precipitationType = "precipitationType"
         case snowfallAmount = "snowfallAmount"
+        case temperatureApparentMax = "temperatureApparentMax"
+        case temperatureApparentMin = "temperatureApparentMin"
+        case temperatureMax = "temperatureMax"
+        case temperatureMin = "temperatureMin"
+        case uvIndexMax = "uvIndexMax"
+        case uvIndexMin = "uvIndexMin"
+        case visibilityMax = "visibilityMax"
+        case visibilityMin = "visibilityMin"
         case windDirection = "windDirection"
+        case windGustSpeedMax = "windGustSpeedMax"
         case windSpeed = "windSpeed"
+        case windSpeedMax = "windSpeedMax"
     }
 }
