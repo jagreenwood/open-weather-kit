@@ -24,26 +24,26 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
-        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.main, comment: "Could not determine country code")
+        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.module, comment: "Could not determine country code")
         case .permissionDenied:
-            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.main, comment: "Permission Denied")
+            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.module, comment: "Permission Denied")
         case .unknown:
-            return NSLocalizedString("Error.unknown", bundle: Bundle.main, comment: "Unknown Error")
+            return NSLocalizedString("Error.unknown", bundle: Bundle.module, comment: "Unknown Error")
         case let .missingData(name):
-            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.main, comment: "The data \(name) is missing from the response"), name)
+            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
         }
     }
 
     /// A localized message describing the reason for the failure.
     public var failureReason: String? {
         switch self {
-        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.main, comment: "Could not determine country code")
+        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.module, comment: "Could not determine country code")
         case .permissionDenied:
-            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.main, comment: "Permission Denied")
+            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.module, comment: "Permission Denied")
         case .unknown:
-            return NSLocalizedString("Error.unknown", bundle: Bundle.main, comment: "Unknown Error")
+            return NSLocalizedString("Error.unknown", bundle: Bundle.module, comment: "Unknown Error")
         case let .missingData(name):
-            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.main, comment: "The data \(name) is missing from the response"), name)
+            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
         }
     }
 

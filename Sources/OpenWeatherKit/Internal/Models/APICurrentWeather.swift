@@ -9,16 +9,16 @@ import Foundation
 
 // MARK: - APICurrentWeather
 struct APICurrentWeather: Codable, Equatable {
-    let name: String
-    let metadata: APIMetadata
+    @TextCaseCoding<Lowercased> var conditionCode: String
+    @TextCaseCoding<Lowercased> var pressureTrend: String
     let asOf: Date
     let cloudCover: Double
-    let conditionCode: String
     let daylight: Bool
     let humidity: Double
+    let metadata: APIMetadata
+    let name: String
     let precipitationIntensity: Double
     let pressure: Double
-    let pressureTrend: String
     let temperature: Double
     let temperatureApparent: Double
     let temperatureDewPoint: Double
@@ -29,13 +29,13 @@ struct APICurrentWeather: Codable, Equatable {
     let windSpeed: Double
 
     enum CodingKeys: String, CodingKey {
-        case name = "name"
-        case metadata = "metadata"
         case asOf = "asOf"
         case cloudCover = "cloudCover"
         case conditionCode = "conditionCode"
         case daylight = "daylight"
         case humidity = "humidity"
+        case metadata = "metadata"
+        case name = "name"
         case precipitationIntensity = "precipitationIntensity"
         case pressure = "pressure"
         case pressureTrend = "pressureTrend"

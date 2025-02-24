@@ -22,19 +22,19 @@ struct APIForecastHourly: Codable, Equatable {
 
 // MARK: - APIHour
 struct APIHour: Codable, Equatable {
-    let forecastStart: Date
+    @TextCaseCoding<Lowercased> var conditionCode: String
+    @TextCaseCoding<Lowercased> var precipitationType: String
+    @TextCaseCoding<Lowercased> var pressureTrend: String
     let cloudCover: Double
-    let conditionCode: String
     let daylight: Bool
+    let forecastStart: Date
     let humidity: Double
     let precipitationAmount: Double
-    let precipitationIntensity: Double
     let precipitationChance: Double
-    let precipitationType: String
+    let precipitationIntensity: Double
     let pressure: Double
-    let pressureTrend: String
-    let snowfallIntensity: Double?
     let snowfallAmount: Double?
+    let snowfallIntensity: Double?
     let temperature: Double
     let temperatureApparent: Double
     let temperatureDewPoint: Double

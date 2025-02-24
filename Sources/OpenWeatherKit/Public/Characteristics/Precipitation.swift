@@ -33,17 +33,17 @@ public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hasha
     public var description: String {
         switch self {
         case .none:
-            return NSLocalizedString("Precipitation.none", bundle: Bundle.main, comment: "None")
+            return NSLocalizedString("Precipitation.none", bundle: Bundle.module, comment: "None")
         case .hail:
-            return NSLocalizedString("Precipitation.hail", bundle: Bundle.main, comment: "Hail")
+            return NSLocalizedString("Precipitation.hail", bundle: Bundle.module, comment: "Hail")
         case .mixed:
-            return NSLocalizedString("Precipitation.mixed", bundle: Bundle.main, comment: "Mixed")
+            return NSLocalizedString("Precipitation.mixed", bundle: Bundle.module, comment: "Mixed")
         case .rain:
-            return NSLocalizedString("Precipitation.rain", bundle: Bundle.main, comment: "Rain")
+            return NSLocalizedString("Precipitation.rain", bundle: Bundle.module, comment: "Rain")
         case .sleet:
-            return NSLocalizedString("Precipitation.sleet", bundle: Bundle.main, comment: "Sleet")
+            return NSLocalizedString("Precipitation.sleet", bundle: Bundle.module, comment: "Sleet")
         case .snow:
-            return NSLocalizedString("Precipitation.snow", bundle: Bundle.main, comment: "Snow")
+            return NSLocalizedString("Precipitation.snow", bundle: Bundle.module, comment: "Snow")
         }
     }
 
@@ -52,17 +52,17 @@ public enum Precipitation : String, CaseIterable, CustomStringConvertible, Hasha
     public var accessibilityDescription: String {
         switch self {
         case .none:
-            return NSLocalizedString("Precipitation.accessibility.none", bundle: Bundle.main, comment: "None")
+            return NSLocalizedString("Precipitation.accessibility.none", bundle: Bundle.module, comment: "None")
         case .hail:
-            return NSLocalizedString("Precipitation.accessibility.hail", bundle: Bundle.main, comment: "Hail")
+            return NSLocalizedString("Precipitation.accessibility.hail", bundle: Bundle.module, comment: "Hail")
         case .mixed:
-            return NSLocalizedString("Precipitation.accessibility.mixed", bundle: Bundle.main, comment: "Mixed")
+            return NSLocalizedString("Precipitation.accessibility.mixed", bundle: Bundle.module, comment: "Mixed")
         case .rain:
-            return NSLocalizedString("Precipitation.accessibility.rain", bundle: Bundle.main, comment: "Rain")
+            return NSLocalizedString("Precipitation.accessibility.rain", bundle: Bundle.module, comment: "Rain")
         case .sleet:
-            return NSLocalizedString("Precipitation.accessibility.sleet", bundle: Bundle.main, comment: "Sleet")
+            return NSLocalizedString("Precipitation.accessibility.sleet", bundle: Bundle.module, comment: "Sleet")
         case .snow:
-            return NSLocalizedString("Precipitation.accessibility.snow", bundle: Bundle.main, comment: "Snow")
+            return NSLocalizedString("Precipitation.accessibility.snow", bundle: Bundle.module, comment: "Snow")
         }
     }
 }

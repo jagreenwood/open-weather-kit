@@ -22,21 +22,21 @@ struct APIForecastDaily: Codable, Equatable {
 
 // MARK: - APIDay
 struct APIDay: Codable, Equatable {
-    let conditionCode: String
+    @TextCaseCoding<Lowercased> var conditionCode: String
+    @TextCaseCoding<Lowercased> var moonPhase: String
+    @TextCaseCoding<Lowercased> var precipitationType: String
     let daytimeForecast: APIForecast
     let forecastEnd: Date
     let forecastStart: Date
     let humidityMax: Int
     let humidityMin: Int
     let maxUvIndex: Int
-    let moonPhase: String
     let moonrise: Date?
     let moonset: Date?
     let overnightForecast: APIForecast
     let precipitationAmount: Int
     let precipitationAmountByType: [APIPrecipitationAmountByType]
     let precipitationChance: Int
-    let precipitationType: String
     let restOfDayForecast: APIForecast
     let snowfallAmount: Int
     let solarMidnight: Date?

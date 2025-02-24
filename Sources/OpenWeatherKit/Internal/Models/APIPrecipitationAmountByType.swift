@@ -9,27 +9,11 @@ import Foundation
 
 // MARK: - APIPrecipitationAmountByType
 struct APIPrecipitationAmountByType: Codable, Equatable {
+    @TextCaseCoding<Lowercased> var precipitationType: String
     let expected: Double
     let expectedSnow: Double
     let maximumSnow: Double
     let minimumSnow: Double
-    let precipitationType: PrecipitationType
-
-    enum CodingKeys: String, CodingKey {
-        case expected = "expected"
-        case expectedSnow = "expectedSnow"
-        case maximumSnow = "maximumSnow"
-        case minimumSnow = "minimumSnow"
-        case precipitationType = "precipitationType"
-    }
-
-    enum PrecipitationType: String, Codable, Equatable {
-        case hail = "HAIL"
-        case mixed = "MIXED"
-        case rain = "RAIN"
-        case sleet = "SLEET"
-        case snow = "SNOW"
-    }
 }
 
 extension Array where Element == APIPrecipitationAmountByType {
@@ -52,15 +36,15 @@ extension Array where Element == APIPrecipitationAmountByType {
 
         for element in self {
             switch element.precipitationType {
-            case .hail:
+            case "hail":
                 amountByType.hail = .millimeters(element.expected)
-            case .mixed:
+            case "mixed":
                 amountByType.mixed = .millimeters(element.expected)
-            case .rain:
+            case "rain":
                 amountByType.rainfall = .millimeters(element.expected)
-            case .sleet:
+            case "sleet":
                 amountByType.sleet = .millimeters(element.expected)
-            case .snow:
+            case "snow":
                 amountByType.snowfallAmount = SnowfallAmount(
                     amount: .millimeters(element.expectedSnow),
                     maximum: .millimeters(element.maximumSnow),
@@ -69,6 +53,7 @@ extension Array where Element == APIPrecipitationAmountByType {
                     maximumLiquidEquivalent: .millimeters(element.maximumSnow / 10.0),
                     minimumLiquidEquivalent: .millimeters(element.minimumSnow / 10.0)
                 )
+            default: break
             }
         }
 
