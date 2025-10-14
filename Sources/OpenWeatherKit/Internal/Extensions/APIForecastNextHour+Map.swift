@@ -9,9 +9,22 @@ import Foundation
 
 extension APIForecastNextHour {
     var minuteForecast: Forecast<MinuteWeather> {
-        Forecast<MinuteWeather>(
+        var _conditions = condition
+        var _condition: APICondition? = nil
+
+        return Forecast<MinuteWeather>(
             forecast: minutes.map { minute in
-                minute.minuteWeather(condition.first(where: { $0.startTime == minute.startTime }))
+                // Find the condition that applies to this minute, if any.
+                // Conditions are sorted by start time, so we can just check the first one.
+                // If it applies, remove it from the list so we don't check it again.
+                // This assumes that conditions do not overlap.
+                if let condition = _conditions.first, condition.startTime <= minute.startTime {
+                    _condition = condition
+                    _conditions.removeFirst()
+                }
+
+                // Map the minute and its condition to a MinuteWeather.
+                return minute.minuteWeather(_condition)
             },
             metadata: metadata.weatherMetadata
         )
