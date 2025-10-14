@@ -25,12 +25,16 @@ struct APIHour: Codable, Equatable {
     @TextCaseCoding<Lowercased> var conditionCode: String
     @TextCaseCoding<Lowercased> var precipitationType: String
     @TextCaseCoding<Lowercased> var pressureTrend: String
-    let cloudCover: Double
+    let cloudCover: Int
+    let cloudCoverHighAltPct: Int
+    let cloudCoverLowAltPct: Int
+    let cloudCoverMidAltPct: Int
     let daylight: Bool
     let forecastStart: Date
-    let humidity: Double
+    let humidity: Int
+    let perceivedPrecipitationIntensity: Double
     let precipitationAmount: Double
-    let precipitationChance: Double
+    let precipitationChance: Int
     let precipitationIntensity: Double
     let pressure: Double
     let snowfallAmount: Double?
@@ -47,9 +51,13 @@ struct APIHour: Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case forecastStart = "forecastStart"
         case cloudCover = "cloudCover"
+        case cloudCoverHighAltPct = "cloudCoverHighAltPct"
+        case cloudCoverLowAltPct = "cloudCoverLowAltPct"
+        case cloudCoverMidAltPct = "cloudCoverMidAltPct"
         case conditionCode = "conditionCode"
         case daylight = "daylight"
         case humidity = "humidity"
+        case perceivedPrecipitationIntensity = "perceivedPrecipitationIntensity"
         case precipitationAmount = "precipitationAmount"
         case precipitationIntensity = "precipitationIntensity"
         case precipitationChance = "precipitationChance"
