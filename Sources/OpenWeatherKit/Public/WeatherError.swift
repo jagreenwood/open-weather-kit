@@ -1,6 +1,6 @@
 //
 //  WeatherError.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 8/28/22.
 //
@@ -19,6 +19,9 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// An unknown error.
     case unknown
 
+    /// Could not find timezone
+    case timezone
+
     case missingData(_ attributeName: String)
 
     /// A localized message describing what error occurred.
@@ -29,6 +32,8 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
             return NSLocalizedString("Error.permissionDenied", bundle: Bundle.module, comment: "Permission Denied")
         case .unknown:
             return NSLocalizedString("Error.unknown", bundle: Bundle.module, comment: "Unknown Error")
+        case .timezone:
+            return NSLocalizedString("Error.timezone", bundle: Bundle.module, comment: "Could not determine timezone")
         case let .missingData(name):
             return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
         }
@@ -42,6 +47,8 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
             return NSLocalizedString("Error.permissionDenied", bundle: Bundle.module, comment: "Permission Denied")
         case .unknown:
             return NSLocalizedString("Error.unknown", bundle: Bundle.module, comment: "Unknown Error")
+        case .timezone:
+            return NSLocalizedString("Error.timezone", bundle: Bundle.module, comment: "Could not determine timezone")
         case let .missingData(name):
             return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
         }

@@ -1,6 +1,6 @@
 //
 //  APIWeatherAvailability+Map.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/27/22.
 //
@@ -11,7 +11,7 @@ extension Array where Element == APIWeatherAvailability {
     var weatherAvailability: WeatherAvailability {
         WeatherAvailability(
             minuteAvailability: contains(.forecastNextHour) ? .available : .temporarilyUnavailable,
-            alertAvailability: contains(.weatherAlerts) ? .available :.temporarilyUnavailable
+            alertAvailability: contains(.weatherAlerts) ? .available : .temporarilyUnavailable
         )
     }
 
