@@ -3,7 +3,7 @@
 
 name: Swift Ubuntu
 
-on:   
+on:
   push:
     branches:
       - main
@@ -25,11 +25,21 @@ jobs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - name: Setup Swift
+    - name: Install Dependencies
+      run: sudo apt-get -y install libcurl4-openssl-dev pkg-config python3-lldb-13
+
+    - name: Install Swiftly
       run: |
-        curl -L https://swiftlang.github.io/swiftly/swiftly-install.sh | bash -s -- --disable-confirmation
+        curl -O https://download.swift.org/swiftly/linux/swiftly-$(uname -m).tar.gz && \
+        tar zxf swiftly-$(uname -m).tar.gz && \
+        ./swiftly init --skip-install --assume-yes
+
+        . ~/.local/share/swiftly/env.sh
+        echo "PATH=$PATH" >> $GITHUB_ENV
+
+    - name: Install Swift
+      run: |
         swiftly install ${{ matrix.swift }}
-        swiftly use ${{ matrix.swift }}
 
     - name: Get Swift version
       run: swift --version
