@@ -125,7 +125,7 @@ extension NetworkClient {
 #endif
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .secondsSince1970
 
         return try decoder.decode(T.self, from: data)
     }
