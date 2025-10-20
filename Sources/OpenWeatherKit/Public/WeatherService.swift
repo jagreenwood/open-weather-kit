@@ -238,7 +238,7 @@ final public class WeatherService: Sendable {
         _ dataSet2: WeatherQuery<T2>,
         timezone: TimeZone
     ) async throws -> (T1, T2) {
-                let proxy = try await networkClient.fetchWeather(
+        let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
             queries: dataSet1, dataSet2,
@@ -343,6 +343,7 @@ final public class WeatherService: Sendable {
         let _dataSet2 = dataSet2.update(with: countryCode)
         let _dataSet3 = dataSet3.update(with: countryCode)
         let _dataSet4 = dataSet4.update(with: countryCode)
+
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
