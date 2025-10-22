@@ -60,7 +60,7 @@ extension APIDay {
             highWindSpeed: Measurement(value: windSpeedMax, unit: .kilometersPerHour),
             daytimeForecast: daytimeForecast.dayPartForecast,
             overnightForecast: overnightForecast.dayPartForecast,
-            restOfDayForecast: restOfDayForecast.dayPartForecast
+            restOfDayForecast: restOfDayForecast?.dayPartForecast
         )
     }
 }

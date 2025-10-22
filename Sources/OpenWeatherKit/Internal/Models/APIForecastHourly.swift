@@ -9,12 +9,10 @@ import Foundation
 
 // MARK: - APIForecastHourly
 struct APIForecastHourly: Codable, Equatable {
-    let name: String
     let metadata: APIMetadata
     let hours: [APIHour]
 
     enum CodingKeys: String, CodingKey {
-        case name = "name"
         case metadata = "metadata"
         case hours = "hours"
     }

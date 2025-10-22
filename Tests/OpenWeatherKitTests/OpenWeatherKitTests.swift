@@ -27,7 +27,8 @@ final class OpenWeatherKitTests: XCTestCase {
                 longitude: 0
             ),
             countryCode: "US",
-            language: .germanDE
+            timezone: TimeZone(secondsFromGMT: 0)!,
+            language: .englishUS
         )
     }
 
@@ -127,7 +128,8 @@ final class OpenWeatherKitTests: XCTestCase {
                 latitude: 0,
                 longitude: 0
             ),
-            countryCode: ""
+            countryCode: "",
+            timezone: TimeZone(secondsFromGMT: 0)!
         )
     }
 
@@ -145,7 +147,9 @@ final class OpenWeatherKitTests: XCTestCase {
             for: Location(
                 latitude: 0,
                 longitude: 0),
-            including: .daily)
+            including: .daily,
+            timezone: TimeZone(secondsFromGMT: 0)!
+        )
     }
 
     func testDataSet2() async throws {
@@ -162,7 +166,9 @@ final class OpenWeatherKitTests: XCTestCase {
             for: Location(
                 latitude: 0,
                 longitude: 0),
-            including: .daily, .hourly)
+            including: .daily, .hourly,
+            timezone: TimeZone(secondsFromGMT: 0)!
+        )
     }
 
     func testDataSet3() async throws {
@@ -179,7 +185,9 @@ final class OpenWeatherKitTests: XCTestCase {
             for: Location(
                 latitude: 0,
                 longitude: 0),
-            including: .daily, .hourly, .alerts(countryCode: ""))
+            including: .daily, .hourly, .alerts(countryCode: ""),
+            timezone: TimeZone(secondsFromGMT: 0)!
+        )
     }
 
     func testDataSet3Optional() async throws {
@@ -197,7 +205,9 @@ final class OpenWeatherKitTests: XCTestCase {
                 for: Location(
                     latitude: 0,
                     longitude: 0),
-                including: .daily, .hourly, .alerts(countryCode: ""))
+                including: .daily, .hourly, .alerts(countryCode: ""),
+                timezone: TimeZone(secondsFromGMT: 0)!
+            )
         } catch {
             switch error {
             case let weatherError as WeatherError where weatherError == .missingData(APIWeather.CodingKeys.weatherAlerts.rawValue):

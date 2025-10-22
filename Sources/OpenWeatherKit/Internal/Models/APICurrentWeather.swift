@@ -16,7 +16,6 @@ struct APICurrentWeather: Codable, Equatable {
     let daylight: Bool
     let humidity: Double
     let metadata: APIMetadata
-    let name: String
     let precipitationIntensity: Double
     let pressure: Double
     let temperature: Double
@@ -35,7 +34,6 @@ struct APICurrentWeather: Codable, Equatable {
         case daylight = "daylight"
         case humidity = "humidity"
         case metadata = "metadata"
-        case name = "name"
         case precipitationIntensity = "precipitationIntensity"
         case pressure = "pressure"
         case pressureTrend = "pressureTrend"

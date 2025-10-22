@@ -10,6 +10,9 @@ import Foundation
 
 #if canImport(CoreLocation)
 extension Geocoder {
-    static let mock = Self(countryCode: { _ in "" })
+    static let mock = Self(
+        countryCode: { _ in "" },
+        timezone: { _ in TimeZone(secondsFromGMT: 0)!.identifier }
+    )
 }
 #endif

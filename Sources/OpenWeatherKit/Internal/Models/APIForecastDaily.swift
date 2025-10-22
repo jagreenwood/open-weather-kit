@@ -9,12 +9,10 @@ import Foundation
 
 // MARK: - APIForecastDaily
 struct APIForecastDaily: Codable, Equatable {
-    let name: String
     let metadata: APIMetadata
     let days: [APIDay]
 
     enum CodingKeys: String, CodingKey {
-        case name = "name"
         case metadata = "metadata"
         case days = "days"
     }
@@ -34,10 +32,10 @@ struct APIDay: Codable, Equatable {
     let moonrise: Date?
     let moonset: Date?
     let overnightForecast: APIForecast
-    let precipitationAmount: Int
+    let precipitationAmount: Double
     let precipitationAmountByType: [APIPrecipitationAmountByType]
     let precipitationChance: Int
-    let restOfDayForecast: APIForecast
+    let restOfDayForecast: APIForecast?
     let snowfallAmount: Int
     let solarMidnight: Date?
     let solarNoon: Date?
@@ -112,11 +110,11 @@ struct APIForecast: Codable, Equatable {
     let humidity: Int
     let humidityMax: Int
     let humidityMin: Int
-    let perceivedPrecipitationIntensityMax: Int
-    let precipitationAmount: Int
+    let perceivedPrecipitationIntensityMax: Double
+    let precipitationAmount: Double
     let precipitationAmountByType: [APIPrecipitationAmountByType]
     let precipitationChance: Int
-    let precipitationIntensityMax: Int
+    let precipitationIntensityMax: Double
     let precipitationType: String
     let snowfallAmount: Int
     let temperatureApparentMax: Double

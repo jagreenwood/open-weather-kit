@@ -31,10 +31,10 @@ actor MockClient: Client {
 #if os(Linux)
     func execute(_ request: HTTPClientRequest, timeout: TimeAmount) async throws -> HTTPClientResponse {
         let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
+        encoder.dateEncodingStrategy = .secondsSince1970
 
         let buffer: ByteBuffer = {
-            if request.url.contains("/api/v1/availability/") {
+            if request.url.contains("/availability/") {
                 return try! encoder.encodeAsByteBuffer(
                     MockData.availability,
                     allocator: .init()
@@ -54,10 +54,10 @@ actor MockClient: Client {
 #else
     func data(_ request: URLRequest) async throws -> (Data, URLResponse) {
         let encoder = JSONEncoder()
-        encoder.dateEncodingStrategy = .iso8601
+        encoder.dateEncodingStrategy = .secondsSince1970
 
         let data: Data = {
-            if request.url!.absoluteString.contains("/api/v1/availability/") {
+            if request.url!.absoluteString.contains("/availability/") {
                 return try! encoder.encode(MockData.availability)
             } else {
                 return try! encoder.encode(Self.apiWeather(with: include))

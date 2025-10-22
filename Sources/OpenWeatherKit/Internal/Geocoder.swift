@@ -33,7 +33,7 @@ struct Geocoder: Sendable {
                         latitude: $0.latitude,
                         longitude: $0.longitude
                     )
-                ).first?.timeZone.identifier
+                ).first?.timeZone?.identifier
             }
         )
     }
