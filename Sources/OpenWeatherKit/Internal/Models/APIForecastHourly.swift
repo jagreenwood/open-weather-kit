@@ -9,12 +9,10 @@ import Foundation
 
 // MARK: - APIForecastHourly
 struct APIForecastHourly: Codable, Equatable {
-    let name: String
     let metadata: APIMetadata
     let hours: [APIHour]
 
     enum CodingKeys: String, CodingKey {
-        case name = "name"
         case metadata = "metadata"
         case hours = "hours"
     }
@@ -22,19 +20,23 @@ struct APIForecastHourly: Codable, Equatable {
 
 // MARK: - APIHour
 struct APIHour: Codable, Equatable {
-    let forecastStart: Date
-    let cloudCover: Double
-    let conditionCode: String
+    @TextCaseCoding<Lowercased> var conditionCode: String
+    @TextCaseCoding<Lowercased> var precipitationType: String
+    @TextCaseCoding<Lowercased> var pressureTrend: String
+    let cloudCover: Int
+    let cloudCoverHighAltPct: Int
+    let cloudCoverLowAltPct: Int
+    let cloudCoverMidAltPct: Int
     let daylight: Bool
-    let humidity: Double
+    let forecastStart: Date
+    let humidity: Int
+    let perceivedPrecipitationIntensity: Double
     let precipitationAmount: Double
+    let precipitationChance: Int
     let precipitationIntensity: Double
-    let precipitationChance: Double
-    let precipitationType: String
     let pressure: Double
-    let pressureTrend: String
-    let snowfallIntensity: Double?
     let snowfallAmount: Double?
+    let snowfallIntensity: Double?
     let temperature: Double
     let temperatureApparent: Double
     let temperatureDewPoint: Double
@@ -47,9 +49,13 @@ struct APIHour: Codable, Equatable {
     enum CodingKeys: String, CodingKey {
         case forecastStart = "forecastStart"
         case cloudCover = "cloudCover"
+        case cloudCoverHighAltPct = "cloudCoverHighAltPct"
+        case cloudCoverLowAltPct = "cloudCoverLowAltPct"
+        case cloudCoverMidAltPct = "cloudCoverMidAltPct"
         case conditionCode = "conditionCode"
         case daylight = "daylight"
         case humidity = "humidity"
+        case perceivedPrecipitationIntensity = "perceivedPrecipitationIntensity"
         case precipitationAmount = "precipitationAmount"
         case precipitationIntensity = "precipitationIntensity"
         case precipitationChance = "precipitationChance"

@@ -86,75 +86,75 @@ public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Ha
     public var description: String {
         switch self {
         case .blizzard:
-            return NSLocalizedString("WeatherCondition.blizzard", bundle: Bundle.main, comment: "Blizzard")
+            return NSLocalizedString("WeatherCondition.blizzard", bundle: Bundle.module, comment: "Blizzard")
         case .blowingDust:
-            return NSLocalizedString("WeatherCondition.blowingDust", bundle: Bundle.main, comment: "Blowing Dust")
+            return NSLocalizedString("WeatherCondition.blowingDust", bundle: Bundle.module, comment: "Blowing Dust")
         case .blowingSnow:
-            return NSLocalizedString("WeatherCondition.blowingSnow", bundle: Bundle.main, comment: "Blowing Snow")
+            return NSLocalizedString("WeatherCondition.blowingSnow", bundle: Bundle.module, comment: "Blowing Snow")
         case .breezy:
-            return NSLocalizedString("WeatherCondition.breezy", bundle: Bundle.main, comment: "Breezy")
+            return NSLocalizedString("WeatherCondition.breezy", bundle: Bundle.module, comment: "Breezy")
         case .clear:
-            return NSLocalizedString("WeatherCondition.clear", bundle: Bundle.main, comment: "Clear")
+            return NSLocalizedString("WeatherCondition.clear", bundle: Bundle.module, comment: "Clear")
         case .cloudy:
-            return NSLocalizedString("WeatherCondition.cloudy", bundle: Bundle.main, comment: "Cloudy")
+            return NSLocalizedString("WeatherCondition.cloudy", bundle: Bundle.module, comment: "Cloudy")
         case .drizzle:
-            return NSLocalizedString("WeatherCondition.drizzle", bundle: Bundle.main, comment: "Drizzle")
+            return NSLocalizedString("WeatherCondition.drizzle", bundle: Bundle.module, comment: "Drizzle")
         case .flurries:
-            return NSLocalizedString("WeatherCondition.flurries", bundle: Bundle.main, comment: "Flurries")
+            return NSLocalizedString("WeatherCondition.flurries", bundle: Bundle.module, comment: "Flurries")
         case .foggy:
-            return NSLocalizedString("WeatherCondition.foggy", bundle: Bundle.main, comment: "Foggy")
+            return NSLocalizedString("WeatherCondition.foggy", bundle: Bundle.module, comment: "Foggy")
         case .freezingDrizzle:
-            return NSLocalizedString("WeatherCondition.freezingDrizzle", bundle: Bundle.main, comment: "Freezing Drizzle")
+            return NSLocalizedString("WeatherCondition.freezingDrizzle", bundle: Bundle.module, comment: "Freezing Drizzle")
         case .freezingRain:
-            return NSLocalizedString("WeatherCondition.freezingRain", bundle: Bundle.main, comment: "Freezing Rain")
+            return NSLocalizedString("WeatherCondition.freezingRain", bundle: Bundle.module, comment: "Freezing Rain")
         case .frigid:
-            return NSLocalizedString("WeatherCondition.frigid", bundle: Bundle.main, comment: "Frigid")
+            return NSLocalizedString("WeatherCondition.frigid", bundle: Bundle.module, comment: "Frigid")
         case .hail:
-            return NSLocalizedString("WeatherCondition.hail", bundle: Bundle.main, comment: "Hail")
+            return NSLocalizedString("WeatherCondition.hail", bundle: Bundle.module, comment: "Hail")
         case .haze:
-            return NSLocalizedString("WeatherCondition.haze", bundle: Bundle.main, comment: "Haze")
+            return NSLocalizedString("WeatherCondition.haze", bundle: Bundle.module, comment: "Haze")
         case .heavyRain:
-            return NSLocalizedString("WeatherCondition.heavyRain", bundle: Bundle.main, comment: "Heavy Rain")
+            return NSLocalizedString("WeatherCondition.heavyRain", bundle: Bundle.module, comment: "Heavy Rain")
         case .heavySnow:
-            return NSLocalizedString("WeatherCondition.heavySnow", bundle: Bundle.main, comment: "Heavy Snow")
+            return NSLocalizedString("WeatherCondition.heavySnow", bundle: Bundle.module, comment: "Heavy Snow")
         case .hot:
-            return NSLocalizedString("WeatherCondition.hot", bundle: Bundle.main, comment: "Hot")
+            return NSLocalizedString("WeatherCondition.hot", bundle: Bundle.module, comment: "Hot")
         case .hurricane:
-            return NSLocalizedString("WeatherCondition.hurricane", bundle: Bundle.main, comment: "Hurricane")
+            return NSLocalizedString("WeatherCondition.hurricane", bundle: Bundle.module, comment: "Hurricane")
         case .isolatedThunderstorms:
-            return NSLocalizedString("WeatherCondition.isolatedThunderstorms", bundle: Bundle.main, comment: "Isolated Thunderstorms")
+            return NSLocalizedString("WeatherCondition.isolatedThunderstorms", bundle: Bundle.module, comment: "Isolated Thunderstorms")
         case .mostlyClear:
-            return NSLocalizedString("WeatherCondition.mostlyClear", bundle: Bundle.main, comment: "Mostly Clear")
+            return NSLocalizedString("WeatherCondition.mostlyClear", bundle: Bundle.module, comment: "Mostly Clear")
         case .mostlyCloudy:
-            return NSLocalizedString("WeatherCondition.mostlyCloudy", bundle: Bundle.main, comment: "Mostly Cloudy")
+            return NSLocalizedString("WeatherCondition.mostlyCloudy", bundle: Bundle.module, comment: "Mostly Cloudy")
         case .partlyCloudy:
-            return NSLocalizedString("WeatherCondition.partlyCloudy", bundle: Bundle.main, comment: "Partly Cloudy")
+            return NSLocalizedString("WeatherCondition.partlyCloudy", bundle: Bundle.module, comment: "Partly Cloudy")
         case .rain:
-            return NSLocalizedString("WeatherCondition.rain", bundle: Bundle.main, comment: "Rain")
+            return NSLocalizedString("WeatherCondition.rain", bundle: Bundle.module, comment: "Rain")
         case .scatteredThunderstorms:
-            return NSLocalizedString("WeatherCondition.scatteredThunderstorms", bundle: Bundle.main, comment: "Scattered Thunderstorms")
+            return NSLocalizedString("WeatherCondition.scatteredThunderstorms", bundle: Bundle.module, comment: "Scattered Thunderstorms")
         case .sleet:
-            return NSLocalizedString("WeatherCondition.sleet", bundle: Bundle.main, comment: "Sleet")
+            return NSLocalizedString("WeatherCondition.sleet", bundle: Bundle.module, comment: "Sleet")
         case .smoky:
-            return NSLocalizedString("WeatherCondition.smoky", bundle: Bundle.main, comment: "Smoky")
+            return NSLocalizedString("WeatherCondition.smoky", bundle: Bundle.module, comment: "Smoky")
         case .snow:
-            return NSLocalizedString("WeatherCondition.snow", bundle: Bundle.main, comment: "Snow")
+            return NSLocalizedString("WeatherCondition.snow", bundle: Bundle.module, comment: "Snow")
         case .strongStorms:
-            return NSLocalizedString("WeatherCondition.strongStorms", bundle: Bundle.main, comment: "StrongStorms")
+            return NSLocalizedString("WeatherCondition.strongStorms", bundle: Bundle.module, comment: "StrongStorms")
         case .sunFlurries:
-            return NSLocalizedString("WeatherCondition.sunFlurries", bundle: Bundle.main, comment: "Sun Flurries")
+            return NSLocalizedString("WeatherCondition.sunFlurries", bundle: Bundle.module, comment: "Sun Flurries")
         case .sunShowers:
-            return NSLocalizedString("WeatherCondition.sunShowers", bundle: Bundle.main, comment: "Sun Showers")
+            return NSLocalizedString("WeatherCondition.sunShowers", bundle: Bundle.module, comment: "Sun Showers")
         case .thunderstorms:
-            return NSLocalizedString("WeatherCondition.thunderstorms", bundle: Bundle.main, comment: "Thunderstorms")
+            return NSLocalizedString("WeatherCondition.thunderstorms", bundle: Bundle.module, comment: "Thunderstorms")
         case .tropicalStorm:
-            return NSLocalizedString("WeatherCondition.tropicalStorm", bundle: Bundle.main, comment: "Tropical Storm")
+            return NSLocalizedString("WeatherCondition.tropicalStorm", bundle: Bundle.module, comment: "Tropical Storm")
         case .undefined:
-            return NSLocalizedString("WeatherCondition.undefined", bundle: Bundle.main, comment: "undefined")
+            return NSLocalizedString("WeatherCondition.undefined", bundle: Bundle.module, comment: "undefined")
         case .windy:
-            return NSLocalizedString("WeatherCondition.windy", bundle: Bundle.main, comment: "Windy")
+            return NSLocalizedString("WeatherCondition.windy", bundle: Bundle.module, comment: "Windy")
         case .wintryMix:
-            return NSLocalizedString("WeatherCondition.wintryMix", bundle: Bundle.main, comment: "Wintry Mix")
+            return NSLocalizedString("WeatherCondition.wintryMix", bundle: Bundle.module, comment: "Wintry Mix")
         }
     }
 
@@ -163,75 +163,75 @@ public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Ha
     public var accessibilityDescription: String {
         switch self {
         case .blizzard:
-            return NSLocalizedString("WeatherCondition.accessibility.blizzard", bundle: Bundle.main, comment: "Blizzard")
+            return NSLocalizedString("WeatherCondition.accessibility.blizzard", bundle: Bundle.module, comment: "Blizzard")
         case .blowingDust:
-            return NSLocalizedString("WeatherCondition.accessibility.blowingDust", bundle: Bundle.main, comment: "Blowing Dust")
+            return NSLocalizedString("WeatherCondition.accessibility.blowingDust", bundle: Bundle.module, comment: "Blowing Dust")
         case .blowingSnow:
-            return NSLocalizedString("WeatherCondition.accessibility.blowingSnow", bundle: Bundle.main, comment: "Blowing Snow")
+            return NSLocalizedString("WeatherCondition.accessibility.blowingSnow", bundle: Bundle.module, comment: "Blowing Snow")
         case .breezy:
-            return NSLocalizedString("WeatherCondition.accessibility.breezy", bundle: Bundle.main, comment: "Breezy")
+            return NSLocalizedString("WeatherCondition.accessibility.breezy", bundle: Bundle.module, comment: "Breezy")
         case .clear:
-            return NSLocalizedString("WeatherCondition.accessibility.clear", bundle: Bundle.main, comment: "Clear")
+            return NSLocalizedString("WeatherCondition.accessibility.clear", bundle: Bundle.module, comment: "Clear")
         case .cloudy:
-            return NSLocalizedString("WeatherCondition.accessibility.cloudy", bundle: Bundle.main, comment: "Cloudy")
+            return NSLocalizedString("WeatherCondition.accessibility.cloudy", bundle: Bundle.module, comment: "Cloudy")
         case .drizzle:
-            return NSLocalizedString("WeatherCondition.accessibility.drizzle", bundle: Bundle.main, comment: "Drizzle")
+            return NSLocalizedString("WeatherCondition.accessibility.drizzle", bundle: Bundle.module, comment: "Drizzle")
         case .flurries:
-            return NSLocalizedString("WeatherCondition.accessibility.flurries", bundle: Bundle.main, comment: "Flurries")
+            return NSLocalizedString("WeatherCondition.accessibility.flurries", bundle: Bundle.module, comment: "Flurries")
         case .foggy:
-            return NSLocalizedString("WeatherCondition.accessibility.foggy", bundle: Bundle.main, comment: "Foggy")
+            return NSLocalizedString("WeatherCondition.accessibility.foggy", bundle: Bundle.module, comment: "Foggy")
         case .freezingDrizzle:
-            return NSLocalizedString("WeatherCondition.accessibility.freezingDrizzle", bundle: Bundle.main, comment: "Freezing Drizzle")
+            return NSLocalizedString("WeatherCondition.accessibility.freezingDrizzle", bundle: Bundle.module, comment: "Freezing Drizzle")
         case .freezingRain:
-            return NSLocalizedString("WeatherCondition.accessibility.freezingRain", bundle: Bundle.main, comment: "Freezing Rain")
+            return NSLocalizedString("WeatherCondition.accessibility.freezingRain", bundle: Bundle.module, comment: "Freezing Rain")
         case .frigid:
-            return NSLocalizedString("WeatherCondition.accessibility.frigid", bundle: Bundle.main, comment: "Frigid")
+            return NSLocalizedString("WeatherCondition.accessibility.frigid", bundle: Bundle.module, comment: "Frigid")
         case .hail:
-            return NSLocalizedString("WeatherCondition.accessibility.hail", bundle: Bundle.main, comment: "Hail")
+            return NSLocalizedString("WeatherCondition.accessibility.hail", bundle: Bundle.module, comment: "Hail")
         case .haze:
-            return NSLocalizedString("WeatherCondition.accessibility.haze", bundle: Bundle.main, comment: "Haze")
+            return NSLocalizedString("WeatherCondition.accessibility.haze", bundle: Bundle.module, comment: "Haze")
         case .heavyRain:
-            return NSLocalizedString("WeatherCondition.accessibility.heavyRain", bundle: Bundle.main, comment: "Heavy Rain")
+            return NSLocalizedString("WeatherCondition.accessibility.heavyRain", bundle: Bundle.module, comment: "Heavy Rain")
         case .heavySnow:
-            return NSLocalizedString("WeatherCondition.accessibility.heavySnow", bundle: Bundle.main, comment: "Heavy Snow")
+            return NSLocalizedString("WeatherCondition.accessibility.heavySnow", bundle: Bundle.module, comment: "Heavy Snow")
         case .hot:
-            return NSLocalizedString("WeatherCondition.accessibility.hot", bundle: Bundle.main, comment: "Hot")
+            return NSLocalizedString("WeatherCondition.accessibility.hot", bundle: Bundle.module, comment: "Hot")
         case .hurricane:
-            return NSLocalizedString("WeatherCondition.accessibility.hurricane", bundle: Bundle.main, comment: "Hurricane")
+            return NSLocalizedString("WeatherCondition.accessibility.hurricane", bundle: Bundle.module, comment: "Hurricane")
         case .isolatedThunderstorms:
-            return NSLocalizedString("WeatherCondition.accessibility.isolatedThunderstorms", bundle: Bundle.main, comment: "Isolated Thunderstorms")
+            return NSLocalizedString("WeatherCondition.accessibility.isolatedThunderstorms", bundle: Bundle.module, comment: "Isolated Thunderstorms")
         case .mostlyClear:
-            return NSLocalizedString("WeatherCondition.accessibility.mostlyClear", bundle: Bundle.main, comment: "Mostly Clear")
+            return NSLocalizedString("WeatherCondition.accessibility.mostlyClear", bundle: Bundle.module, comment: "Mostly Clear")
         case .mostlyCloudy:
-            return NSLocalizedString("WeatherCondition.accessibility.mostlyCloudy", bundle: Bundle.main, comment: "Mostly Cloudy")
+            return NSLocalizedString("WeatherCondition.accessibility.mostlyCloudy", bundle: Bundle.module, comment: "Mostly Cloudy")
         case .partlyCloudy:
-            return NSLocalizedString("WeatherCondition.accessibility.partlyCloudy", bundle: Bundle.main, comment: "Partly Cloudy")
+            return NSLocalizedString("WeatherCondition.accessibility.partlyCloudy", bundle: Bundle.module, comment: "Partly Cloudy")
         case .rain:
-            return NSLocalizedString("WeatherCondition.accessibility.rain", bundle: Bundle.main, comment: "Rain")
+            return NSLocalizedString("WeatherCondition.accessibility.rain", bundle: Bundle.module, comment: "Rain")
         case .scatteredThunderstorms:
-            return NSLocalizedString("WeatherCondition.accessibility.scatteredThunderstorms", bundle: Bundle.main, comment: "Scattered Thunderstorms")
+            return NSLocalizedString("WeatherCondition.accessibility.scatteredThunderstorms", bundle: Bundle.module, comment: "Scattered Thunderstorms")
         case .sleet:
-            return NSLocalizedString("WeatherCondition.accessibility.sleet", bundle: Bundle.main, comment: "Sleet")
+            return NSLocalizedString("WeatherCondition.accessibility.sleet", bundle: Bundle.module, comment: "Sleet")
         case .smoky:
-            return NSLocalizedString("WeatherCondition.accessibility.smoky", bundle: Bundle.main, comment: "Smoky")
+            return NSLocalizedString("WeatherCondition.accessibility.smoky", bundle: Bundle.module, comment: "Smoky")
         case .snow:
-            return NSLocalizedString("WeatherCondition.accessibility.snow", bundle: Bundle.main, comment: "Snow")
+            return NSLocalizedString("WeatherCondition.accessibility.snow", bundle: Bundle.module, comment: "Snow")
         case .strongStorms:
-            return NSLocalizedString("WeatherCondition.accessibility.strongStorms", bundle: Bundle.main, comment: "StrongStorms")
+            return NSLocalizedString("WeatherCondition.accessibility.strongStorms", bundle: Bundle.module, comment: "StrongStorms")
         case .sunFlurries:
-            return NSLocalizedString("WeatherCondition.accessibility.sunFlurries", bundle: Bundle.main, comment: "Sun Flurries")
+            return NSLocalizedString("WeatherCondition.accessibility.sunFlurries", bundle: Bundle.module, comment: "Sun Flurries")
         case .sunShowers:
-            return NSLocalizedString("WeatherCondition.accessibility.sunShowers", bundle: Bundle.main, comment: "Sun Showers")
+            return NSLocalizedString("WeatherCondition.accessibility.sunShowers", bundle: Bundle.module, comment: "Sun Showers")
         case .thunderstorms:
-            return NSLocalizedString("WeatherCondition.accessibility.thunderstorms", bundle: Bundle.main, comment: "Thunderstorms")
+            return NSLocalizedString("WeatherCondition.accessibility.thunderstorms", bundle: Bundle.module, comment: "Thunderstorms")
         case .tropicalStorm:
-            return NSLocalizedString("WeatherCondition.accessibility.tropicalStorm", bundle: Bundle.main, comment: "Tropical Storm")
+            return NSLocalizedString("WeatherCondition.accessibility.tropicalStorm", bundle: Bundle.module, comment: "Tropical Storm")
         case .undefined:
-            return NSLocalizedString("WeatherCondition.accessibility.undefined", bundle: Bundle.main, comment: "undefined")
+            return NSLocalizedString("WeatherCondition.accessibility.undefined", bundle: Bundle.module, comment: "undefined")
         case .windy:
-            return NSLocalizedString("WeatherCondition.accessibility.windy", bundle: Bundle.main, comment: "Windy")
+            return NSLocalizedString("WeatherCondition.accessibility.windy", bundle: Bundle.module, comment: "Windy")
         case .wintryMix:
-            return NSLocalizedString("WeatherCondition.accessibility.wintryMix", bundle: Bundle.main, comment: "Wintry Mix")
+            return NSLocalizedString("WeatherCondition.accessibility.wintryMix", bundle: Bundle.module, comment: "Wintry Mix")
         }
     }
 }

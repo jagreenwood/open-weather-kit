@@ -1,6 +1,6 @@
 //
 //  NetworkClient.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/31/22.
 //
@@ -39,6 +39,7 @@ struct NetworkClient: Sendable {
         location: LocationProtocol,
         language: WeatherService.Configuration.Language,
         queries: Query...,
+        timezone: TimeZone,
         jwt: String
     ) async throws -> WeatherProxy {
         try await withThrowingTaskGroup(of: WeatherProxy.self) { group in
@@ -63,7 +64,17 @@ struct NetworkClient: Sendable {
             // if queries other than availability
             if !_queries.isEmpty {
                 let queryItems = _queries.queryItems
+
                 group.addTask {
+                    // add timezone query item
+                    var queryItems = queryItems
+                    queryItems.append(
+                        URLQueryItem(
+                            name: QueryContants.timezone,
+                            value: timezone.identifier
+                        )
+                    )
+
                     let weather: APIWeather = try await get(
                         .weather(language, location),
                         queryItems: queryItems,
@@ -114,7 +125,7 @@ extension NetworkClient {
 #endif
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .secondsSince1970
 
         return try decoder.decode(T.self, from: data)
     }

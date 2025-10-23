@@ -30,15 +30,15 @@ public enum WeatherSeverity : String, Codable, CaseIterable, CustomStringConvert
     public var description: String {
         switch self {
         case .minor:
-            return NSLocalizedString("WeatherSeverity.minor", bundle: Bundle.main, comment: "Minor")
+            return NSLocalizedString("WeatherSeverity.minor", bundle: Bundle.module, comment: "Minor")
         case .moderate:
-            return NSLocalizedString("WeatherSeverity.moderate", bundle: Bundle.main, comment: "Moderate")
+            return NSLocalizedString("WeatherSeverity.moderate", bundle: Bundle.module, comment: "Moderate")
         case .severe:
-            return NSLocalizedString("WeatherSeverity.severe", bundle: Bundle.main, comment: "Severe")
+            return NSLocalizedString("WeatherSeverity.severe", bundle: Bundle.module, comment: "Severe")
         case .extreme:
-            return NSLocalizedString("WeatherSeverity.extreme", bundle: Bundle.main, comment: "Extreme")
+            return NSLocalizedString("WeatherSeverity.extreme", bundle: Bundle.module, comment: "Extreme")
         case .unknown:
-            return NSLocalizedString("WeatherSeverity.unknown", bundle: Bundle.main, comment: "Unknown")
+            return NSLocalizedString("WeatherSeverity.unknown", bundle: Bundle.module, comment: "Unknown")
         }
     }
 
@@ -47,15 +47,15 @@ public enum WeatherSeverity : String, Codable, CaseIterable, CustomStringConvert
     public var accessibilityDescription: String {
         switch self {
         case .minor:
-            return NSLocalizedString("WeatherSeverity.accessibility.minor", bundle: Bundle.main, comment: "Minor")
+            return NSLocalizedString("WeatherSeverity.accessibility.minor", bundle: Bundle.module, comment: "Minor")
         case .moderate:
-            return NSLocalizedString("WeatherSeverity.accessibility.moderate", bundle: Bundle.main, comment: "Moderate")
+            return NSLocalizedString("WeatherSeverity.accessibility.moderate", bundle: Bundle.module, comment: "Moderate")
         case .severe:
-            return NSLocalizedString("WeatherSeverity.accessibility.severe", bundle: Bundle.main, comment: "Severe")
+            return NSLocalizedString("WeatherSeverity.accessibility.severe", bundle: Bundle.module, comment: "Severe")
         case .extreme:
-            return NSLocalizedString("WeatherSeverity.accessibility.extreme", bundle: Bundle.main, comment: "Extreme")
+            return NSLocalizedString("WeatherSeverity.accessibility.extreme", bundle: Bundle.module, comment: "Extreme")
         case .unknown:
-            return NSLocalizedString("WeatherSeverity.accessibility.unknown", bundle: Bundle.main, comment: "Unknown")
+            return NSLocalizedString("WeatherSeverity.accessibility.unknown", bundle: Bundle.module, comment: "Unknown")
         }
     }
 }
