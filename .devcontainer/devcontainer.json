@@ -1,18 +1,19 @@
 {
     "name": "Swift",
-    "image": "swift:5.10",
+    "image": "swift:6.1",
     "features": {
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": "false",
             "username": "vscode",
-            "userUid": "1000",
-            "userGid": "1000",
+            "userUid": "1001",
+            "userGid": "1001",
             "upgradePackages": "false"
         },
         "ghcr.io/devcontainers/features/git:1": {
             "version": "os-provided",
             "ppa": "false"
-        }
+        },
+        "ghcr.io/devcontainers/features/node:1": { }
     },
     "runArgs": [
         "--cap-add=SYS_PTRACE",
@@ -29,7 +30,7 @@
             },
             // Add the IDs of extensions you want installed when the container is created.
             "extensions": [
-                "sswg.swift-lang"
+                "swiftlang.swift-vscode"
             ]
         }
     },
@@ -37,7 +38,7 @@
     // "forwardPorts": [],
 
     // Use 'postCreateCommand' to run commands after the container is created.
-    "postCreateCommand": "swift --version",
+    "postCreateCommand": "./scripts/post_create_container.sh",
 
     // Set `remoteUser` to `root` to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
     "remoteUser": "vscode"

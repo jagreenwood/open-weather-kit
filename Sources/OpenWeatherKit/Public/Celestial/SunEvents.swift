@@ -8,7 +8,7 @@
 import Foundation
 
 /// An enumeration that represents dates of solar events, including sunrise, sunset, dawn, and dusk.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct SunEvents: Sendable {
 
     /// The time of astronomical sunrise when the sun’s center is 18° below the horizon.

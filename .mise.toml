@@ -1,0 +1,6 @@
+[tools]
+swiftlint = "latest"
+claude = "latest"
+
+[settings]
+experimental = true

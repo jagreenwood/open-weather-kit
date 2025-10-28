@@ -15,11 +15,11 @@ import CoreLocation
 #endif
 
 /// Provides an interface for obtaining weather data.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 final public class WeatherService: Sendable {
 
     /// Establishes the configuration for weather requests.
-    @available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     public struct Configuration: Sendable {
         
         public enum Language: String, Sendable {

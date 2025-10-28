@@ -8,7 +8,7 @@
 import Foundation
 
 /// Contains wind data of speed, direction, and gust.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct Wind: Sendable {
 
     /// General indicator of wind direction, often referred to as "due north", "due south", etc.

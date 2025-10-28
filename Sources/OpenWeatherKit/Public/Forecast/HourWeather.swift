@@ -8,7 +8,7 @@
 import Foundation
 
 /// A structure that represents the weather conditions for the hour.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct HourWeather: Sendable {
 
     /// The start date of the hour weather.
