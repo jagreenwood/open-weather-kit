@@ -9,7 +9,7 @@ import Foundation
 #if canImport(CoreLocation)
 import CoreLocation
 
-extension CLLocation: LocationProtocol, @unchecked Sendable {
+extension CLLocation: LocationProtocol {
     public var latitude: Double { coordinate.latitude }
     public var longitude: Double { coordinate.longitude }
 }
