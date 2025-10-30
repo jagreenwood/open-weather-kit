@@ -42,20 +42,31 @@ extension WeatherService {
         endDay: Int,
         including: repeat DailyWeatherStatisticsQuery<each T>
     ) async throws -> (repeat DailyWeatherStatistics<each T>) {
-        // Validate day range
-        guard (1...366).contains(startDay) && (1...366).contains(endDay) && startDay <= endDay else {
-            throw WeatherError.invalidRequest("Day range must be between 1-366 and startDay must be <= endDay")
+        // Use a UTC Gregorian calendar to interpret day-of-year in UTC
+        var calendar = Calendar(identifier: .gregorian)
+        guard let utcTimeZone = TimeZone(secondsFromGMT: 0) else {
+            throw WeatherError.invalidRequest("Unable to create UTC timezone")
         }
+        calendar.timeZone = utcTimeZone
 
-        let statistics = try await networkClient.fetchDailyStatistics(
-            location: location,
-            dataSets: repeat each including,
+        let now = Date()
+        let currentYear = calendar.component(.year, from: now)
+
+        // Compute the date range
+        let (startDate, endDate) = try Date.computeDateRange(
             startDay: startDay,
             endDay: endDay,
-            jwt: configuration.jwt()
+            calendar: calendar,
+            referenceYear: currentYear
         )
 
-        return (repeat statistics.parse(query: each including))
+        // Build interval and delegate to date-interval overload; header docs note end is capped at 1 year after start
+        let interval = DateInterval(start: startDate, end: endDate)
+        return try await dailyStatistics(
+            for: location,
+            forDaysIn: interval,
+            including: repeat each including
+        )
     }
 
     ///
@@ -82,17 +93,33 @@ extension WeatherService {
         forDaysIn interval: DateInterval,
         including: repeat DailyWeatherStatisticsQuery<each T>
     ) async throws -> (repeat DailyWeatherStatistics<each T>) {
-        // Convert DateInterval to day of year
-        let calendar = Calendar.current
-        let startDay = calendar.ordinality(of: .day, in: .year, for: interval.start) ?? 1
-        let endDay = calendar.ordinality(of: .day, in: .year, for: interval.end) ?? 366
+        // Validate interval and cap the end date to 1 year after the start date
+        guard interval.end >= interval.start else {
+            throw WeatherError.invalidRequest("End date must not be earlier than start date")
+        }
 
-        return try await dailyStatistics(
-            for: location,
+        // Use consistent calendar for date calculations
+        var calendar = Calendar(identifier: .gregorian)
+        guard let utcTimeZone = TimeZone(secondsFromGMT: 0) else {
+            throw WeatherError.invalidRequest("Unable to create UTC timezone")
+        }
+        calendar.timeZone = utcTimeZone
+
+        let oneYearAfterStart = calendar.date(byAdding: .year, value: 1, to: interval.start) ?? interval.end
+        let cappedEndDate = min(interval.end, oneYearAfterStart)
+
+        let startDay = calendar.ordinality(of: .day, in: .year, for: interval.start) ?? 1
+        let endDay = calendar.ordinality(of: .day, in: .year, for: cappedEndDate) ?? 366
+
+        let statistics = try await networkClient.fetchDailyStatistics(
+            location: location,
+            dataSets: repeat each including,
             startDay: startDay,
             endDay: endDay,
-            including: repeat each including
+            jwt: configuration.jwt()
         )
+
+        return (repeat statistics.parse(query: each including))
     }
 
     ///

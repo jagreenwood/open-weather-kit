@@ -27,7 +27,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         // January 15 to January 31
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 15,
             endDay: 31,
             calendar: calendar,
@@ -47,7 +47,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         // Day 1 to Day 365
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 1,
             endDay: 365,
             calendar: calendar,
@@ -67,7 +67,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         // Day 100 to Day 100
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 100,
             endDay: 100,
             calendar: calendar,
@@ -88,7 +88,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2025
 
         // Day 366 (Dec 31 in leap year) to Day 2 (Jan 2)
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 366,
             endDay: 2,
             calendar: calendar,
@@ -108,7 +108,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         // Day 365 to Day 1
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 365,
             endDay: 1,
             calendar: calendar,
@@ -128,7 +128,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         // Day 200 to Day 50
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 200,
             endDay: 50,
             calendar: calendar,
@@ -150,7 +150,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024 // 2024 is a leap year
         
         // Day 366 (Dec 31) to Day 366 (same day)
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 366,
             endDay: 366,
             calendar: calendar,
@@ -170,7 +170,7 @@ struct WeatherServiceDateRangeTests {
         
         // Day 366 should not exist in 2023
         #expect(throws: WeatherError.self) {
-            try WeatherService.computeDateRange(
+            try Date.computeDateRange(
                 startDay: 366,
                 endDay: 366,
                 calendar: calendar,
@@ -186,7 +186,7 @@ struct WeatherServiceDateRangeTests {
         
         // Day 366 in 2023 (non-leap year) should fail
         #expect(throws: WeatherError.self) {
-            try WeatherService.computeDateRange(
+            try Date.computeDateRange(
                 startDay: 366,
                 endDay: 1,
                 calendar: calendar,
@@ -203,7 +203,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         #expect(throws: WeatherError.self) {
-            try WeatherService.computeDateRange(
+            try Date.computeDateRange(
                 startDay: 0,
                 endDay: 1,
                 calendar: calendar,
@@ -218,7 +218,7 @@ struct WeatherServiceDateRangeTests {
         let referenceYear = 2024
         
         #expect(throws: WeatherError.self) {
-            try WeatherService.computeDateRange(
+            try Date.computeDateRange(
                 startDay: 1,
                 endDay: 367,
                 calendar: calendar,
@@ -232,7 +232,7 @@ struct WeatherServiceDateRangeTests {
         let calendar = utcCalendar
         let referenceYear = 1000
         
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 1,
             endDay: 31,
             calendar: calendar,
@@ -251,7 +251,7 @@ struct WeatherServiceDateRangeTests {
         let calendar = utcCalendar
         let referenceYear = 2050
         
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 100,
             endDay: 200,
             calendar: calendar,
@@ -272,7 +272,7 @@ struct WeatherServiceDateRangeTests {
         let calendar = utcCalendar
         let referenceYear = 2024
         
-        let result = try WeatherService.computeDateRange(
+        let result = try Date.computeDateRange(
             startDay: 1,
             endDay: 2,
             calendar: calendar,
