@@ -34,6 +34,106 @@ struct NetworkClient: Sendable {
         )
     }
 
+    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @usableFromInline
+    func fetchDailySummary<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startDate: Date,
+        endDate: Date,
+        jwt: String
+    ) async throws -> APIDailySummary {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "start", value: startDate.toDateString()),
+            URLQueryItem(name: "end", value: endDate.toDateString())
+        ]
+
+        return try await get(
+            .dailySummary(location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
+    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @usableFromInline
+    func fetchHourlyStatistics<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startHour: Int,
+        endHour: Int,
+        jwt: String
+    ) async throws -> APIHourlyStatistics {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "startHour", value: "\(startHour)"),
+            URLQueryItem(name: "endHour", value: "\(endHour)")
+        ]
+
+        return try await get(
+            .statistics(.hourly, location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
+    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @usableFromInline
+    func fetchDailyStatistics<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startDay: Int,
+        endDay: Int,
+        jwt: String
+    ) async throws -> APIDailyStatistics {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "startDay", value: "\(startDay)"),
+            URLQueryItem(name: "endDay", value: "\(endDay)")
+        ]
+        
+        return try await get(
+            .statistics(.daily, location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
+    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @usableFromInline
+    func fetchMonthlyStatistics<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startMonth: Int,
+        endMonth: Int,
+        jwt: String
+    ) async throws -> APIMonthlyStatistics {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "startMonth", value: "\(startMonth)"),
+            URLQueryItem(name: "endMonth", value: "\(endMonth)")
+        ]
+
+        return try await get(
+            .statistics(.monthly, location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
     @usableFromInline
     func fetchWeather(
         location: LocationProtocol,
