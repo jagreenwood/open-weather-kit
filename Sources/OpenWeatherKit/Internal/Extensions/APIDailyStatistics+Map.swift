@@ -42,7 +42,7 @@ extension APIDailyStatistics {
     }
 }
 
-@available(iOS 18.0, *)
+@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
 extension APIDailyStatisticsData {
     var precipitationStatistics: DayPrecipitationStatistics {
         guard let precipitation else {
