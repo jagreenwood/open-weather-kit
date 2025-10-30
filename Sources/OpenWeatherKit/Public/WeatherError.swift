@@ -24,6 +24,9 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
 
     case missingData(_ attributeName: String)
 
+    /// An invalid request parameter.
+    case invalidRequest(_ message: String)
+
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
@@ -36,6 +39,8 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
             return NSLocalizedString("Error.timezone", bundle: Bundle.module, comment: "Could not determine timezone")
         case let .missingData(name):
             return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
+        case let .invalidRequest(message):
+            return message
         }
     }
 
@@ -51,6 +56,8 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
             return NSLocalizedString("Error.timezone", bundle: Bundle.module, comment: "Could not determine timezone")
         case let .missingData(name):
             return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
+        case let .invalidRequest(message):
+            return message
         }
     }
 
