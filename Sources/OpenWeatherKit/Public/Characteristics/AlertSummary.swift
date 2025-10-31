@@ -93,7 +93,7 @@ public enum WeatherResponse: String, Codable, Equatable, Sendable {
     case assess
 
     /// The event no longer poses a threat.
-    case allClear
+    case allClear = "all_clear"
 
     /// No action recommended.
     case none

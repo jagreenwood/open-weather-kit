@@ -12,75 +12,75 @@ import Foundation
 public enum WeatherCondition : String, CaseIterable, CustomStringConvertible, Hashable, Sendable {
 
     /// The kind of condition.
-    case blizzard = "Blizzard"
+    case blizzard = "blizzard"
 
-    case blowingDust = "BlowingDust"
+    case blowingDust = "blowing_dust"
 
-    case blowingSnow = "BlowingSnow"
+    case blowingSnow = "blowing_snow"
 
-    case breezy = "Breezy"
+    case breezy = "breezy"
 
-    case clear = "Clear"
+    case clear = "clear"
 
-    case cloudy = "Cloudy"
+    case cloudy = "cloudy"
 
-    case drizzle = "Drizzle"
+    case drizzle = "drizzle"
 
-    case flurries = "Flurries"
+    case flurries = "flurries"
 
-    case foggy = "Foggy"
+    case foggy = "foggy"
 
-    case freezingDrizzle = "FreezingDrizzle"
+    case freezingDrizzle = "freezing_drizzle"
 
-    case freezingRain = "FreezingRain"
+    case freezingRain = "freezing_rain"
 
-    case frigid = "Frigid"
+    case frigid = "frigid"
 
-    case hail = "Hail"
+    case hail = "hail"
 
-    case haze = "Haze"
+    case haze = "haze"
 
-    case heavyRain = "HeavyRain"
+    case heavyRain = "heavy_rain"
 
-    case heavySnow = "HeavySnow"
+    case heavySnow = "heavy_snow"
 
-    case hot = "Hot"
+    case hot = "hot"
 
-    case hurricane = "Hurricane"
+    case hurricane = "hurricane"
 
-    case isolatedThunderstorms = "IsolatedThunderstorms"
+    case isolatedThunderstorms = "isolated_thunderstorms"
 
-    case mostlyClear = "MostlyClear"
+    case mostlyClear = "mostly_clear"
 
-    case mostlyCloudy = "MostlyCloudy"
+    case mostlyCloudy = "mostly_cloudy"
 
-    case partlyCloudy = "PartlyCloudy"
+    case partlyCloudy = "partly_cloudy"
 
-    case rain = "Rain"
+    case rain = "rain"
 
-    case scatteredThunderstorms = "ScatteredThunderstorms"
+    case scatteredThunderstorms = "scattered_thunderstorms"
 
-    case sleet = "Sleet"
+    case sleet = "sleet"
 
-    case smoky = "Smoky"
+    case smoky = "smoky"
 
-    case snow = "Snow"
+    case snow = "snow"
 
-    case strongStorms = "StrongStorms"
+    case strongStorms = "strong_storms"
 
-    case sunFlurries = "SunFlurries"
+    case sunFlurries = "sun_flurries"
 
-    case sunShowers = "SunShowers"
+    case sunShowers = "sun_showers"
 
-    case thunderstorms = "Thunderstorms"
+    case thunderstorms = "thunderstorms"
 
-    case tropicalStorm = "TropicalStorm"
+    case tropicalStorm = "tropical_storm"
 
-    case undefined = "Undefined"
+    case undefined = "undefined"
 
-    case windy = "Windy"
+    case windy = "windy"
 
-    case wintryMix = "WintryMix"
+    case wintryMix = "wintry_mix"
 
     /// Standard string describing the current condition.
     public var description: String {
