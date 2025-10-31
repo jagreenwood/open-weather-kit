@@ -138,7 +138,7 @@ struct NetworkClient: Sendable {
     func fetchWeather(
         location: LocationProtocol,
         language: WeatherService.Configuration.Language,
-        queries: Query...,
+        queries: [any Query],
         timezone: TimeZone,
         jwt: String
     ) async throws -> WeatherProxy {
