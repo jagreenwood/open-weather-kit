@@ -8,7 +8,7 @@
 import Foundation
 
 /// Precipitation statistics for a specific month.
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct MonthPrecipitationStatistics: Codable, Equatable, Sendable {
     /// The month of the year, in UTC.
     ///

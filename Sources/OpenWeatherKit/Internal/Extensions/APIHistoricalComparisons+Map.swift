@@ -7,7 +7,7 @@
 
 import Foundation
 
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension APIHistoricalComparisons {
     var historicalComparisons: HistoricalComparisons {
         HistoricalComparisons(
@@ -17,7 +17,7 @@ extension APIHistoricalComparisons {
     }
 }
 
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension APIComparison {
     var historicalComparison: HistoricalComparison? {
         let deviation = Deviation(rawValue: deviation) ?? .normal

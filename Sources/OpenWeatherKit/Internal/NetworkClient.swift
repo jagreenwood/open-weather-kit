@@ -34,7 +34,7 @@ struct NetworkClient: Sendable {
         )
     }
 
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @usableFromInline
     func fetchDailySummary<each Q: StatisticsQuery>(
         location: LocationProtocol,
@@ -59,7 +59,7 @@ struct NetworkClient: Sendable {
         )
     }
 
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @usableFromInline
     func fetchHourlyStatistics<each Q: StatisticsQuery>(
         location: LocationProtocol,
@@ -84,7 +84,7 @@ struct NetworkClient: Sendable {
         )
     }
 
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @usableFromInline
     func fetchDailyStatistics<each Q: StatisticsQuery>(
         location: LocationProtocol,
@@ -109,7 +109,7 @@ struct NetworkClient: Sendable {
         )
     }
 
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @usableFromInline
     func fetchMonthlyStatistics<each Q: StatisticsQuery>(
         location: LocationProtocol,

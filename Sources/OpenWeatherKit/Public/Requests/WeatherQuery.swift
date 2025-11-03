@@ -64,6 +64,18 @@ public struct WeatherQuery<T> {
         )
     }
 
+    /// The weather changes query.
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    public static var changes: WeatherQuery<WeatherChanges?> {
+        preconditionFailure()
+    }
+
+    /// The weather historical comparison query.
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    public static var historicalComparisons: WeatherQuery<HistoricalComparisons?> {
+        preconditionFailure()
+    }
+
 #if canImport(CoreLocation)
     public static var alerts: WeatherQuery<[WeatherAlert]?> {
         WeatherQuery<[WeatherAlert]?>(

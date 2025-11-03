@@ -12,7 +12,7 @@ import Foundation
 /// It's a list of comparisons between current readings and historical averages.
 /// The list is ordered by significance of deviation.
 ///
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct HistoricalComparisons: Codable, Equatable, Sendable, RandomAccessCollection {
 
     /// A type representing the sequence's elements.
@@ -44,7 +44,7 @@ public struct HistoricalComparisons: Codable, Equatable, Sendable, RandomAccessC
 ///
 /// An enum that represents a recognized comparison in the statistical analysis of a location's historical weather data.
 ///
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public enum HistoricalComparison: Codable, Equatable, Sendable {
 
     /// The comparison relates to the location's maximum temperature averaged since ~1970.
@@ -63,7 +63,7 @@ public enum HistoricalComparison: Codable, Equatable, Sendable {
 ///
 /// A structure describing an observed pattern in the data for weather at a location for a specific condition.
 ///
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct Trend<Dimension>: Codable, Sendable, Equatable where Dimension: Unit {
 
     /// The manner in which the comparison between the baseline and current values are compared.
@@ -79,7 +79,7 @@ public struct Trend<Dimension>: Codable, Sendable, Equatable where Dimension: Un
 ///
 /// A type encapsulating everything there is to know about what a trend baseline is.
 ///
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct TrendBaseline<Dimension> : Codable, Sendable, Equatable where Dimension: Unit {
 
     /// An enum describing what value is being compared between historical and current readings.
@@ -102,7 +102,7 @@ public struct TrendBaseline<Dimension> : Codable, Sendable, Equatable where Dime
 ///
 /// Describes a comparison between two values in a trend.
 ///
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public enum Deviation: String, Codable, Equatable, Sendable, Hashable {
 
     /// The most recently observed value is much larger than the value it is being compared against.

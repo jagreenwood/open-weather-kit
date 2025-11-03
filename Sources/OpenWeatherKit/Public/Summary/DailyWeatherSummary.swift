@@ -10,7 +10,7 @@ import Foundation
 ///
 /// A structure that holds a collection of day weather summaries.
 ///
-@available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct DailyWeatherSummary<T> : Codable, Equatable, Sendable, RandomAccessCollection where T : Decodable, T : Encodable, T : Equatable, T : Sendable {
 
     /// A type representing the sequence's elements.
