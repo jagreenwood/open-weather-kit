@@ -415,34 +415,15 @@ extension WeatherService {
     /// `let (current, minute, hourly, daily, alerts) = try await service.weather(for: newYork, including: .current, .minute, .hourly, .daily, .alerts)`
     /// ```
 #if canImport(CoreLocation)
-    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @preconcurrency final public func weather<each T>(
         for location: CLLocation,
-        including dataSet: repeat WeatherQuery<each T>
+        including dataSets: repeat WeatherQuery<each T>
     ) async throws -> (repeat each T) {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(
-            for: location,
-            including: repeat each dataSet,
-            countryCode: countryCode,
-            timezone: timezone
-        )
-    }
-#endif
 
-    @available(iOS 18.0, macOS 15.0, tvOS 18.0, watchOS 11.0, visionOS 2.0, *)
-    @preconcurrency final public func weather<each T>(
-        for location: CLLocation,
-        including dataSets: repeat WeatherQuery<each T>,
-        countryCode: String? = nil,
-        timezone: TimeZone
-    ) async throws -> (repeat each T) {
-        // Materialize the pack to a mutable variable to allow conditional mutation
-        var _dataSets = (repeat each dataSets)
-        // If a country code is provided, update each query with the country code for region-specific data
-        if let countryCode {
-            _dataSets = (repeat (each dataSets).update(with: countryCode))
-        }
+        // Update each dataSet with countryCode
+        let _dataSets = (repeat (each dataSets).update(with: countryCode))
 
         // The network client's fetchWeather method expects an array, so convert the pack into an array
         var queries: [any Query] = []
@@ -458,8 +439,9 @@ extension WeatherService {
         )
 
         // Expand the pack to extract the typed results from the proxy for each query
-        return (repeat try (each _dataSets).result(proxy))
+        return (repeat try (each dataSets).result(proxy))
     }
+#endif
 }
 
 extension WeatherService {
