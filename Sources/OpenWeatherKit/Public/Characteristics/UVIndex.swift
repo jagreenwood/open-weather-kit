@@ -20,7 +20,7 @@ public struct UVIndex: Sendable {
     ///
     /// An enumeration that indicates risk of harm from unprotected sun exposure.
     ///
-    @frozen public enum ExposureCategory : String, Codable, Comparable, CustomStringConvertible, CaseIterable, Sendable {
+    @frozen public enum ExposureCategory: String, Codable, Comparable, CustomStringConvertible, CaseIterable, Sendable {
 
         /// The UV index is low.
         ///
@@ -40,7 +40,7 @@ public struct UVIndex: Sendable {
         /// The UV index is very high.
         ///
         /// The valid values of this property are 8, 9, and 10.
-        case veryHigh
+        case veryHigh = "very_high"
 
         /// The UV index is extreme.
         ///

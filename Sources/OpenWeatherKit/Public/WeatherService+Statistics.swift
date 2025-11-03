@@ -34,7 +34,7 @@ extension WeatherService {
     /// ```
     ///
     /// - Precondition: `startDay in 1...366 && endDay in 1...366`
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func dailyStatistics<each T>(
         for location: LocationProtocol,
@@ -86,7 +86,7 @@ extension WeatherService {
     /// let (dailyPrecipitationStatistics, dailyTemperatureStatistics) = try await service.dailyStatistics(for: newYork, forDaysIn: timeInterval, including: .precipitation, .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func dailyStatistics<each T>(
         for location: LocationProtocol,
@@ -138,7 +138,7 @@ extension WeatherService {
     /// let (dailyPrecipitationStatistics, dailyTemperatureStatistics) = try await service.dailyStatistics(for: newYork, including: .precipitation, .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func dailyStatistics<each T>(
         for location: LocationProtocol,
@@ -183,7 +183,7 @@ extension WeatherService {
     /// ```
     ///
     /// - Precondition: `startHour in 1...8784 && endHour in 1...8784`
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func hourlyStatistics<each T>(
         for location: LocationProtocol,
@@ -224,7 +224,7 @@ extension WeatherService {
     /// let hourlyTemperatureStatistics = try await service.hourlyStatistics(for: newYork, forHoursIn: interval, including: .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func hourlyStatistics<each T>(
         for location: LocationProtocol,
@@ -262,7 +262,7 @@ extension WeatherService {
     /// let hourlyTemperatureStatistics = try await service.hourlyStatistics(for: newYork, including: .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func hourlyStatistics<each T>(
         for location: LocationProtocol,
@@ -307,7 +307,7 @@ extension WeatherService {
     /// ```
     ///
     /// - Precondition: `startMonth in 1...12 && endMonth in 1...12`
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func monthlyStatistics<each T>(
         for location: LocationProtocol,
@@ -348,7 +348,7 @@ extension WeatherService {
     /// let (monthlyPrecipitationStatistics, monthlyTemperatureStatistics) = try await service.monthlyStatistics(for: newYork, forMonthsIn: interval, including: .precipitation, .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func monthlyStatistics<each T>(
         for location: LocationProtocol,
@@ -384,7 +384,7 @@ extension WeatherService {
     /// let (monthlyPrecipitationStatistics, monthlyTemperatureStatistics) = try await service.monthlyStatistics(for: newYork, including: .precipitation, .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func monthlyStatistics<each T>(
         for location: LocationProtocol,

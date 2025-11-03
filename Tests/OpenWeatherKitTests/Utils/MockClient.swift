@@ -74,7 +74,9 @@ actor MockClient: Client {
             forecastDaily: include.contains(.daily) ? MockData.dailyWeather : nil,
             forecastHourly: include.contains(.hourly) ? MockData.hourlyWeather : nil,
             forecastNextHour: include.contains(.nextHour) ? MockData.nextHourWeather : nil,
-            weatherAlerts: include.contains(.alerts) ? MockData.alerts : nil
+            historicalComparisons: include.contains(.nextHour) ? MockData.historicalComparisons : nil,
+            weatherAlerts: include.contains(.alerts) ? MockData.alerts : nil,
+            weatherChanges: include.contains(.nextHour) ? MockData.changes : nil
         )
     }
 }
