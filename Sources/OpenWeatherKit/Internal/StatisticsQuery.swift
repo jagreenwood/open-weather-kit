@@ -7,7 +7,7 @@
 
 import Foundation
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 @usableFromInline
 protocol StatisticsQuery {
     var statisticsType: StatisticsType { get }
@@ -27,14 +27,14 @@ enum StatisticsType: Sendable {
     }
 }
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension DailyWeatherStatisticsQuery: StatisticsQuery {}
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension HourlyWeatherStatisticsQuery: StatisticsQuery {}
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension MonthlyWeatherStatisticsQuery: StatisticsQuery {}
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension DailyWeatherSummaryQuery: StatisticsQuery {}

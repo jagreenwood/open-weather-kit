@@ -7,7 +7,7 @@
 
 import Foundation
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension APIHourlyStatistics {
     @usableFromInline
     var hourlyTemperatureStatistics: HourlyWeatherStatistics<HourTemperatureStatistics> {
@@ -32,7 +32,7 @@ extension APIHourlyStatistics {
     }
 }
 
-@available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 extension APIHourlyStatisticsData {
     @usableFromInline
     var temperatureStatistics: HourTemperatureStatistics {

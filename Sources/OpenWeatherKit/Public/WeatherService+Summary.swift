@@ -35,7 +35,7 @@ extension WeatherService {
     /// ```
     ///
     /// - Precondition: `startDay in 1...366 && endDay in 1...366`
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func dailySummary<each T>(
         for location: LocationProtocol,
@@ -85,7 +85,7 @@ extension WeatherService {
     /// let (dailyPrecipitationSummary, dailyTemperatureSummary) = try await service.dailySummary(for: newYork, forDaysIn: timeInterval, including: .precipitation, .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func dailySummary<each T>(
         for location: LocationProtocol,
@@ -133,7 +133,7 @@ extension WeatherService {
     /// let (dailyPrecipitationSummary, dailyTemperatureSummary) = try await service.dailySummary(for: newYork, including: .precipitation, .temperature)
     /// ```
     ///
-    @available(macOS 15.0, iOS 18.0, watchOS 11.0, tvOS 18.0, visionOS 2.0, *)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
     @inlinable
     final public func dailySummary<each T>(
         for location: LocationProtocol,

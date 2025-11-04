@@ -21,7 +21,11 @@ extension WeatherService {
     @inlinable
     final public func weather(for location: LocationProtocol) async throws -> Weather {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await getWeather(location: location, countryCode: countryCode, timezone: timezone)
+        return try await getWeather(
+            location: location,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -38,7 +42,12 @@ extension WeatherService {
         timezone: TimeZone,
         language: WeatherService.Configuration.Language? = nil
     ) async throws -> Weather {
-        try await getWeather(location: location, countryCode: countryCode, timezone: timezone, language: language)
+        try await getWeather(
+            location: location,
+            countryCode: countryCode,
+            timezone: timezone,
+            language: language
+        )
     }
 
     ///
@@ -61,7 +70,12 @@ extension WeatherService {
         including dataSet: WeatherQuery<T>
     ) async throws -> T {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(for: location, including: dataSet, countryCode: countryCode, timezone: timezone)
+        return try await weather(
+            for: location,
+            including: dataSet,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -77,7 +91,7 @@ extension WeatherService {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
-            queries: _dataSet,
+            queries: [_dataSet],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -106,7 +120,12 @@ extension WeatherService {
         _ dataSet2: WeatherQuery<T2>
     ) async throws -> (T1, T2) {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(for: location, including: dataSet1, dataSet2, countryCode: countryCode, timezone: timezone)
+        return try await weather(
+            for: location,
+            including: dataSet1, dataSet2,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -124,7 +143,7 @@ extension WeatherService {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
-            queries: _dataSet1, _dataSet2,
+            queries: [_dataSet1, _dataSet2],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -154,7 +173,12 @@ extension WeatherService {
         _ dataSet3: WeatherQuery<T3>
     ) async throws -> (T1, T2, T3) {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(for: location, including: dataSet1, dataSet2, dataSet3, countryCode: countryCode, timezone: timezone)
+        return try await weather(
+            for: location,
+            including: dataSet1, dataSet2, dataSet3,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -174,7 +198,7 @@ extension WeatherService {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
-            queries: _dataSet1, _dataSet2, _dataSet3,
+            queries: [_dataSet1, _dataSet2, _dataSet3],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -206,7 +230,12 @@ extension WeatherService {
         _ dataSet4: WeatherQuery<T4>
     ) async throws -> (T1, T2, T3, T4) {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(for: location, including: dataSet1, dataSet2, dataSet3, dataSet4, countryCode: countryCode, timezone: timezone)
+        return try await weather(
+            for: location,
+            including: dataSet1, dataSet2, dataSet3, dataSet4,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -228,7 +257,7 @@ extension WeatherService {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
-            queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4,
+            queries: [_dataSet1, _dataSet2, _dataSet3, _dataSet4],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -262,7 +291,12 @@ extension WeatherService {
         _ dataSet5: WeatherQuery<T5>
     ) async throws -> (T1, T2, T3, T4, T5) {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(for: location, including: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, countryCode: countryCode, timezone: timezone)
+        return try await weather(
+            for: location,
+            including: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -286,7 +320,7 @@ extension WeatherService {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
-            queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5,
+            queries: [_dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -322,7 +356,12 @@ extension WeatherService {
         _ dataSet6: WeatherQuery<T6>
     ) async throws -> (T1, T2, T3, T4, T5, T6) {
         let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
-        return try await weather(for: location, including: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6, countryCode: countryCode, timezone: timezone)
+        return try await weather(
+            for: location,
+            including: dataSet1, dataSet2, dataSet3, dataSet4, dataSet5, dataSet6,
+            countryCode: countryCode,
+            timezone: timezone
+        )
     }
 #endif
 
@@ -348,7 +387,7 @@ extension WeatherService {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: self.configuration.language,
-            queries: _dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5, _dataSet6,
+            queries: [_dataSet1, _dataSet2, _dataSet3, _dataSet4, _dataSet5, _dataSet6],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -362,6 +401,47 @@ extension WeatherService {
             _dataSet6.result(proxy)
         )
     }
+
+    ///
+    /// Returns the weather forecast for the requested location.
+    ///
+    /// - Parameter location: The requested location.
+    /// - Throws: Weather data error `WeatherError`
+    /// - Returns: The requested weather data set.
+    ///
+    /// This is a variadic API in which any combination of data sets can be requested and returned as a tuple. Here's an example:
+    ///
+    /// ```
+    /// `let (current, minute, hourly, daily, alerts) = try await service.weather(for: newYork, including: .current, .minute, .hourly, .daily, .alerts)`
+    /// ```
+#if canImport(CoreLocation)
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    @preconcurrency final public func weather<each T>(
+        for location: CLLocation,
+        including dataSets: repeat WeatherQuery<each T>
+    ) async throws -> (repeat each T) {
+        let (countryCode, timezone) = try await resolveCountryCodeAndTimezone(for: location)
+
+        // Update each dataSet with countryCode
+        let _dataSets = (repeat (each dataSets).update(with: countryCode))
+
+        // The network client's fetchWeather method expects an array, so convert the pack into an array
+        var queries: [any Query] = []
+        repeat queries.append((each _dataSets)) // Pack expansion into the array
+
+        // Perform the network fetch with all queries batched together
+        let proxy = try await networkClient.fetchWeather(
+            location: location,
+            language: self.configuration.language,
+            queries: queries,
+            timezone: timezone,
+            jwt: self.configuration.jwt()
+        )
+
+        // Expand the pack to extract the typed results from the proxy for each query
+        return (repeat try (each dataSets).result(proxy))
+    }
+#endif
 }
 
 extension WeatherService {
@@ -380,16 +460,23 @@ extension WeatherService {
 #endif
 
     @usableFromInline
-    func getWeather(location: LocationProtocol, countryCode: String, timezone: TimeZone, language: WeatherService.Configuration.Language? = nil) async throws -> Weather {
+    func getWeather(
+        location: LocationProtocol,
+        countryCode: String,
+        timezone: TimeZone,
+        language: WeatherService.Configuration.Language? = nil
+    ) async throws -> Weather {
         let proxy = try await networkClient.fetchWeather(
             location: location,
             language: language ?? self.configuration.language,
-            queries: WeatherQuery<CurrentWeather>.current,
-            WeatherQuery<Forecast<MinuteWeather>?>.minute,
-            WeatherQuery<Forecast<HourWeather>>.hourly,
-            WeatherQuery<Forecast<DayWeather>>.daily,
-            WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
-            WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode),
+            queries: [
+                WeatherQuery<CurrentWeather>.current,
+                WeatherQuery<Forecast<MinuteWeather>?>.minute,
+                WeatherQuery<Forecast<HourWeather>>.hourly,
+                WeatherQuery<Forecast<DayWeather>>.daily,
+                WeatherQuery<[WeatherAlert]?>.alerts(countryCode: countryCode),
+                WeatherQuery<WeatherAvailability>.availability(countryCode: countryCode)
+            ],
             timezone: timezone,
             jwt: self.configuration.jwt()
         )
@@ -412,3 +499,4 @@ extension WeatherService {
         )
     }
 }
+
