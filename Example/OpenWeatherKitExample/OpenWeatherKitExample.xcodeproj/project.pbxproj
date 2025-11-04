@@ -6,6 +6,10 @@
 	objectVersion = 77;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		3F3187C82EBA901B00023927 /* OpenWeatherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3187C72EBA901B00023927 /* OpenWeatherKit */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		3F3187982EBA808700023927 /* OpenWeatherKitExample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenWeatherKitExample.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -23,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3F3187C82EBA901B00023927 /* OpenWeatherKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -65,6 +70,7 @@
 			);
 			name = OpenWeatherKitExample;
 			packageProductDependencies = (
+				3F3187C72EBA901B00023927 /* OpenWeatherKit */,
 			);
 			productName = OpenWeatherKitExample;
 			productReference = 3F3187982EBA808700023927 /* OpenWeatherKitExample.app */;
@@ -94,6 +100,9 @@
 			);
 			mainGroup = 3F31878F2EBA808700023927;
 			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				3F3187C62EBA901B00023927 /* XCLocalSwiftPackageReference "../../../open-weather-kit" */,
+			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3F3187992EBA808700023927 /* Products */;
 			projectDirPath = "";
@@ -328,6 +337,20 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		3F3187C62EBA901B00023927 /* XCLocalSwiftPackageReference "../../../open-weather-kit" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = "../../../open-weather-kit";
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		3F3187C72EBA901B00023927 /* OpenWeatherKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = OpenWeatherKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = 3F3187902EBA808700023927 /* Project object */;
 }
