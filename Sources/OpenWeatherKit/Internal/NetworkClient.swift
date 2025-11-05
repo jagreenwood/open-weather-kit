@@ -73,8 +73,8 @@ struct NetworkClient: Sendable {
 
         let queryItems = [
             URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
-            URLQueryItem(name: "startHour", value: "\(startHour)"),
-            URLQueryItem(name: "endHour", value: "\(endHour)")
+            URLQueryItem(name: "start", value: "\(startHour)"),
+            URLQueryItem(name: "end", value: "\(endHour)")
         ]
 
         return try await get(
@@ -98,8 +98,8 @@ struct NetworkClient: Sendable {
 
         let queryItems = [
             URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
-            URLQueryItem(name: "startDay", value: "\(startDay)"),
-            URLQueryItem(name: "endDay", value: "\(endDay)")
+            URLQueryItem(name: "start", value: "\(startDay)"),
+            URLQueryItem(name: "end", value: "\(endDay)")
         ]
         
         return try await get(
@@ -123,8 +123,8 @@ struct NetworkClient: Sendable {
 
         let queryItems = [
             URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
-            URLQueryItem(name: "startMonth", value: "\(startMonth)"),
-            URLQueryItem(name: "endMonth", value: "\(endMonth)")
+            URLQueryItem(name: "start", value: "\(startMonth)"),
+            URLQueryItem(name: "end", value: "\(endMonth)")
         ]
 
         return try await get(

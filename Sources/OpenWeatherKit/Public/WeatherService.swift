@@ -27,7 +27,7 @@ final public class WeatherService: Sendable {
             case germanDE = "de_DE"
         }
 
-        public var jwt: @Sendable () -> String
+        public var jwt: @Sendable () async throws -> String
         public var language: Language
 
         /// Initializes an instance of Configuation
@@ -35,7 +35,7 @@ final public class WeatherService: Sendable {
         ///   - jwt: A closure to provide a JWT.
         ///   - language: A language to localize human readable strings.
         public init(
-            jwt: @escaping @Sendable () -> String,
+            jwt: @escaping @Sendable () async throws -> String,
             language: WeatherService.Configuration.Language = .englishUS
         ) {
             self.jwt = jwt
