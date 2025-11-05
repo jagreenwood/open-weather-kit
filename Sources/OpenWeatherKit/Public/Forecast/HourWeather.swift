@@ -8,7 +8,7 @@
 import Foundation
 
 /// A structure that represents the weather conditions for the hour.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct HourWeather: Sendable {
 
     /// The start date of the hour weather.
@@ -17,6 +17,9 @@ public struct HourWeather: Sendable {
     /// Fraction of cloud cover, from 0 to 1. Cloud cover describes the fraction of
     /// sky obscured by clouds when observed from a given location.
     public var cloudCover: Double
+
+    /// The percentage of the sky covered with low altitude, middle altitude and high altitude clouds during the period.
+    public var cloudCoverByAltitude: CloudCoverByAltitude
 
     /// A description of the weather condition for this hour.
     public var condition: WeatherCondition
@@ -46,6 +49,9 @@ public struct HourWeather: Sendable {
     /// precipitation amounts.
     public var precipitationAmount: Measurement<UnitLength>
 
+    /// The rate at which snow crystals are falling, in millimeters per hour.
+    public var precipitationIntensity: Measurement<UnitSpeed>
+
     /// The sea level pressure, which describes the atmospheric pressure at sea level at a given location.
     /// It is a reduced pressure calculated by using observed conditions to remove the effects of elevation
     /// from pressure readings.
@@ -54,10 +60,10 @@ public struct HourWeather: Sendable {
     /// The pressure trend, or barometric tendency, is the kind and amount of atmospheric pressure
     /// change over time.
     public var pressureTrend: PressureTrend
-    
+
     /// The rate at which snow crystals are falling, in millimeters per hour.
     public var snowfallIntensity: Measurement<UnitSpeed>
-    
+
     /// The amount of snowfall for the hour.
     public var snowfallAmount: Measurement<UnitLength>
 

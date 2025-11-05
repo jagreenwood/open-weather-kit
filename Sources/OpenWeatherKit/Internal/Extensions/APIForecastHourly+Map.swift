@@ -1,6 +1,6 @@
 //
 //  APIForecastHourly+Map.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/25/22.
 //
@@ -20,15 +20,21 @@ extension APIHour {
     var hourWeather: HourWeather {
         HourWeather(
             date: forecastStart,
-            cloudCover: cloudCover,
+            cloudCover: cloudCover.percentage,
+            cloudCoverByAltitude: CloudCoverByAltitude(
+                low: cloudCoverLowAltPct.percentage,
+                medium: cloudCoverMidAltPct.percentage,
+                high: cloudCoverHighAltPct.percentage
+            ),
             condition: WeatherCondition(rawValue: conditionCode) ?? .undefined,
             symbolName: (WeatherCondition(rawValue: conditionCode) ?? .undefined).sfSymbol,
             dewPoint: Measurement(value: temperatureDewPoint, unit: .celsius),
-            humidity: humidity,
+            humidity: humidity.percentage,
             isDaylight: daylight,
             precipitation: Precipitation(rawValue: precipitationType) ?? .none,
-            precipitationChance: precipitationChance,
+            precipitationChance: precipitationChance.percentage,
             precipitationAmount: Measurement(value: precipitationAmount, unit: .millimeters),
+            precipitationIntensity: Measurement(value: perceivedPrecipitationIntensity, unit: .millimetersPerHour),
             pressure: Measurement(value: pressure, unit: .millibars),
             pressureTrend: PressureTrend(rawValue: pressureTrend) ?? .undefined,
             snowfallIntensity: Measurement(value: snowfallIntensity ?? 0.0, unit: .millimetersPerHour),

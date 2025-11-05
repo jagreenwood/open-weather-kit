@@ -1,6 +1,6 @@
 //
 //  WeatherError.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 8/28/22.
 //
@@ -8,7 +8,7 @@
 import Foundation
 
 /// An error WeatherKit returns.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// Could not find country code
     case countryCode
@@ -19,31 +19,45 @@ public enum WeatherError : LocalizedError, Equatable, Hashable {
     /// An unknown error.
     case unknown
 
+    /// Could not find timezone
+    case timezone
+
     case missingData(_ attributeName: String)
+
+    /// An invalid request parameter.
+    case invalidRequest(_ message: String)
 
     /// A localized message describing what error occurred.
     public var errorDescription: String? {
         switch self {
-        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.main, comment: "Could not determine country code")
+        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.module, comment: "Could not determine country code")
         case .permissionDenied:
-            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.main, comment: "Permission Denied")
+            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.module, comment: "Permission Denied")
         case .unknown:
-            return NSLocalizedString("Error.unknown", bundle: Bundle.main, comment: "Unknown Error")
+            return NSLocalizedString("Error.unknown", bundle: Bundle.module, comment: "Unknown Error")
+        case .timezone:
+            return NSLocalizedString("Error.timezone", bundle: Bundle.module, comment: "Could not determine timezone")
         case let .missingData(name):
-            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.main, comment: "The data \(name) is missing from the response"), name)
+            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
+        case let .invalidRequest(message):
+            return message
         }
     }
 
     /// A localized message describing the reason for the failure.
     public var failureReason: String? {
         switch self {
-        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.main, comment: "Could not determine country code")
+        case .countryCode: return NSLocalizedString("Error.countryCode", bundle: Bundle.module, comment: "Could not determine country code")
         case .permissionDenied:
-            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.main, comment: "Permission Denied")
+            return NSLocalizedString("Error.permissionDenied", bundle: Bundle.module, comment: "Permission Denied")
         case .unknown:
-            return NSLocalizedString("Error.unknown", bundle: Bundle.main, comment: "Unknown Error")
+            return NSLocalizedString("Error.unknown", bundle: Bundle.module, comment: "Unknown Error")
+        case .timezone:
+            return NSLocalizedString("Error.timezone", bundle: Bundle.module, comment: "Could not determine timezone")
         case let .missingData(name):
-            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.main, comment: "The data \(name) is missing from the response"), name)
+            return String(format: NSLocalizedString("Error.missingData", bundle: Bundle.module, comment: "The data \(name) is missing from the response"), name)
+        case let .invalidRequest(message):
+            return message
         }
     }
 

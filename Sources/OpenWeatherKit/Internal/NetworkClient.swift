@@ -1,6 +1,6 @@
 //
 //  NetworkClient.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/31/22.
 //
@@ -34,11 +34,112 @@ struct NetworkClient: Sendable {
         )
     }
 
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    @usableFromInline
+    func fetchDailySummary<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startDate: Date,
+        endDate: Date,
+        jwt: String
+    ) async throws -> APIDailySummary {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "start", value: startDate.toDateString()),
+            URLQueryItem(name: "end", value: endDate.toDateString())
+        ]
+
+        return try await get(
+            .dailySummary(location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    @usableFromInline
+    func fetchHourlyStatistics<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startHour: Int,
+        endHour: Int,
+        jwt: String
+    ) async throws -> APIHourlyStatistics {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "start", value: "\(startHour)"),
+            URLQueryItem(name: "end", value: "\(endHour)")
+        ]
+
+        return try await get(
+            .statistics(.hourly, location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    @usableFromInline
+    func fetchDailyStatistics<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startDay: Int,
+        endDay: Int,
+        jwt: String
+    ) async throws -> APIDailyStatistics {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "start", value: "\(startDay)"),
+            URLQueryItem(name: "end", value: "\(endDay)")
+        ]
+        
+        return try await get(
+            .statistics(.daily, location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    @usableFromInline
+    func fetchMonthlyStatistics<each Q: StatisticsQuery>(
+        location: LocationProtocol,
+        dataSets: repeat each Q,
+        startMonth: Int,
+        endMonth: Int,
+        jwt: String
+    ) async throws -> APIMonthlyStatistics {
+        var names: [String] = []
+        repeat names.append((each dataSets).statisticsType.dataSet)
+
+        let queryItems = [
+            URLQueryItem(name: "dataSets", value: names.joined(separator: ",")),
+            URLQueryItem(name: "start", value: "\(startMonth)"),
+            URLQueryItem(name: "end", value: "\(endMonth)")
+        ]
+
+        return try await get(
+            .statistics(.monthly, location),
+            queryItems: queryItems,
+            jwt: jwt
+        )
+    }
+
     @usableFromInline
     func fetchWeather(
         location: LocationProtocol,
         language: WeatherService.Configuration.Language,
-        queries: Query...,
+        queries: [any Query],
+        timezone: TimeZone,
         jwt: String
     ) async throws -> WeatherProxy {
         try await withThrowingTaskGroup(of: WeatherProxy.self) { group in
@@ -63,7 +164,17 @@ struct NetworkClient: Sendable {
             // if queries other than availability
             if !_queries.isEmpty {
                 let queryItems = _queries.queryItems
+
                 group.addTask {
+                    // add timezone query item
+                    var queryItems = queryItems
+                    queryItems.append(
+                        URLQueryItem(
+                            name: QueryContants.timezone,
+                            value: timezone.identifier
+                        )
+                    )
+
                     let weather: APIWeather = try await get(
                         .weather(language, location),
                         queryItems: queryItems,
@@ -114,7 +225,7 @@ extension NetworkClient {
 #endif
 
         let decoder = JSONDecoder()
-        decoder.dateDecodingStrategy = .iso8601
+        decoder.dateDecodingStrategy = .secondsSince1970
 
         return try decoder.decode(T.self, from: data)
     }

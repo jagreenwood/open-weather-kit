@@ -8,7 +8,7 @@
 import Foundation
 
 /// The expected intensity of ultraviolet radiation from the sun.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct UVIndex: Sendable {
 
     /// The UV Index value.
@@ -20,7 +20,7 @@ public struct UVIndex: Sendable {
     ///
     /// An enumeration that indicates risk of harm from unprotected sun exposure.
     ///
-    @frozen public enum ExposureCategory : String, Codable, Comparable, CustomStringConvertible, CaseIterable, Sendable {
+    @frozen public enum ExposureCategory: String, Codable, Comparable, CustomStringConvertible, CaseIterable, Sendable {
 
         /// The UV index is low.
         ///
@@ -40,7 +40,7 @@ public struct UVIndex: Sendable {
         /// The UV index is very high.
         ///
         /// The valid values of this property are 8, 9, and 10.
-        case veryHigh
+        case veryHigh = "very_high"
 
         /// The UV index is extreme.
         ///
@@ -62,15 +62,15 @@ public struct UVIndex: Sendable {
         public var description: String {
             switch self {
             case .low:
-                return NSLocalizedString("UVIndex.low", bundle: Bundle.main, comment: "Low")
+                return NSLocalizedString("UVIndex.low", bundle: Bundle.module, comment: "Low")
             case .moderate:
-                return NSLocalizedString("UVIndex.moderate", bundle: Bundle.main, comment: "Moderate")
+                return NSLocalizedString("UVIndex.moderate", bundle: Bundle.module, comment: "Moderate")
             case .high:
-                return NSLocalizedString("UVIndex.high", bundle: Bundle.main, comment: "High")
+                return NSLocalizedString("UVIndex.high", bundle: Bundle.module, comment: "High")
             case .veryHigh:
-                return NSLocalizedString("UVIndex.veryHigh", bundle: Bundle.main, comment: "Very High")
+                return NSLocalizedString("UVIndex.veryHigh", bundle: Bundle.module, comment: "Very High")
             case .extreme:
-                return NSLocalizedString("UVIndex.extreme", bundle: Bundle.main, comment: "Extreme")
+                return NSLocalizedString("UVIndex.extreme", bundle: Bundle.module, comment: "Extreme")
             }
         }
 
@@ -79,15 +79,15 @@ public struct UVIndex: Sendable {
         public var accessibilityDescription: String {
             switch self {
             case .low:
-                return NSLocalizedString("UVIndex.accessibility.low", bundle: Bundle.main, comment: "Low")
+                return NSLocalizedString("UVIndex.accessibility.low", bundle: Bundle.module, comment: "Low")
             case .moderate:
-                return NSLocalizedString("UVIndex.accessibility.moderate", bundle: Bundle.main, comment: "Moderate")
+                return NSLocalizedString("UVIndex.accessibility.moderate", bundle: Bundle.module, comment: "Moderate")
             case .high:
-                return NSLocalizedString("UVIndex.accessibility.high", bundle: Bundle.main, comment: "High")
+                return NSLocalizedString("UVIndex.accessibility.high", bundle: Bundle.module, comment: "High")
             case .veryHigh:
-                return NSLocalizedString("UVIndex.accessibility.veryHigh", bundle: Bundle.main, comment: "Very High")
+                return NSLocalizedString("UVIndex.accessibility.veryHigh", bundle: Bundle.module, comment: "Very High")
             case .extreme:
-                return NSLocalizedString("UVIndex.accessibility.extreme", bundle: Bundle.main, comment: "Extreme")
+                return NSLocalizedString("UVIndex.accessibility.extreme", bundle: Bundle.module, comment: "Extreme")
             }
         }
 

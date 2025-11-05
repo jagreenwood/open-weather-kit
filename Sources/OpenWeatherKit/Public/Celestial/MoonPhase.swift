@@ -8,71 +8,52 @@
 import Foundation
 
 /// An enumeration that specifies the moon phase kind.
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 @frozen public enum MoonPhase : String, CustomStringConvertible, CaseIterable {
-    enum CodingKeys: String, CodingKey {
-        case new, waxingCrescent, firstQuarter, waxingGibbous, full, waningGibbous, waningCrescent
-        case lastQuarter = "thirdQuarter"
-    }
 
     /// The disk is unlit where the moon is not visible.
-    case new
+    case new = "new"
 
     /// The disk is partially lit as the moon is waxing.
-    case waxingCrescent
+    case waxingCrescent = "waxing_crescent"
 
     /// The disk is half lit.
-    case firstQuarter
+    case firstQuarter = "first_quarter"
 
     /// The disk is half lit as the moon is waxing.
-    case waxingGibbous
+    case waxingGibbous = "waxing_gibbous"
 
     /// The disk is fully lit where the moon is visible.
-    case full
+    case full = "full"
 
     /// The disk is half lit as the moon is waning.
-    case waningGibbous
+    case waningGibbous = "waning_gibbous"
 
     /// The disk is half lit.
-    case lastQuarter
+    case lastQuarter = "last_quarter"
 
     /// The disk is partially lit as the moon is waning.
-    case waningCrescent
-
-    public init?(rawValue: String) {
-        switch rawValue {
-        case CodingKeys.new.rawValue: self = .new
-        case CodingKeys.waxingCrescent.rawValue: self = .waxingCrescent
-        case CodingKeys.firstQuarter.rawValue: self = .firstQuarter
-        case CodingKeys.waxingGibbous.rawValue: self = .waxingGibbous
-        case CodingKeys.full.rawValue: self = .full
-        case CodingKeys.waningGibbous.rawValue: self = .waningGibbous
-        case CodingKeys.lastQuarter.rawValue: self = .lastQuarter
-        case CodingKeys.waningCrescent.rawValue: self = .waningCrescent
-        default:
-            return nil
-        }
-    }
+    case waningCrescent = "waning_crescent"
 
     /// A localized string describing the moon phase.
     public var description: String {
         switch self {
         case .new:
-            return NSLocalizedString("MoonPhase.new", bundle: Bundle.main, comment: "New")
+            return NSLocalizedString("MoonPhase.new", bundle: Bundle.module, comment: "New")
         case .waxingCrescent:
-            return NSLocalizedString("MoonPhase.waxingCrescent", bundle: Bundle.main, comment: "WaxingCrescent")
+            return NSLocalizedString("MoonPhase.waxingCrescent", bundle: Bundle.module, comment: "WaxingCrescent")
         case .firstQuarter:
-            return NSLocalizedString("MoonPhase.firstQuarter", bundle: Bundle.main, comment: "FirstQuarter")
+            return NSLocalizedString("MoonPhase.firstQuarter", bundle: Bundle.module, comment: "FirstQuarter")
         case .waxingGibbous:
-            return NSLocalizedString("MoonPhase.waxingGibbous", bundle: Bundle.main, comment: "WaxingGibbous")
+            return NSLocalizedString("MoonPhase.waxingGibbous", bundle: Bundle.module, comment: "WaxingGibbous")
         case .full:
-            return NSLocalizedString("MoonPhase.full", bundle: Bundle.main, comment: "Full")
+            return NSLocalizedString("MoonPhase.full", bundle: Bundle.module, comment: "Full")
         case .waningGibbous:
-            return NSLocalizedString("MoonPhase.waningGibbous", bundle: Bundle.main, comment: "WaningGibbous")
+            return NSLocalizedString("MoonPhase.waningGibbous", bundle: Bundle.module, comment: "WaningGibbous")
         case .lastQuarter:
-            return NSLocalizedString("MoonPhase.lastQuarter", bundle: Bundle.main, comment: "LastQuarter")
+            return NSLocalizedString("MoonPhase.lastQuarter", bundle: Bundle.module, comment: "LastQuarter")
         case .waningCrescent:
-            return NSLocalizedString("MoonPhase.waningCrescent", bundle: Bundle.main, comment: "WaningCrescent")
+            return NSLocalizedString("MoonPhase.waningCrescent", bundle: Bundle.module, comment: "WaningCrescent")
         }
     }
 
@@ -81,21 +62,21 @@ import Foundation
     public var accessibilityDescription: String {
         switch self {
         case .new:
-            return NSLocalizedString("MoonPhase.accessibility.new", bundle: Bundle.main, comment: "New")
+            return NSLocalizedString("MoonPhase.accessibility.new", bundle: Bundle.module, comment: "New")
         case .waxingCrescent:
-            return NSLocalizedString("MoonPhase.accessibility.waxingCrescent", bundle: Bundle.main, comment: "WaxingCrescent")
+            return NSLocalizedString("MoonPhase.accessibility.waxingCrescent", bundle: Bundle.module, comment: "WaxingCrescent")
         case .firstQuarter:
-            return NSLocalizedString("MoonPhase.accessibility.firstQuarter", bundle: Bundle.main, comment: "FirstQuarter")
+            return NSLocalizedString("MoonPhase.accessibility.firstQuarter", bundle: Bundle.module, comment: "FirstQuarter")
         case .waxingGibbous:
-            return NSLocalizedString("MoonPhase.accessibility.waxingGibbous", bundle: Bundle.main, comment: "WaxingGibbous")
+            return NSLocalizedString("MoonPhase.accessibility.waxingGibbous", bundle: Bundle.module, comment: "WaxingGibbous")
         case .full:
-            return NSLocalizedString("MoonPhase.accessibility.full", bundle: Bundle.main, comment: "Full")
+            return NSLocalizedString("MoonPhase.accessibility.full", bundle: Bundle.module, comment: "Full")
         case .waningGibbous:
-            return NSLocalizedString("MoonPhase.accessibility.waningGibbous", bundle: Bundle.main, comment: "WaningGibbous")
+            return NSLocalizedString("MoonPhase.accessibility.waningGibbous", bundle: Bundle.module, comment: "WaningGibbous")
         case .lastQuarter:
-            return NSLocalizedString("MoonPhase.accessibility.lastQuarter", bundle: Bundle.main, comment: "LastQuarter")
+            return NSLocalizedString("MoonPhase.accessibility.lastQuarter", bundle: Bundle.module, comment: "LastQuarter")
         case .waningCrescent:
-            return NSLocalizedString("MoonPhase.accessibility.waningCrescent", bundle: Bundle.main, comment: "WaningCrescent")
+            return NSLocalizedString("MoonPhase.accessibility.waningCrescent", bundle: Bundle.module, comment: "WaningCrescent")
         }
     }
 

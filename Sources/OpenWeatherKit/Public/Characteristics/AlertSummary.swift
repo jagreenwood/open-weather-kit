@@ -1,6 +1,6 @@
 //
 //  AlertSummary.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/26/22.
 //
@@ -8,9 +8,8 @@
 import Foundation
 
 /// All information related to the weather alert
-@available(macOS 10.15, iOS 13, watchOS 6, tvOS 13, *)
+@available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
 public struct AlertSummary: Codable, Equatable, Sendable {
-    public var name: String
     public var id: String
     public var areaID: String?
     public var areaName: String?
@@ -31,7 +30,6 @@ public struct AlertSummary: Codable, Equatable, Sendable {
     public var responses: [WeatherResponse]
 
     public init(
-        name: String,
         id: String,
         areaID: String?,
         areaName: String?,
@@ -51,7 +49,6 @@ public struct AlertSummary: Codable, Equatable, Sendable {
         importance: String,
         responses: [WeatherResponse]
     ) {
-        self.name = name
         self.id = id
         self.areaID = areaID
         self.areaName = areaName
@@ -96,7 +93,7 @@ public enum WeatherResponse: String, Codable, Equatable, Sendable {
     case assess
 
     /// The event no longer poses a threat.
-    case allClear
+    case allClear = "all_clear"
 
     /// No action recommended.
     case none

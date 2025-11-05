@@ -11,9 +11,12 @@ is nearly identical to Apple's [WeatherKit](https://developer.apple.com/document
 
 ## 💻 Supported Platforms
 
+Minimum Swift version of 5.9
+
 - iOS 13+
 - watchOS 6+
 - tvOS 13+
+- visionOS 1+
 - macOS 11+
 - Ubuntu 18.04+
 
@@ -70,7 +73,7 @@ struct Payload: JWTPayload, Equatable {
     let issuer: IssuerClaim
     let subject: SubjectClaim
 
-    func verify(using signer: JWTKit.JWTSigner) throws {}
+    func verify(using key: some JWTAlgorithm) throws {}
 }
 ```
 
@@ -78,9 +81,9 @@ Generate the JWT
 
 ```swift
 struct JWTProvider {
-    static func generate() -> String {
-        let signers = JWTSigners()
-        try signers.use(.es256(key: ECDSAKey.private(pem: PRIVATE_KEY_FROM_DEV_PORTAL))
+    static func generate() async throws -> String {
+        let keys = JWTKeyCollection()
+        try await keys.add(ecdsa: ES256PrivateKey(pem: PRIVATE_KEY_FROM_DEV_PORTAL))
 
         let payload = Payload(
             expiration: .init(value: .distantFuture),
@@ -89,14 +92,15 @@ struct JWTProvider {
             subject: SERVICE_IDENTIFIER
         )
 
-        return try! signers.sign(payload, kid: KEY_ID)
+        return try await keys.sign(payload, kid: KEY_ID)
     }
 }
 ```
 
 Note the variables:
 
-`PRIVATE_KEY_FROM_DEV_PORTAL`: The contents of the private key file including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
+`PRIVATE_KEY_FROM_DEV_PORTAL`: The contents of the private key file including
+`-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
 
 `TEAM_ID`: Found in Membership Details on the developer portal
 
@@ -112,7 +116,7 @@ The service must be initialized with a JWT generating closure and optionally a l
 
 ```swift
 let weatherService = WeatherService(
-    configuration: .init(jwt: JWTProvider.generate)
+    configuration: .init(jwt: { try await JWTProvider.generate() })
 )
 ```
 
@@ -154,9 +158,117 @@ let availability = try await weatherService
     )
 ```
 
+### Get Weather Statistics
+
+Historical weather statistics are derived from weather data recorded over the past decades. Statistics are available at daily, hourly, and monthly intervals.
+
+**Daily Statistics** (30 days ago to 10 days from now by default):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .precipitation, .temperature
+    )
+```
+
+**Daily Statistics** (specific day range, 1-366):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startDay: 1,
+        endDay: 10,
+        including: .precipitation, .temperature
+    )
+```
+
+**Hourly Statistics** (24 hours of current day by default):
+
+```swift
+let hourlyTemperature = try await weatherService
+    .hourlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .temperature
+    )
+```
+
+**Hourly Statistics** (specific hour range, 1-8784):
+
+```swift
+let hourlyTemperature = try await weatherService
+    .hourlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startHour: 1,
+        endHour: 24,
+        including: .temperature
+    )
+```
+
+**Monthly Statistics** (all 12 months by default):
+
+```swift
+let (monthlyPrecipitation, monthlyTemperature) = try await weatherService
+    .monthlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .precipitation, .temperature
+    )
+```
+
+**Monthly Statistics** (specific month range, 1-12):
+
+```swift
+let (monthlyPrecipitation, monthlyTemperature) = try await weatherService
+    .monthlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startMonth: 1,
+        endMonth: 6,
+        including: .precipitation, .temperature
+    )
+```
+
+### Get Weather Summaries
+
+Weather summaries provide aggregated actual weather data (not statistics) for past dates.
+
+**Daily Summary** (past 30 days by default):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailySummary(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .precipitation, .temperature
+    )
+```
+
+**Daily Summary** (specific day range, 1-366):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailySummary(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startDay: 1,
+        endDay: 10,
+        including: .precipitation, .temperature
+    )
+```
+
+**Daily Summary** (specific date interval):
+
+```swift
+let interval = DateInterval(start: startDate, end: endDate)
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailySummary(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        forDaysIn: interval,
+        including: .precipitation, .temperature
+    )
+```
+
 ### Geocoding for Country Code (Apple platforms only)
 
-When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the library will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
+When the library is used on an Apple platform, the `countryCode` and `timezone` parameters are not required. Internally, the library will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
 
 ## 📝 Attribution
 

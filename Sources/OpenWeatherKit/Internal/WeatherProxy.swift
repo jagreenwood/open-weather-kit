@@ -15,7 +15,9 @@ struct WeatherProxy: Sendable {
         dailyForecast: Forecast<DayWeather>?,
         hourlyForecast: Forecast<HourWeather>?,
         minuteForecast: Forecast<MinuteWeather>?,
-        weatherAlerts: [WeatherAlert]?
+        weatherAlerts: [WeatherAlert]?,
+        weatherChanges: WeatherChanges? = nil,
+        historicalComparisons: HistoricalComparisons? = nil
     ) {
         self.availability = availability
         self.currentWeather = currentWeather
@@ -23,6 +25,8 @@ struct WeatherProxy: Sendable {
         self.hourlyForecast = hourlyForecast
         self.minuteForecast = minuteForecast
         self.weatherAlerts = weatherAlerts
+        self.weatherChanges = weatherChanges
+        self.historicalComparisons = historicalComparisons
     }
 
     var availability: WeatherAvailability?
@@ -32,6 +36,9 @@ struct WeatherProxy: Sendable {
     var minuteForecast: Forecast<MinuteWeather>?
     var weatherAlerts: [WeatherAlert]?
 
+    var weatherChanges: WeatherChanges?
+    var historicalComparisons: HistoricalComparisons?
+
     func combined(with weatherProxy: WeatherProxy) -> WeatherProxy {
         WeatherProxy(
             availability: availability ?? weatherProxy.availability,
@@ -39,7 +46,9 @@ struct WeatherProxy: Sendable {
             dailyForecast: dailyForecast ?? weatherProxy.dailyForecast,
             hourlyForecast: hourlyForecast ?? weatherProxy.hourlyForecast,
             minuteForecast: minuteForecast ?? weatherProxy.minuteForecast,
-            weatherAlerts: weatherAlerts ?? weatherProxy.weatherAlerts
+            weatherAlerts: weatherAlerts ?? weatherProxy.weatherAlerts,
+            weatherChanges: weatherChanges ?? weatherProxy.weatherChanges,
+            historicalComparisons: historicalComparisons ?? weatherProxy.historicalComparisons
         )
     }
 }
@@ -51,6 +60,8 @@ extension WeatherProxy {
         dailyForecast: nil,
         hourlyForecast: nil,
         minuteForecast: nil,
-        weatherAlerts: nil
+        weatherAlerts: nil,
+        weatherChanges: nil,
+        historicalComparisons: nil
     )
 }
