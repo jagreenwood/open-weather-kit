@@ -116,7 +116,7 @@ The service must be initialized with a JWT generating closure and optionally a l
 
 ```swift
 let weatherService = WeatherService(
-    configuration: .init(jwt: JWTProvider.generate)
+    configuration: .init(jwt: { try await JWTProvider.generate() })
 )
 ```
 
