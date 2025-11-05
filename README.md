@@ -157,6 +157,114 @@ let availability = try await weatherService
     )
 ```
 
+### Get Weather Statistics
+
+Historical weather statistics are derived from weather data recorded over the past decades. Statistics are available at daily, hourly, and monthly intervals.
+
+**Daily Statistics** (30 days ago to 10 days from now by default):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .precipitation, .temperature
+    )
+```
+
+**Daily Statistics** (specific day range, 1-366):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startDay: 1,
+        endDay: 10,
+        including: .precipitation, .temperature
+    )
+```
+
+**Hourly Statistics** (24 hours of current day by default):
+
+```swift
+let hourlyTemperature = try await weatherService
+    .hourlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .temperature
+    )
+```
+
+**Hourly Statistics** (specific hour range, 1-8784):
+
+```swift
+let hourlyTemperature = try await weatherService
+    .hourlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startHour: 1,
+        endHour: 24,
+        including: .temperature
+    )
+```
+
+**Monthly Statistics** (all 12 months by default):
+
+```swift
+let (monthlyPrecipitation, monthlyTemperature) = try await weatherService
+    .monthlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .precipitation, .temperature
+    )
+```
+
+**Monthly Statistics** (specific month range, 1-12):
+
+```swift
+let (monthlyPrecipitation, monthlyTemperature) = try await weatherService
+    .monthlyStatistics(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startMonth: 1,
+        endMonth: 6,
+        including: .precipitation, .temperature
+    )
+```
+
+### Get Weather Summaries
+
+Weather summaries provide aggregated actual weather data (not statistics) for past dates.
+
+**Daily Summary** (past 30 days by default):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailySummary(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        including: .precipitation, .temperature
+    )
+```
+
+**Daily Summary** (specific day range, 1-366):
+
+```swift
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailySummary(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        startDay: 1,
+        endDay: 10,
+        including: .precipitation, .temperature
+    )
+```
+
+**Daily Summary** (specific date interval):
+
+```swift
+let interval = DateInterval(start: startDate, end: endDate)
+let (dailyPrecipitation, dailyTemperature) = try await weatherService
+    .dailySummary(
+        for: Location(latitude: 37.541290, longitude: -77.511429),
+        forDaysIn: interval,
+        including: .precipitation, .temperature
+    )
+```
+
 ### Geocoding for Country Code (Apple platforms only)
 
 When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the library will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
