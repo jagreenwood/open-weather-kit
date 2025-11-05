@@ -88,11 +88,11 @@ actor MockClient: Client {
             } else if request.url!.absoluteString.contains("/summary/") {
                 return try! encoder.encode(MockData.dailySummary)
             } else if request.url!.absoluteString.contains("/statistics/hourly/") {
-                preconditionFailure()
+                return try! encoder.encode(MockData.hourlyStatistics)
             } else if request.url!.absoluteString.contains("/statistics/daily/") {
-                preconditionFailure()
+                return try! encoder.encode(MockData.dailyStatistics)
             } else if request.url!.absoluteString.contains("/statistics/monthly/") {
-                preconditionFailure()
+                return try! encoder.encode(MockData.monthlyStatistics)
             } else {
                 preconditionFailure("Unknown URL: \(request.url!.absoluteString)")
             }
