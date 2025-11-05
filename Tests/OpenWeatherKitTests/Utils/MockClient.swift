@@ -1,6 +1,6 @@
 //
 //  MockClient.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 11/9/22.
 //
@@ -19,11 +19,13 @@ actor MockClient: Client {
     }
 
     enum Include: CaseIterable {
+        case alerts
+        case changes
         case current
         case daily
+        case historicalComparisons
         case hourly
         case nextHour
-        case alerts
     }
 
     var include: Set<Include>
@@ -39,11 +41,33 @@ actor MockClient: Client {
                     MockData.availability,
                     allocator: .init()
                 )
-            } else {
+            } else if request.url.contains("/weather/") {
                 return try! encoder.encodeAsByteBuffer(
                     Self.apiWeather(with: include),
                     allocator: .init()
                 )
+            } else if request.url.contains("/summary/") {
+                return try! encoder.encodeAsByteBuffer(
+                    MockData.dailySummary,
+                    allocator: .init()
+                )
+            } else if request.url.contains("/statistics/hourly/") {
+                return try! encoder.encodeAsByteBuffer(
+                    MockData.hourlyStatistics,
+                    allocator: .init()
+                )
+            } else if request.url.contains("/statistics/daily/") {
+                return try! encoder.encodeAsByteBuffer(
+                    MockData.dailyStatistics,
+                    allocator: .init()
+                )
+            } else if request.url.contains("/statistics/monthly/") {
+                return try! encoder.encodeAsByteBuffer(
+                    MockData.monthlyStatistics,
+                    allocator: .init()
+                )
+            } else {
+                preconditionFailure("Unknown URL: \(request.url)")
             }
         }()
 
@@ -59,8 +83,18 @@ actor MockClient: Client {
         let data: Data = {
             if request.url!.absoluteString.contains("/availability/") {
                 return try! encoder.encode(MockData.availability)
-            } else {
+            } else if request.url!.absoluteString.contains("/weather/") {
                 return try! encoder.encode(Self.apiWeather(with: include))
+            } else if request.url!.absoluteString.contains("/summary/") {
+                return try! encoder.encode(MockData.dailySummary)
+            } else if request.url!.absoluteString.contains("/statistics/hourly/") {
+                preconditionFailure()
+            } else if request.url!.absoluteString.contains("/statistics/daily/") {
+                preconditionFailure()
+            } else if request.url!.absoluteString.contains("/statistics/monthly/") {
+                preconditionFailure()
+            } else {
+                preconditionFailure("Unknown URL: \(request.url!.absoluteString)")
             }
         }()
 

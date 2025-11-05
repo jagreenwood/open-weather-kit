@@ -112,6 +112,81 @@ final class OpenWeatherKitTests: XCTestCase {
             }
         }
     }
+
+    func testHourlyStatistics() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient,
+            geocoder: .mock
+        )
+
+        let _ = try await service.hourlyStatistics(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature)
+    }
+
+    func testDailyStatistics() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient,
+            geocoder: .mock
+        )
+
+        let _ = try await service.dailyStatistics(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature, .precipitation
+        )
+    }
+
+    func testMonthlyStatistics() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient,
+            geocoder: .mock
+        )
+
+        let _ = try await service.monthlyStatistics(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature, .precipitation
+        )
+    }
+
+    func testDailySummary() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient,
+            geocoder: .mock
+        )
+
+        let _ = try await service.dailySummary(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature, .precipitation
+        )
+    }
 #else
     func testWeather() async throws {
         let networkClient = NetworkClient(
@@ -217,5 +292,77 @@ final class OpenWeatherKitTests: XCTestCase {
             }
         }
     }
+
+    func testDailySummary() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient
+        )
+
+        let _ = try await service.dailySummary(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature, .precipitation
+        )
+    }
+
+    func testHourlyStatistics() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient
+        )
+
+        let _ = try await service.hourlyStatistics(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature)
+    }
+
+    func testDailyStatistics() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient
+        )
+
+        let _ = try await service.dailyStatistics(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature, .precipitation
+        )
+    }
+
+    func testMonthlyStatistics() async throws {
+        let networkClient = NetworkClient(
+            client: MockClient(include: Set([]))
+        )
+
+        let service = WeatherService(
+            configuration: .init(jwt: { "" }),
+            networkClient: networkClient
+        )
+
+        let _ = try await service.monthlyStatistics(
+            for: Location(
+                latitude: 0,
+                longitude: 0),
+            including: .temperature, .precipitation
+        )
+    }
 #endif
 }
+

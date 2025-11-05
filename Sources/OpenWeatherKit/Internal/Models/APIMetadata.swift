@@ -10,7 +10,7 @@ import Foundation
 // MARK: - APIMetadata
 struct APIMetadata: Codable, Equatable {
     @TextCaseCoding<Lowercased> var sourceType: String
-    let attributionURL: String
+    let attributionURL: String?
     let expireTime: Date
     let language: String?
     let latitude: Double
