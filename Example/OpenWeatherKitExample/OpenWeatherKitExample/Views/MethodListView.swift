@@ -11,11 +11,7 @@ import OpenWeatherKit
 /// Main list view displaying all available WeatherService methods
 /// Methods are grouped by category (Forecast, Statistics, Summary)
 struct MethodListView: View {
-    @StateObject private var viewModel: WeatherViewModel
-
-    init(viewModel: WeatherViewModel) {
-        _viewModel = StateObject(wrappedValue: viewModel)
-    }
+    var viewModel: WeatherViewModel
 
     var body: some View {
         List {

@@ -11,8 +11,8 @@ import OpenWeatherKit
 import SwiftUI
 
 /// ViewModel managing weather data fetching and state
-@MainActor
-class WeatherViewModel: ObservableObject {
+@Observable
+class WeatherViewModel {
     // MARK: - Properties
 
     /// The WeatherService instance used for all API calls
@@ -23,13 +23,13 @@ class WeatherViewModel: ObservableObject {
     private let nycLocation = Location(latitude: 40.7128, longitude: -74.0060)
 
     /// Loading state - true when an API call is in progress
-    @Published var isLoading = false
+    var isLoading = false
 
     /// Error from the last API call, if any
-    @Published var error: Error?
+    var error: Error?
 
     /// Result from the last successful API call
-    @Published var result: WeatherMethodResult?
+    var result: WeatherMethodResult?
 
     // MARK: - Initialization
 

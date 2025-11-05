@@ -11,7 +11,7 @@ import OpenWeatherKit
 /// Detail view that executes and displays results for a selected weather method
 struct MethodDetailView: View {
     let methodType: WeatherMethodType
-    @ObservedObject var viewModel: WeatherViewModel
+    var viewModel: WeatherViewModel
     @State private var showError = false
 
     var body: some View {
