@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3F3187C82EBA901B00023927 /* OpenWeatherKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3187C72EBA901B00023927 /* OpenWeatherKit */; };
+		3F3187CB2EBA9D4300023927 /* JWTKit in Frameworks */ = {isa = PBXBuildFile; productRef = 3F3187CA2EBA9D4300023927 /* JWTKit */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -28,6 +29,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				3F3187C82EBA901B00023927 /* OpenWeatherKit in Frameworks */,
+				3F3187CB2EBA9D4300023927 /* JWTKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -71,6 +73,7 @@
 			name = OpenWeatherKitExample;
 			packageProductDependencies = (
 				3F3187C72EBA901B00023927 /* OpenWeatherKit */,
+				3F3187CA2EBA9D4300023927 /* JWTKit */,
 			);
 			productName = OpenWeatherKitExample;
 			productReference = 3F3187982EBA808700023927 /* OpenWeatherKitExample.app */;
@@ -102,6 +105,7 @@
 			minimizedProjectReferenceProxies = 1;
 			packageReferences = (
 				3F3187C62EBA901B00023927 /* XCLocalSwiftPackageReference "../../../open-weather-kit" */,
+				3F3187C92EBA9D4300023927 /* XCRemoteSwiftPackageReference "jwt-kit" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 3F3187992EBA808700023927 /* Products */;
@@ -258,8 +262,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UCKKZ9R4MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -274,6 +280,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jagreenwood.OpenWeatherKitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -289,8 +296,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = UCKKZ9R4MV;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -305,6 +314,7 @@
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = com.jagreenwood.OpenWeatherKitExample;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_APPROACHABLE_CONCURRENCY = YES;
 				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
@@ -345,10 +355,26 @@
 		};
 /* End XCLocalSwiftPackageReference section */
 
+/* Begin XCRemoteSwiftPackageReference section */
+		3F3187C92EBA9D4300023927 /* XCRemoteSwiftPackageReference "jwt-kit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/vapor/jwt-kit.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 5.3.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
 /* Begin XCSwiftPackageProductDependency section */
 		3F3187C72EBA901B00023927 /* OpenWeatherKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = OpenWeatherKit;
+		};
+		3F3187CA2EBA9D4300023927 /* JWTKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 3F3187C92EBA9D4300023927 /* XCRemoteSwiftPackageReference "jwt-kit" */;
+			productName = JWTKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
