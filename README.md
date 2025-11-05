@@ -73,7 +73,7 @@ struct Payload: JWTPayload, Equatable {
     let issuer: IssuerClaim
     let subject: SubjectClaim
 
-    func verify(using signer: JWTKit.JWTSigner) throws {}
+    func verify(using key: some JWTAlgorithm) throws {}
 }
 ```
 
@@ -81,9 +81,9 @@ Generate the JWT
 
 ```swift
 struct JWTProvider {
-    static func generate() -> String {
-        let signers = JWTSigners()
-        try signers.use(.es256(key: ECDSAKey.private(pem: PRIVATE_KEY_FROM_DEV_PORTAL))
+    static func generate() async throws -> String {
+        let keys = JWTKeyCollection()
+        try await keys.add(ecdsa: ES256PrivateKey(pem: PRIVATE_KEY_FROM_DEV_PORTAL))
 
         let payload = Payload(
             expiration: .init(value: .distantFuture),
@@ -92,14 +92,15 @@ struct JWTProvider {
             subject: SERVICE_IDENTIFIER
         )
 
-        return try! signers.sign(payload, kid: KEY_ID)
+        return try await keys.sign(payload, kid: KEY_ID)
     }
 }
 ```
 
 Note the variables:
 
-`PRIVATE_KEY_FROM_DEV_PORTAL`: The contents of the private key file including `-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
+`PRIVATE_KEY_FROM_DEV_PORTAL`: The contents of the private key file including
+`-----BEGIN PRIVATE KEY-----` and `-----END PRIVATE KEY-----`
 
 `TEAM_ID`: Found in Membership Details on the developer portal
 
@@ -267,7 +268,7 @@ let (dailyPrecipitation, dailyTemperature) = try await weatherService
 
 ### Geocoding for Country Code (Apple platforms only)
 
-When the library is used on an Apple platform, the `countryCode` parameter is not required. Internally the library will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
+When the library is used on an Apple platform, the `countryCode` and `timezone` parameters are not required. Internally, the library will use `CoreLocation` to reverse geocode the location to determine the country code. If the country cannot be determined, an error will be thrown.
 
 ## 📝 Attribution
 
