@@ -31,8 +31,12 @@ is nearly identical to Apple's [WeatherKit](https://developer.apple.com/document
 - ``AlertSummary``
 - ``AlertUrgency``
 - ``Certainty``
+- ``CloudCoverByAltitude``
+- ``DayPartForecast``
 - ``Precipitation``
+- ``PrecipitationAmountByType``
 - ``PressureTrend``
+- ``SnowfallAmount``
 - ``UVIndex``
 - ``WeatherCondition``
 - ``WeatherSeverity``
@@ -42,18 +46,42 @@ is nearly identical to Apple's [WeatherKit](https://developer.apple.com/document
 
 - ``DayWeather``
 - ``Forecast``
+- ``HistoricalComparisons``
 - ``HourWeather``
 - ``MinuteWeather``
 - ``WeatherAlert``
 - ``WeatherAvailability``
+- ``WeatherChanges``
 - ``WeatherResponse``
 
 ### Requests
 
 - ``CurrentWeather``
+- ``DailyWeatherStatisticsQuery``
+- ``DailyWeatherSummaryQuery``
+- ``HourlyWeatherStatisticsQuery``
+- ``MonthlyWeatherStatisticsQuery``
 - ``WeatherAttribution``
 - ``WeatherMetadata``
 - ``WeatherQuery``
+
+### Statistics
+
+- ``DailyWeatherStatistics``
+- ``DayPrecipitationStatistics``
+- ``DayTemperatureStatistics``
+- ``HourlyWeatherStatistics``
+- ``HourTemperatureStatistics``
+- ``MonthlyWeatherStatistics``
+- ``MonthPrecipitationStatistics``
+- ``MonthTemperatureStatistics``
+- ``Percentiles``
+
+### Summary
+
+- ``DailyWeatherSummary``
+- ``DayPrecipitationSummary``
+- ``DayTemperatureSummary``
 
 ### Geographic Location
 

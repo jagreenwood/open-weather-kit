@@ -1,6 +1,6 @@
 //
 //  WeatherQuery+QueryItems.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/28/22.
 //
@@ -15,6 +15,7 @@ enum QueryContants {
     static let dataSets = "dataSets"
     static let hourlyEnd = "hourlyEnd"
     static let hourlyStart = "hourlyStart"
+    static let timezone = "timezone"
 }
 
 extension Array where Element == Query {

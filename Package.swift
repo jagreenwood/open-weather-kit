@@ -23,7 +23,10 @@ let package = Package(
         .target(
             name: "OpenWeatherKit",
             dependencies: [],
-            resources: [.process("Resources")]
+            resources: [.process("Resources")],
+            swiftSettings: [
+                .unsafeFlags(["-Xfrontend", "-enable-pack-metadata-stack-promotion=false"]) // https://github.com/swiftlang/swift/issues/67702
+            ]
         ),
         .testTarget(
             name: "OpenWeatherKitTests",

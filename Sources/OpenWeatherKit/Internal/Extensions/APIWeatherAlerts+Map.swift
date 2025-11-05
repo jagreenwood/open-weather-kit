@@ -1,6 +1,6 @@
 //
 //  APIWeatherAlerts+Map.swift
-//  
+//
 //
 //  Created by Jeremy Greenwood on 10/26/22.
 //
@@ -22,7 +22,6 @@ extension APIWeatherAlerts {
 extension APIAlertSummary {
     var alertSummary: AlertSummary {
         AlertSummary(
-            name: name,
             id: id,
             areaID: areaID,
             areaName: areaName,

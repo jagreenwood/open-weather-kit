@@ -20,7 +20,8 @@ public struct WeatherQuery<T> {
     public static var current: WeatherQuery<CurrentWeather> {
         WeatherQuery<CurrentWeather>(
             queryType: .current(APIWeather.CodingKeys.currentWeather.rawValue),
-            result: { try $0.currentWeather
+            result: {
+                try $0.currentWeather
                     .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.currentWeather.rawValue))
             }
         )
@@ -30,7 +31,8 @@ public struct WeatherQuery<T> {
     public static var minute: WeatherQuery<Forecast<MinuteWeather>?> {
         WeatherQuery<Forecast<MinuteWeather>?>(
             queryType: .minute(APIWeather.CodingKeys.forecastNextHour.rawValue),
-            result: { try $0.minuteForecast
+            result: {
+                try $0.minuteForecast
                     .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastNextHour.rawValue))
             }
         )
@@ -44,7 +46,8 @@ public struct WeatherQuery<T> {
                 Date(),
                 Date.hoursFromNow(24)
             ),
-            result: { try $0.hourlyForecast
+            result: {
+                try $0.hourlyForecast
                     .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastHourly.rawValue))
             }
         )
@@ -58,8 +61,33 @@ public struct WeatherQuery<T> {
                 Date(),
                 Date.daysFromNow(10)
             ),
-            result: { try $0.dailyForecast
+            result: {
+                try $0.dailyForecast
                     .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.forecastDaily.rawValue))
+            }
+        )
+    }
+
+    /// The weather changes query.
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    public static var changes: WeatherQuery<WeatherChanges?> {
+        WeatherQuery<WeatherChanges?>(
+            queryType: .changes(APIWeather.CodingKeys.weatherChanges.rawValue),
+            result: {
+                try $0.weatherChanges
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.weatherChanges.rawValue))
+            }
+        )
+    }
+
+    /// The weather historical comparison query.
+    @available(macOS 11, iOS 13, watchOS 6, tvOS 13, visionOS 1, *)
+    public static var historicalComparisons: WeatherQuery<HistoricalComparisons?> {
+        WeatherQuery<HistoricalComparisons?>(
+            queryType: .comparisons(APIWeather.CodingKeys.historicalComparisons.rawValue),
+            result: {
+                try $0.historicalComparisons
+                    .unwrap(or: WeatherError.missingData(APIWeather.CodingKeys.historicalComparisons.rawValue))
             }
         )
     }
