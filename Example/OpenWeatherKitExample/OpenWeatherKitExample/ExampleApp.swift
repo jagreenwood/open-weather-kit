@@ -7,16 +7,19 @@
 
 import SwiftUI
 import OpenWeatherKit
+import JWTKit
 
 @main
 struct ExampleApp: App {
+    @State var viewModel: WeatherViewModel = WeatherViewModel(
+        configuration: createWeatherConfiguration()
+    )
+
     var body: some Scene {
         WindowGroup {
             NavigationStack {
                 MethodListView(
-                    viewModel: WeatherViewModel(
-                        configuration: createWeatherConfiguration()
-                    )
+                    viewModel: viewModel
                 )
             }
         }
@@ -44,26 +47,50 @@ struct ExampleApp: App {
     ///
     /// For more information, see Apple's WeatherKit documentation:
     /// https://developer.apple.com/documentation/weatherkit
-    private func createWeatherConfiguration() -> WeatherService.Configuration {
+    private static func createWeatherConfiguration() -> WeatherService.Configuration {
         WeatherService.Configuration(
             jwt: {
-                // REPLACE THIS WITH YOUR ACTUAL JWT GENERATION CODE
-                // Example using jwt-kit (not included in this project):
-                //
-                // let signers = JWTSigners()
-                // try! signers.use(.es256(key: .private(pem: privateKeyPEM)))
-                // let payload = WeatherKitJWT(
-                //     iss: "YOUR_TEAM_ID",
-                //     sub: "YOUR_SERVICE_ID",
-                //     exp: Date().addingTimeInterval(3600),
-                //     iat: Date()
-                // )
-                // return try! signers.sign(payload, kid: "YOUR_KEY_ID")
-
-                // Placeholder token - REPLACE THIS
-                return "YOUR_JWT_TOKEN_HERE"
+                try await JWTProvider.generate()
             },
             language: .englishUS
         )
     }
 }
+
+struct Payload: JWTPayload, Equatable {
+    enum CodingKeys: String, CodingKey {
+        case expiration = "exp"
+        case issued = "iat"
+        case issuer = "iss"
+        case subject = "sub"
+    }
+
+    let expiration: ExpirationClaim
+    let issued: IssuedAtClaim
+    let issuer: IssuerClaim
+    let subject: SubjectClaim
+
+    func verify(using key: some JWTAlgorithm) throws {}
+}
+
+struct JWTProvider {
+    static func generate() async throws -> String {
+        let keys = JWTKeyCollection()
+        try await keys.add(ecdsa: ES256PrivateKey(pem: privateKey))
+
+        let payload = Payload(
+            expiration: .init(value: .distantFuture),
+            issued: .init(value: .now),
+            issuer: "TEAM_ID",
+            subject: "SERVICE_IDENTIFIER"
+        )
+
+        return try await keys.sign(payload, kid: "KEY_ID")
+    }
+}
+
+let privateKey = """
+    -----BEGIN PRIVATE KEY-----
+    PRIVATE_KEY_CONTENTS
+    -----END PRIVATE KEY-----
+    """
